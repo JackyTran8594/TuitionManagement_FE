@@ -10,4 +10,5 @@
 
 export const environment = {
   production: false,
+  apiUrl:'http://api02-dat.bhq.vn:8082'
 };

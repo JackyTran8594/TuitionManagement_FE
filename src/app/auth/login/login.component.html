@@ -1,0 +1,36 @@
+<div class="login-form">
+    <form [formGroup]="loginForm">
+        <div class="form-control-group">
+            <nb-form-field>
+                <nb-icon nbPrefix icon="person-outline"></nb-icon>
+                <input id="username" nbInput fullWidth formControlName="username" type="text"
+                    placeholder="Tên tài khoản..."
+                    [status]="username.dirty ? (username.invalid ? 'danger': 'success'): ''">
+            </nb-form-field>
+            <ngx-validation-message label="username" [showRequired]="username?.errors?.required && username.touched"></ngx-validation-message>
+        </div>
+
+        <div class="form-control-group">
+            <nb-form-field>
+                <nb-icon nbPrefix icon="lock-outline"></nb-icon>
+                <input id="password" nbInput fullWidth formControlName="password" type="password"
+                    placeholder="Mật khẩu..."
+                    [status]="password.dirty ? (password.invalid ? 'danger': 'success'): ''">
+            </nb-form-field>
+            <ngx-validation-message label="password" [showRequired]="password?.errors?.required && password.touched"
+                [showMaxLength]="password?.hasError('maxLength') && password.touched"
+                [showMinLength]="password?.hasError('minLength') && password.touched"
+                [minLength]="minLength"
+                [maxLength]="maxLength"
+            ></ngx-validation-message>
+        </div>
+
+        <div class="form-control-group accept-group">
+            <nb-checkbox formControlName="rememberMe" name="rememberMe" *ngIf="rememberMe">Ghi nhớ đăng nhập</nb-checkbox>
+        </div>
+
+        <button nbButton fullWidth status="primary" size="large" (click)="login()" (keyup.enter)="login()"
+            [disabled]="submitted || !loginForm.valid" [class.btn-pulse]="submitted"
+        >Đăng nhập</button>
+    </form>
+</div>

@@ -17,5 +17,8 @@ export interface IAccount {
 
 export interface IUser {
     username?: string;
-    password?: string
+    password?: string;
+    rememberMe?: boolean;
 }
+
+

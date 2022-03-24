@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "http://api02-dat.bhq.vn:9082",
+        "secure": false,
+        "logLevel": "info"
+    }
+}

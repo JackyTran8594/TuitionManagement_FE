@@ -19,15 +19,15 @@ export class HttpService {
     return this.http.get(`${this.apiUrl}/${endpoint}`, options);
   }
 
-  post(endpoint: string, data, options): Observable<any> {
+  post(endpoint: string, data, options?): Observable<any> {
     return this.http.post(`${this.apiUrl}/${endpoint}`, data, options);
   }
 
-  put(endpoint: string, data, options): Observable<any> {
+  put(endpoint: string, data, options?): Observable<any> {
     return this.http.post(`${this.apiUrl}/${endpoint}`, data, options);
   }
 
-  delete(endpoint: string, data, options): Observable<any> {
+  delete(endpoint: string, data, options?): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${endpoint}`, options);
   }
 }

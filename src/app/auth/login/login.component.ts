@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { getDeepFromObject, NbAuthService, NbAuthSocialLink, NbLoginComponent, NB_AUTH_OPTIONS } from '@nebular/auth';
+import { getDeepFromObject, NB_AUTH_OPTIONS } from '@nebular/auth';
 import { Subject } from 'rxjs';
 import { IUser } from '../service/auth';
 import { AuthService } from '../service/auth.service';
@@ -9,7 +9,8 @@ import { AuthService } from '../service/auth.service';
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
@@ -30,8 +32,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isUsernameRequired && usernameValidators.push(Validators.required)
 
     const passwordValidators = [
-      Validators.minLength(this.minLength),
-      Validators.maxLength(this.maxLength)
+      // Validators.minLength(this.minLength),
+      // Validators.maxLength(this.maxLength)
     ]
     this.isPasswordRequired && passwordValidators.push(Validators.required);
 
@@ -44,8 +46,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private destroy$: Subject<void> = new Subject<void>();
-  minLength: number = this.getConfigValue("forms.validation.password.minLength");
-  maxLength: number = this.getConfigValue("forms.validation.password.maxlength");
+  // minLength: number = this.getConfigValue("forms.validation.password.minLength");
+  // maxLength: number = this.getConfigValue("forms.validation.password.maxlength");
   redirectDelay: number = this.getConfigValue("forms.login.redirectDelay");
   rememberMe = this.getConfigValue("forms.login.rememberMe");
   isUsernameRequired: boolean = this.getConfigValue("forms.validation.username.required");
@@ -69,7 +71,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(): void {
     let user: IUser = this.loginForm.value;
-    this.service.authenticate(user)
+    this.submitted = true;
+    this.service.authenticate(user).subscribe(res => {
+      if (res != null) {
+        this.submitted = false;
+        console.log("---init access token---");
+          localStorage.setItem("access_token", JSON.stringify(res));
+      }
+    })
   }
 
 

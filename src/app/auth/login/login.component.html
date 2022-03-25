@@ -7,30 +7,36 @@
                     placeholder="Tên tài khoản..."
                     [status]="username.dirty ? (username.invalid ? 'danger': 'success'): ''">
             </nb-form-field>
-            <ngx-validation-message label="username" [showRequired]="username?.errors?.required && username.touched"></ngx-validation-message>
+            <ngx-validation-message label="username" [showRequired]="username?.errors?.required && username.touched">
+            </ngx-validation-message>
         </div>
 
         <div class="form-control-group">
             <nb-form-field>
                 <nb-icon nbPrefix icon="lock-outline"></nb-icon>
                 <input id="password" nbInput fullWidth formControlName="password" type="password"
-                    placeholder="Mật khẩu..."
-                    [status]="password.dirty ? (password.invalid ? 'danger': 'success'): ''">
+                    placeholder="Mật khẩu..." [status]="password.dirty ? (password.invalid ? 'danger': 'success'): ''">
             </nb-form-field>
-            <ngx-validation-message label="password" [showRequired]="password?.errors?.required && password.touched"
+            <!-- <ngx-validation-message label="password" [showRequired]="password?.errors?.required && password.touched"
                 [showMaxLength]="password?.hasError('maxLength') && password.touched"
-                [showMinLength]="password?.hasError('minLength') && password.touched"
-                [minLength]="minLength"
-                [maxLength]="maxLength"
-            ></ngx-validation-message>
+                [showMinLength]="password?.hasError('minLength') && password.touched" [minLength]="minLength"
+                [maxLength]="maxLength"></ngx-validation-message> -->
+            <ngx-validation-message label="password" [showRequired]="password?.errors?.required && password.touched">
+            </ngx-validation-message>
         </div>
 
         <div class="form-control-group accept-group">
-            <nb-checkbox formControlName="rememberMe" name="rememberMe" *ngIf="rememberMe">Ghi nhớ đăng nhập</nb-checkbox>
+            <nb-checkbox formControlName="rememberMe" name="rememberMe" *ngIf="rememberMe">Ghi nhớ đăng nhập
+            </nb-checkbox>
         </div>
 
         <button nbButton fullWidth status="primary" size="large" (click)="login()" (keyup.enter)="login()"
-            [disabled]="submitted || !loginForm.valid" [class.btn-pulse]="submitted"
-        >Đăng nhập</button>
+            [disabled]="submitted || !loginForm.valid" [class.btn-pulse]="submitted">Đăng nhập</button>
+
+
+        <div class="form-control-group accept-group">
+            <label class="login-label"><a class="forgot-password caption-2" routerLink="../request-password">Quên mật
+                    khẩu?</a></label>
+        </div>
     </form>
 </div>

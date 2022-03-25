@@ -1,0 +1,102 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import "~@nebular/theme/styles/global/breakpoints";
+
+:host {
+  $auth-layout-padding: 2.5rem;
+
+  .login-row {
+    margin-top: 15%;
+  }
+
+  nb-card {
+    margin-top: 25%;
+    // height: calc(100vh - 2 * #{$auth-layout-padding});
+    // margin-right: $auth-layout-padding;
+    min-width: 420px;
+    max-width: 450px;
+  }
+
+  .navigation .link {
+    display: inline-block;
+    text-decoration: none;
+
+    nb-icon {
+      font-size: 2rem;
+      vertical-align: middle;
+    }
+  }
+
+  .links nb-icon {
+    font-size: 2.5rem;
+  }
+
+  nb-card-body {
+    display: flex;
+    width: 100%;
+  }
+
+  nb-auth-block {
+    margin: auto;
+  }
+
+  @include media-breakpoint-down(sm) {
+    nb-card {
+      border-radius: 0;
+      height: 100vh;
+    }
+  }
+
+  .login-title {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  ::ng-deep {
+    nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding: $auth-layout-padding;
+      margin: 0;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+      }
+    }
+
+    nb-layout .layout .layout-container .content {
+      background-image: url("../../assets/images/bg_login_bidv_.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .login-label > a,
+    button {
+      color: white !important;
+      font-family: Roboto, sans-serif !important;
+      font-size: 0.9375rem !important;
+      font-weight: 400 !important;
+      line-height: 1.25rem !important;
+    }
+
+    nb-checkbox .text {
+      color: white !important;
+    }
+
+    .login-form input,
+    nb-checkbox .custom-checkbox {
+      background-color: white !important;
+    }
+
+    .login-form nb-icon {
+      color: #424242 !important;
+    }
+
+    // nb-checkbox .custom-checkbox.checked > nb-icon {
+    //   color: black !important;
+    // }
+  }
+}

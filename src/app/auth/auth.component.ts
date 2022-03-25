@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-auth',
-  template: `
-    <p>
-      auth works!
-    </p>
-  `,
-  styles: [
-  ]
+  styleUrls: ['./auth.component.scss'],
+  templateUrl: './auth.component.html', 
 })
 export class AuthComponent implements OnInit {
 

@@ -31,7 +31,7 @@
         </div>
 
         <button nbButton fullWidth status="primary" size="large" (click)="login()" (keyup.enter)="login()"
-            [disabled]="submitted || !loginForm.valid" [class.btn-pulse]="submitted">Đăng nhập</button>
+            [disabled]="!loginForm.valid" >Đăng nhập</button>
 
 
         <div class="form-control-group accept-group">

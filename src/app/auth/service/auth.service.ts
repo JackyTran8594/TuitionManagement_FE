@@ -28,7 +28,7 @@ export class AuthService {
   isAuthenticated(): boolean {
     let token = this.tokenStorage.get().getValue();
     console.log(token);
-    if (token != "") {
+    if (!token) {
       return true;
     } else { return false; }
   }

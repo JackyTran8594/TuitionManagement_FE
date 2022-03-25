@@ -13,8 +13,13 @@ export class HttpService {
   }
 
   headers = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Origin': '*',
+    'key': 'x-api-key',
+
   });
 
 

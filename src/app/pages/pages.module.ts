@@ -6,7 +6,6 @@ import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { DeviceComponent } from './device/device.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -15,9 +14,9 @@ import { FormsModule } from '@angular/forms';
     ThemeModule,
     NbMenuModule,
     DashboardModule,
-    NbDialogModule.forRoot(),
     NbIconModule,
     NbCheckboxModule,
+    // NbDialogModule.forChild(),
     NbCardModule,
     FormsModule,
     SharedModule

@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DeviceRoutingModule } from './device-routing.module';
 import { DeviceFrmComponent } from './device-frm/device-frm.component';
 import { SharedModule } from '../../shared/shared.module';
-import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbIconModule, NbInputModule, NbListModule, NbRadioModule, NbSelectModule, NbTabsetModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbListModule, NbRadioModule, NbSelectModule, NbTabsetModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { DeviceData } from './service/device';
 import { DeviceComponent } from './device.component';
+import { DeviceService } from './service/device.service';
+import { DeviceApi } from './service/device.api';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -21,8 +23,12 @@ const NB_MODULES = [
   NbIconModule,
   NbDatepickerModule,
   NbInputModule,
-  NbCheckboxModule
+  NbCheckboxModule,
+  NbDialogModule.forChild(),
 ]
+
+const API = [DeviceApi]
+const SERVICES = [{ provide: DeviceData, useClass: DeviceService }]
 
 @NgModule({
   declarations: [
@@ -36,7 +42,10 @@ const NB_MODULES = [
     ...NB_MODULES,
   ],
   providers: [
-    
+    ...API,
+    ...SERVICES
   ]
 })
-export class DeviceModule { }
+export class DeviceModule {
+  
+ }

@@ -33,16 +33,12 @@ import { SharedModule } from './shared/shared.module';
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
-    NbDialogModule.forRoot(),
+    // NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
-    // NbChatModule.forRoot({
-    //   messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
-    // }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     AuthModule.forRoot(),
-    // SharedModule
   ],
   bootstrap: [AppComponent],
 })

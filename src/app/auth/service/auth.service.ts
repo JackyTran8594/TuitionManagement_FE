@@ -25,10 +25,13 @@ export class AuthService {
   isAuthenticated(): boolean {
     let token = <IAccessToken>JSON.parse(localStorage.getItem('access_token'));
     console.log(token);
-    console.log(token.id_token);
+    // console.log(token.id_token);
 
-    if (token.id_token) {
-      return true;
+    if (token) {
+      if (token.id_token) {
+        return true;
+
+      } else { return false; }
     } else { return false; }
   }
 

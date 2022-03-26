@@ -20,14 +20,11 @@ export interface Device {
     isChecked?: boolean
 }
 
-@Injectable({
-    providedIn: DeviceModule,
-})
 export abstract class DeviceData {
-    abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Device>>;
-    abstract getById(id: number): Observable<Device>;
-    abstract create(device: Device): Observable<Device>;
-    abstract update(device: Device): Observable<Device>;
-    abstract delete(id: number): Observable<boolean>;
-    abstract deleteList(listId: number[]): Observable<boolean>;
+     abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Device>>;
+     abstract getById(id: number): Observable<Device>;
+     abstract create(device: Device): Observable<Device>;
+     abstract update(device: Device): Observable<Device>;
+     abstract delete(id: number): Observable<boolean>;
+     abstract deleteList(listId: number[]): Observable<boolean>;
 }

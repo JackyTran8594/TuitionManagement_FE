@@ -13,14 +13,18 @@ const routes: Routes = [{
       path: 'dashboard',
       component: DashboardComponent,
     },
-   
+
     {
       path: 'charts',
       loadChildren: () => import('./charts/charts.module')
         .then(m => m.ChartsModule),
     },
-    
-  
+    {
+      path: 'device',
+      loadChildren: () => import('./device/device.module').then(m => m.DeviceModule)
+    },
+
+
     {
       path: '',
       redirectTo: 'dashboard',

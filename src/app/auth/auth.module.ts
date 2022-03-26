@@ -43,6 +43,7 @@ const NB_MODULES = [
     SharedModule
   ],
   providers: [
+    
     {
       provide: NbTokenLocalStorage, useClass: NbTokenLocalStorage,
     }

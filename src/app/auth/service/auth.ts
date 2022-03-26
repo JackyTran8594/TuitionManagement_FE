@@ -1,3 +1,5 @@
+import { NbAuthSimpleToken } from "@nebular/auth";
+
 export interface IAccessToken {
     id_token?: string;
     accounts?: IAccount[];
@@ -19,6 +21,16 @@ export interface IUser {
     username?: string;
     password?: string;
     rememberMe?: boolean;
+}
+
+export class AuthToken extends NbAuthSimpleToken {
+    static NAME = 'auth:token';
+    private parsedToken: IAccessToken;
+
+
+    getValue(): string {
+        return this.parsePayload().token;
+    }
 }
 
 

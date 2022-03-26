@@ -1,0 +1,18 @@
+<nb-card>
+    <nb-card-header class="custom-header">{{title}}</nb-card-header>
+    <nb-card-body>{{ data }}</nb-card-body>
+    <nb-card-footer>
+        <div class="text-center">
+            <div class="buttons-row">
+                <button nbButton status="info" class="btn-custom" (click)="save()">
+                    <nb-icon class="action-icon" icon="save-outline"></nb-icon>
+                    Có
+                </button>
+                <button nbButton status="danger" class="btn-custom" (click)="close()">
+                    <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
+                    Không
+                </button>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

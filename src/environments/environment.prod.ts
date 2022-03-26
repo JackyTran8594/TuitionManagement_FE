@@ -5,5 +5,7 @@
  */
 export const environment = {
   production: true,
-  apiUrl:'http://api02-dat.bhq.vn:9082/api'
+  // apiUrl:'http://api02-dat.bhq.vn:9082/api',
+  apiUrl:'http://api02-dat.bhq.vn:8082/api'
+
 };

@@ -2,15 +2,12 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NbTokenLocalStorage } from '@nebular/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { HttpService } from '../../shared/http.service';
 import { IAccessToken, IUser } from './auth';
 import { AuthApi } from './auth.api';
 
 @Injectable({
   providedIn: 'root'
 })
-// @Injectable()
 export class AuthService {
 
   token: IAccessToken = {};
@@ -26,9 +23,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    let token = this.tokenStorage.get().getValue();
+    let token = <IAccessToken>JSON.parse(localStorage.getItem('access_token'));
     console.log(token);
-    if (!token) {
+    console.log(token.id_token);
+
+    if (token.id_token) {
       return true;
     } else { return false; }
   }

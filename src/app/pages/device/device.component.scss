@@ -1,0 +1,37 @@
+// @import '../../../../@theme/styles/themes';
+
+// @include nb-install-component() {
+//   nb-card-body {
+//     min-height: 500px;
+//   }
+
+//   nb-card {
+//     transform: translate3d(0, 0, 0);
+//   }
+
+  
+// }
+
+
+::ng-deep .btn-custom {
+    margin-right: 10px;
+  }
+  
+  ::ng-deep .table-content {
+  height: 400px;
+  overflow-y: scroll;
+  }
+  
+  .footer-table {
+  padding-top: 20px;
+  }
+  
+  .pagination {
+  display: inline-flex;
+  text-align: right;
+  }
+  
+  ::ng-deep .pagination > nb-select {
+  max-width: 5rem !important;
+  cursor: pointer;
+  }

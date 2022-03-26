@@ -1,1 +1,170 @@
-<p>device works!</p>
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+
+<nb-card>
+    <nb-card-header style="background-color: white">
+        <div class="row">
+            <div class="col-12 col-md-8 mb-2">
+                <h6>Danh sách hồ sơ</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-8 mb-2">
+                <div class="input-group input-group-md">
+                    <input type="text" name="searchContact" class="form-control" id="searchContact"
+                        placeholder="Nhập thông tin tìm kiếm...." [(ngModel)]="txtSearch"
+                        (keyup.enter)="searchData()" />
+                    <span class="input-group-btn ml-2">
+                        <button nbButton class="btn btn-primary" (click)="searchData()">
+                            <nb-icon class="action-icon" icon="search-outline"></nb-icon>
+                            Tìm kiếm
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="float-right">
+                    <div class="input-group input-group-md">
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="onCreate()">
+                                <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
+                                Thêm mới
+                            </button>
+                        </span>
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="danger" (click)="onDeleteAll($event)">
+                                <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
+                                Xóa tất cả
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="table-content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center table-col-0">
+                            <nb-checkbox (checkedChange)="checkedAll($event)"></nb-checkbox>
+                        </th>
+                        <th scope="col" class="text-center table-col-0">STT</th>
+                        <th scope="col" class="text-center table-col-1">Mã thiết bị</th>
+                        <th scope="col" class="text-center table-col-2">Tài khoản</th>
+                        <th scope="col" class="text-center table-col-3">Mã đăng ký</th>
+                        <th scope="col" class="text-center table-col-0">Serial</th>
+                        <th scope="col" class="text-center table-col-3">
+                            Imei
+                        </th>
+                        <th scope="col" class="text-center table-col-3">
+                            Sim
+                        </th>
+                        <th scope="col" class="text-center table-col-1">
+                            Mã phương tiện
+                        </th>
+                        <th scope="col" class="text-center table-col-3">Người dùng</th>
+                        <th scope="col" class="text-center table-col-3">Ngày khởi tạo</th>
+                        <th scope="col" class="text-center table-col-3">
+                            Trạng thái
+                        </th>
+
+                        <th scope="col" class="text-center col col-lg-2 table-col-4">
+                            Thao tác
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="listData && listData.length < 1">
+                    <tr>
+                        <td colspan="11" class="text-center"><b>Không có dữ liệu</b></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="listData && listData.length >= 1">
+                    <tr *ngFor="
+                let item of listData
+                  | paginate
+                    : {
+                        itemsPerPage: pageSize,
+                        currentPage: currentPage,
+                        totalItems: totalElements
+                      };
+                let idx = index
+              ">
+                        <td class="text-center table-col-0" scope="row">
+                            <nb-checkbox [checked]="item.isChecked" (checkedChange)="isChecked($event, idx)">
+                            </nb-checkbox>
+                        </td>
+                        <th class="text-center table-col-0" scope="row">
+                            {{ (currentPage - 1) * pageSize + (idx + 1) }}
+                        </th>
+                        <td class="text-center table-col-1">{{ item.deviceID }}</td>
+                        <td class="table-col-3">{{ item.accountID }}</td>
+                        <td class="text-center table-col-3">{{ item.registerID }}</td>
+                        <td class="text-center table-col-0">
+                            {{item.serialNumber}}
+                        </td>
+                        <td class="table-col-3">{{ item.imeiNumber }}</td>
+                        <td class="text-center table-col-3">
+                            {{item.simID}}
+                        </td>
+                        <td class="text-center table-col-1">
+                            {{ item.vehicleID }}
+                        </td>
+                        <td class="text-center table-col-3">
+                            {{ item.userID }}
+                        </td>
+                        <td class="text-center table-col-3">
+                            {{ item.creationTime | date: "dd/MM/YYYY hh:mm:ss" }}
+                        </td>
+
+                        <td class="table-col-3">
+                            {{item.status}}
+                        </td>
+                        <td class="text-center col col-lg-2 table-col-4">
+                            <div class="buttons-row">
+                                <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">
+                                    <nb-icon class="action-icon" icon="eye-outline"></nb-icon>
+                                </button>
+                                <button class="btn-custom" nbButton status="info" matRipple shape="round"
+                                    (click)="onEdit(item)">
+                                    <nb-icon class="action-icon" icon="edit-outline"></nb-icon>
+                                </button>
+
+                                <button class="btn-custom" status="danger" nbButton matRipple shape="round"
+                                    (click)="onDelete(item)">
+                                    <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-table">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Tổng số bản ghi: {{ totalElements }} bản ghi</p>
+                </div>
+                <div class="col-md-4 offset-md-4" *ngIf="listData.length > 0">
+                    <div class="pagination">
+                        <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
+                            <nb-option [value]="10">10</nb-option>
+                            <nb-option [value]="20">20</nb-option>
+                            <nb-option [value]="30">30</nb-option>
+                            <nb-option [value]="40">40</nb-option>
+                            <nb-option [value]="50">50</nb-option>
+                        </nb-select>
+                        <pagination-controls maxSize="5" responsive="true" (pageChange)="pageChanged($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

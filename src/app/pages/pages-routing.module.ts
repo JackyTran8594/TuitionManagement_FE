@@ -23,7 +23,14 @@ const routes: Routes = [{
       path: 'device',
       loadChildren: () => import('./device/device.module').then(m => m.DeviceModule)
     },
-
+    {
+      path: 'user-management/user',
+      loadChildren: () => import('./user-management/user/user.module').then(m => m.UserModule)
+    },
+    {
+      path: 'user-management/role-group',
+      loadChildren: () => import('./user-management/role-group/role-group.module').then(m => m.RoleGroupModule)
+    },
 
     {
       path: '',

@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
+import { Status, StatusList } from '../../../shared/other-object';
 import { Device, DeviceData } from '../service/device';
 
 @Component({
@@ -15,26 +16,22 @@ export class DeviceFrmComponent implements OnInit, OnDestroy {
   @Input() view: Boolean;
   @Input() create: Boolean;
   @Input() update: Boolean;
-  
+  listStatus: Status[] = []
+
   protected readonly unsubcribe$ = new Subject<void>();
 
   constructor(private dialogRef: NbDialogRef<DeviceFrmComponent>, private service: DeviceData) { }
- 
+
   ngOnDestroy(): void {
     this.unsubcribe$.next();
     this.unsubcribe$.complete();
   }
 
   ngOnInit(): void {
-    // if(this.view) {
-       
-    // }
-    // if(this.update) {
-       
-    // }
-    // if(this.create) {
-       
-    // }
+    this.listStatus = StatusList;
+    if(this.create) {
+      this.item.status = 0;
+    } 
   }
 
 
@@ -43,24 +40,24 @@ export class DeviceFrmComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    if(this.create) {
+    if (this.create) {
       this.service.create(this.item).subscribe(res => {
         console.log(res);
-        if(res) {
+        if (res) {
           this.dialogRef.close(res);
         }
       });
     }
-    if(this.update) {
+    if (this.update) {
       this.service.update(this.item).subscribe(res => {
         console.log(res);
-        if(res) {
+        if (res) {
           this.dialogRef.close(res);
         }
       });
     }
-    
-    
+
+
   }
 
 }

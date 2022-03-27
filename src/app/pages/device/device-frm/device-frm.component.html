@@ -1,39 +1,182 @@
 <nb-card class="modal-custom">
   <nb-card-header>
-    <div class="form-group row">
-      <div class="col-12 col-md-10 mb-2">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
         <h6 class="modal-title-custom">
           <b>{{ title }}</b>
         </h6>
       </div>
-      <div class="col-12 col-md-2 mb-2">
+      <div class="col-md-3">
         <nb-action matRipple icon="close-outline" class="modal-close-custom" (click)="close()"></nb-action>
       </div>
     </div>
   </nb-card-header>
   <nb-card-body>
+    <form name="form" #formModal="ngForm">
+      <!-- row 1 -->
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Mã thiết bị: &nbsp;<span
+                [hidden]="view" style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="deviceID" [(ngModel)]="item.deviceID"
+                name="deviceID" #deviceID="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+              'invalid-data': deviceID.invalid && (deviceID.touched || deviceID.dirty)
+            }" placeholder="Mã thiết bị" />
+            </div>
+          </div>
 
-    <p>working</p>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label for="accountID" class="label col-md-4 col-sm-4 col-form-label">Tài khoản: &nbsp;<span [hidden]="view"
+                style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="accountID" [(ngModel)]="item.accountID"
+                name="accountID" #accountID="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+            'invalid-data': accountID.invalid && (accountID.touched || accountID.dirty)
+          }" placeholder="Tài khoản" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+
+          <div class="form-group row">
+            <label for="registerID " class="label col-md-4 col-sm-4 col-form-label">Mã đăng ký: &nbsp;<span
+                [hidden]="view" style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="registerID " [(ngModel)]="item.registerID "
+                name="registerID " #registerID="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+                'invalid-data': deviceID.invalid && (registerID .touched || registerID .dirty)
+              }" placeholder="Mã đăng ký" />
+            </div>
+          </div>
+
+        </div>
+        <!-- row 2 -->
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label for="serialNumber" class="label col-md-4 col-sm-4 col-form-label">Serial Number: &nbsp;<span
+                [hidden]="view" style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="serialNumber"
+                [(ngModel)]="item.serialNumber" name="serialNumber" #serialNumber="ngModel" required
+                [ngxReadOnly]="view" [ngClass]="{
+            'invalid-data': serialNumber.invalid && (serialNumber.touched || serialNumber.dirty)
+          }" placeholder="Tài khoản" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- row 3 -->
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+
+          <div class="form-group row">
+            <label for="imeiNumber" class="label col-md-4 col-sm-4 col-form-label">Imei: &nbsp;<span [hidden]="view"
+                style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="imeiNumber" [(ngModel)]="item.imeiNumber"
+                name="imeiNumber " #imeiNumber="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+            'invalid-data': imeiNumber.invalid && (imeiNumber.touched || imeiNumber.dirty)
+          }" placeholder="Imei" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label for="displayName" class="label col-md-4 col-sm-4 col-form-label">Tên hiện thị: &nbsp;<span
+                [hidden]="view" style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="displayName" [(ngModel)]="item.displayName"
+                name="displayName" #displayName="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+            'invalid-data': displayName.invalid && (displayName.touched || displayName.dirty)
+          }" placeholder="Tên hiển thị" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- row 4 -->
+        <div class="col-lg-6 col-md-6">
+
+          <div class="form-group row">
+            <label for="vehicleID" class="label col-md-4 col-sm-4 col-form-label">Mã phương tiện: &nbsp;<span
+                [hidden]="view" style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="vehicleID" [(ngModel)]="item.vehicleID"
+                name="vehicleID" #vehicleID="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+            'invalid-data': vehicleID.invalid && (vehicleID.touched || vehicleID.dirty)
+          }" placeholder="Mã phương tiện" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label for="userID" class="label col-md-4 col-sm-4 col-form-label">Mã người dùng: &nbsp;<span
+                [hidden]="view" style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="userID" [(ngModel)]="item.userID"
+                name="userID" #userID="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+            'invalid-data': userID.invalid && (userID.touched || userID.dirty)
+          }" placeholder="Mã người dùng" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- row 5 -->
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+
+          <div class="form-group row">
+            <label for="simID" class="label col-md-4 col-sm-4 col-form-label">SIM: &nbsp;<span [hidden]="view"
+                style="color: red">*</span></label>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" nbInput fullWidth id="simID" [(ngModel)]="item.simID" name="simID"
+                #simID="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+              'invalid-data': simID.invalid && (simID.touched || simID.dirty)
+            }" placeholder="SIM" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label for="status" class="label col-md-4 col-sm-4 col-form-label">Trạng thái:</label>
+            <div class="col-md-8 col-sm-8">
+              <nb-select matRipple [(ngModel)]="item.status" name="status"
+                [ngxReadOnly]="view">
+                <nb-option matRipple *ngFor="let item of listStatus" [value]="item.id">{{item.name}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
 
 
   </nb-card-body>
   <nb-card-footer>
-    <div class="form-group row">
-      <div class="col-md-3 col-sm-3"></div>
-      <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
         <div class="text-center">
           <div class="buttons-row">
-            <!-- <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="view"
+            <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="view"
               [disabled]="!formModal.form.valid">
               <nb-icon class="action-icon" icon="save-outline"></nb-icon>
               Lưu
-            </button> -->
+            </button>
             <button nbButton status="danger" class="btn-custom" (click)="close()">
               <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
               Hủy
             </button>
-
-
           </div>
         </div>
       </div>

@@ -40,6 +40,7 @@ const SERVICES = [{ provide: DeviceData, useClass: DeviceService }]
     DeviceRoutingModule,
     FormsModule,
     ...NB_MODULES,
+    SharedModule
   ],
   providers: [
     ...API,

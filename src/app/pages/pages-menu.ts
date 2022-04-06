@@ -13,6 +13,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/device',
   },
   {
+    title: 'Quản trị hệ thống',
+    icon: 'settings-outline',
+    children: [
+      {
+        title: 'Quản lý người dung',
+        icon:'person-outline',
+        link: '/pages/system-management/user',
+      },
+      {
+        title: 'Quản lý phân quyền',
+        icon:'person-done-outline',
+        link: '/pages/system-management/role-group',
+      },
+    ],
+  },
+  {
     title: 'Charts',
     icon: 'pie-chart-outline',
     children: [

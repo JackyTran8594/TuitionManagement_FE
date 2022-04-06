@@ -1,0 +1,87 @@
+<nb-card>
+    <nb-card-header>
+        <div class="row">
+            <div class="col-12 col-md-8 mb-2">
+                <h6>Dánh sách người dùng</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-8 mb-2">
+                <div class="input-group input-group-md">
+                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="txtSearch"
+                        (keyup.enter)="search()" placeholder="Nhập thông tin tìm kiếm ..." aria-label="">
+                    <span class="input-group-btn ml-2">
+                        <button class="btn btn-primary" nbButton aria-label="">
+                            <nb-icon class="action-icon" icon="search-outline"></nb-icon>
+                            Tìm kiếm
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="float-right">
+                    <div class="input-group input-group-md">
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="onCreate()">
+                                <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
+                                Thêm mới
+                            </button>
+                        </span>
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="danger" (click)="onDeleteAll($event)">
+                                <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
+                                Xóa tất cả
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="table-content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-table">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Tổng số bản ghi: {{ totalItems }} bản ghi</p>
+                </div>
+                <div class="col-md-4 offset-md-4">
+                    <div class="pagination">
+                        <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
+                            <nb-option [value]="10">10</nb-option>
+                            <nb-option [value]="20">20</nb-option>
+                            <nb-option [value]="30">30</nb-option>
+                            <nb-option [value]="40">40</nb-option>
+                            <nb-option [value]="50">50</nb-option>
+                        </nb-select>
+                        <pagination-controls maxSize="5" responsive="true" (pageChange)="pageChanged($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nb-card-body>
+</nb-card>

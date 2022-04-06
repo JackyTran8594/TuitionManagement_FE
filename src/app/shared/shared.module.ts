@@ -7,14 +7,10 @@ import { DeleteComponent } from './delete/delete.component';
 import { ReadOnlyDirective } from './directives/read-only.directive';
 
 const NB_MODULES = [
-  NbActionsModule,
   NbButtonModule,
   NbCardModule,
   NbInputModule,
-  NbRadioModule,
-  NbSelectModule,
   NbIconModule,
-  NbCheckboxModule,
   NbSpinnerModule,
 ]
 

@@ -15,7 +15,7 @@ export interface User {
     resetkey?: string;
     creationTime?: Date;
     resetdate?: Date;
-    lastUpdateTime?: Date
+    lastUpdateTime?: Date;
 }
 
 export abstract class UserData {
@@ -27,6 +27,5 @@ export abstract class UserData {
     abstract delete(id: number): Observable<boolean>;
     abstract deleteAll(ids: number[]): Observable<boolean>;
 
-
-
 }
+

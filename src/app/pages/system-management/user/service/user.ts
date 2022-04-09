@@ -16,6 +16,7 @@ export interface User {
     creationTime?: Date;
     resetdate?: Date;
     lastUpdateTime?: Date;
+    isChecked?: Boolean;
 }
 
 export abstract class UserData {

@@ -5,7 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { UserFrmComponent } from './user-frm/user-frm.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbInputModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -15,7 +15,9 @@ const NB_MODULES = [
   NbButtonModule,
   NbInputModule,
   NbSelectModule,
-  NbOptionModule
+  NbOptionModule,
+  NbActionsModule,
+  NbCheckboxModule
 ]
 
 

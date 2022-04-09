@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
+import { Status, StatusList, UserType, UserTypes } from '../../../../shared/other-object';
+import { User, UserData } from '../service/user';
 
 @Component({
   selector: 'ngx-user-frm',
@@ -7,9 +10,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFrmComponent implements OnInit {
 
-  constructor() { }
+  @Input() title: string = '';
+  @Input() create: boolean;
+  @Input() update: boolean;
+  @Input() view: boolean;
+  item: User = {};
+  UserTypes: UserType[] = [];
+  listStatus: Status[] = [];
+  selected: number;
+  passwordCheck: string;
+
+  constructor(private dialogRef: NbDialogRef<UserFrmComponent>, private service: UserData) { }
 
   ngOnInit(): void {
+    if (this.create) {
+      this.selected = 5
+    }
+    this.UserTypes = UserTypes;
+    this.listStatus = StatusList;
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
+  onCheckPassword(item) {
+    if (this.item.passwordhash.trim() == item.trim()) {
+      return true;
+    }
+    return false;
+  }
+
+  save() {
+    if (this.create) {
+      this.service.create(this.item).subscribe(res => {
+        console.log(res);
+        this.dialogRef.close(res);
+      });
+    }
+    if (this.update) {
+      this.service.update(this.item).subscribe(res => {
+        console.log(res);
+        this.dialogRef.close(res);
+      });
+    }
+  }
 }

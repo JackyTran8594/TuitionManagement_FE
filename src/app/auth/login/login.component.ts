@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { getDeepFromObject, NB_AUTH_OPTIONS } from '@nebular/auth';
 import { Subject } from 'rxjs';
-import { IUser } from '../service/auth';
+import { User } from '../service/auth';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(): void {
-    let user: IUser = this.loginForm.value;
+    let user: User = this.loginForm.value;
     this.submitted = true;
     this.service.authenticate(user).subscribe(res => {
       if (res.id_token != null) {

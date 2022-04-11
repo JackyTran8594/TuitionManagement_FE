@@ -8,7 +8,8 @@ import { User } from './user';
 @Injectable()
 export class UserApi {
 
-  private readonly apiController: string = 'user';
+  private readonly apiController: string = 'users';
+  private readonly apiControllerV2: string = 'users/v3/users-managed'
 
   constructor(private http: HttpService) {
 
@@ -18,8 +19,8 @@ export class UserApi {
     let params = new HttpParams()
       .set("pageNumber", pageNumber)
       .set("pageSize", pageSize)
-      .set("txtSearch", txtSearch);
-    return this.http.get(this.apiController, { params });
+      // .set("txtSearch", txtSearch);
+    return this.http.get(this.apiControllerV2, { params });
   }
   create(item: User): Observable<User> {
     return this.http.post(this.apiController, item);

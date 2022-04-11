@@ -6,6 +6,7 @@ export interface User {
     login?: string;
     usertype?: number;
     passwordhash?: string;
+    // passwordCheck?: string;
     firstname?: string;
     lastname?: string;
     email?: string;

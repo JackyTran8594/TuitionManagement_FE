@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
@@ -19,9 +19,7 @@ export class UserComponent implements OnInit, OnDestroy {
   listData: User[] = [];
   protected readonly $unsubcribe = new Subject<void>();
 
-
-
-  constructor(private service: UserData, private dialog: NbDialogService, private toaster: NbToastrService) { }
+  constructor(private service: UserData, private dialog: NbDialogService, private toastr: NbToastrService) { }
 
   ngOnDestroy(): void {
     this.$unsubcribe.next();
@@ -72,7 +70,7 @@ export class UserComponent implements OnInit, OnDestroy {
       closeOnBackdropClick: false
     }).onClose.subscribe(result => {
       if (result) {
-        this.toaster.show("Thêm mới thành công", "", {
+        this.toastr.show("Thêm mới thành công", "", {
           status: "success",
           destroyByClick: true,
           duration: 2000,
@@ -83,7 +81,7 @@ export class UserComponent implements OnInit, OnDestroy {
         }, 1000);
       };
     }, err => {
-      this.toaster.show("Có lỗi khi thêm mới", err.message, {
+      this.toastr.show("Có lỗi khi thêm mới", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,
@@ -101,7 +99,7 @@ export class UserComponent implements OnInit, OnDestroy {
       closeOnBackdropClick: false
     }).onClose.subscribe(result => {
       if (result) {
-        this.toaster.show("Chỉnh sửa thành công", "", {
+        this.toastr.show("Chỉnh sửa thành công", "", {
           status: "success",
           destroyByClick: true,
           duration: 2000,
@@ -112,7 +110,7 @@ export class UserComponent implements OnInit, OnDestroy {
         }, 1000);
       };
     }, err => {
-      this.toaster.show("Có lỗi khi chính sửa", err.message, {
+      this.toastr.show("Có lỗi khi chính sửa", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,
@@ -144,7 +142,7 @@ export class UserComponent implements OnInit, OnDestroy {
       if (result) {
         this.service.delete(id).subscribe(res => {
           if (res) {
-            this.toaster.show("Xóa người dùng thành công", "", {
+            this.toastr.show("Xóa người dùng thành công", "", {
               status: "success",
               destroyByClick: true,
               duration: 2000,
@@ -158,7 +156,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
       };
     }, err => {
-      this.toaster.show("Có lỗi khi xóa người dùng", err.message, {
+      this.toastr.show("Có lỗi khi xóa người dùng", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,
@@ -183,7 +181,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
         this.service.deleteAll(listId).subscribe(res => {
           if (res) {
-            this.toaster.show("Xóa người dùng thành công", "", {
+            this.toastr.show("Xóa người dùng thành công", "", {
               status: "success",
               destroyByClick: true,
               duration: 2000,
@@ -197,7 +195,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
       };
     }, err => {
-      this.toaster.show("Có lỗi khi xóa người dùng", err.message, {
+      this.toastr.show("Có lỗi khi xóa người dùng", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,

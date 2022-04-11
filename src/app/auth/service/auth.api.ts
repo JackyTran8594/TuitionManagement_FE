@@ -5,24 +5,24 @@ import { NbTokenLocalStorage } from '@nebular/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpService } from '../../shared/http.service';
-import { IAccessToken, IUser } from './auth';
+import {AccessToken, User } from './auth';
 
-@Injectable({
-  providedIn: 'root'
-})
-// @Injectable()
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Injectable()
 export class AuthApi {
 
   private readonly apiController: string = 'authenticate';
 
-  token: IAccessToken = {};
+  token: AccessToken = {};
 
 
   constructor(private http: HttpService) {
 
   }
 
-  authenticate(item: IUser): Observable<IAccessToken> {
+  authenticate(item: User): Observable<AccessToken> {
     return this.http.post(this.apiController, item);
   }
 

@@ -6,16 +6,22 @@ import { AuthComponent } from '../auth/auth.component';
 import { LoginComponent } from './login/login.component';
 import { NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule } from '@nebular/theme';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { AuthGuardService } from './_helper/auth-guard.service';
-import { NbSecurityModule } from '@nebular/security';
-import { NbTokenLocalStorage } from '@nebular/auth';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NbTokenLocalStorage, NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
+import { HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './_helper/auth-interceptor.service';
 import { AuthBlockComponent } from './auth-block/auth-block.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ComponentModule } from '../@component/component.module';
+import { HttpService } from '../shared/http.service';
+import { JwtInterceptorService } from './_helper/jwt-interceptor.service';
+import { AuthApi } from './service/auth.api';
+import { AuthService } from './service/auth.service';
 
 
 const GUARDS = [AuthGuardService]
+const SERVICES = [AuthService, HttpService]
+const API = [AuthApi]
 
 const NB_MODULES = [
   NbIconModule,
@@ -28,22 +34,25 @@ const NB_MODULES = [
   NbFormFieldModule
 ]
 
+export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
+  return ['/auth/login', '/auth/sign-up', '/auth/request-pass', '/auth/refresh-token'].some(url => req.url.includes(url));
+}
+
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
     AuthBlockComponent,
-
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
     NB_MODULES,
-    SharedModule
+    ComponentModule
   ],
   providers: [
-    
     {
       provide: NbTokenLocalStorage, useClass: NbTokenLocalStorage,
     }
@@ -54,10 +63,18 @@ export class AuthModule {
     return {
       ngModule: AuthModule,
       providers: [
+        // {
+        //   provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest
+        // },
         {
-          provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+          provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,
         },
-        ...GUARDS
+        // {
+        //   provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true,
+        // },
+        ...GUARDS,
+        ...SERVICES,
+        ...API
       ]
     }
 

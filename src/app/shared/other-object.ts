@@ -22,28 +22,42 @@ export const StatusList: Status[] = [
 
 export interface UserType {
     id?: number;
-    value?: string;
+    name?: string;
 }
 
 export const UserTypes: UserType[] = [
     {
         id: 0,
-        value: "Thiết bị"
+        name: "Thiết bị"
     },
     {
         id: 1,
-        value: "Công ty BHQ"
+        name: "Công ty BHQ"
     },
     {
         id: 2,
-        value: "Đại lý"
+        name: "Đại lý"
     },
     {
         id: 3,
-        value: "Cơ sở đào tạo"
+        name: "Cơ sở đào tạo"
     },
     {
         id: 5,
-        value: "---Lựa chọn loại người dùng---"
+        name: "---Lựa chọn loại người dùng---"
     }
 ]
+
+
+export interface MenuRoleTree {
+    id?: number;
+    unitCode?: string;
+    parentCode?: string;
+    description?: string;
+    target?: string;
+    ofTw?: boolean;
+    ofProvince?: boolean;
+    ofDistrict?: boolean;
+    children?: MenuRoleTree[];
+
+}

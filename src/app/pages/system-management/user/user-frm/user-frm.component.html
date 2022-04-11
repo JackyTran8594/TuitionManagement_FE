@@ -46,9 +46,9 @@
                         <label for="usertype" class="label col-md-4 col-sm-4 col-form-label">Loại người dùng:
                         </label>
                         <div class="col-md-8 col-sm-8">
-                            <nb-select type="text" class="form-control" nbInput fullWidth id="usertype"
-                                [(selected)]="selected" [(ngModel)]="item.usertype" [ngxReadOnly]="view">
-                                <nb-options *ngFor="let type of UserTypes" [value]="type.id"></nb-options>
+                            <nb-select  matRipple fullWidth id="usertype" name="usertype" [(selected)]="selected"
+                                [(ngModel)]="item.usertype" [ngxReadOnly]="view">
+                                <nb-option matRipple *ngFor="let type of UserTypes" [value]="type.id">{{type.name}}</nb-option>
                             </nb-select>
                         </div>
                     </div>
@@ -70,6 +70,7 @@
                                 [ngxReadOnly]="view" [ngClass]="{
                   'invalid-data': passwordhash.invalid && (passwordhash .touched || passwordhash.dirty)
                 }" placeholder="Mật khẩu" />
+
                         </div>
                     </div>
 
@@ -79,12 +80,18 @@
                         <label for="passwordCheck" class="label col-md-4 col-sm-4 col-form-label">Nhập lại mạt khẩu:
                             &nbsp;<span [hidden]="view" style="color: red">*</span></label>
                         <div class="col-md-8 col-sm-8">
-                            <input type="text" class="form-control" nbInput fullWidth id="passwordCheck"
-                                [ngModel]="passwordCheck" [ngModelOptions]="{standalone:true}"
-                                (ngModelChange)="onCheckPassword(passwordCheck)" name="passwordCheck"
-                                #passwordCheck="ngModel" required [ngxReadOnly]="view" [ngClass]="{
+                            <nb-form-field>
+                                <input type="text" class="form-control" nbInput fullWidth id="passwordCheck"
+                                    [ngModel]="passwordCheck" [ngModelOptions]="{standalone:true}"
+                                    (ngModelChange)="onCheckPassword(passwordCheck)" name="passwordCheck"
+                                    #passwordCheck="ngModel" required [ngxReadOnly]="view" [ngClass]="{
               'invalid-data': passwordCheck.invalid && (passwordCheck.touched || passwordCheck.dirty)
             }" placeholder="Nhập lại mật khẩu" />
+                                <nb-icon *ngIf="onCheckPassword(passwordCheck)" status="success" nbSuffix class="action-icon" icon="checkmark-outline" pack="eva">
+                                </nb-icon>
+                                <nb-icon *ngIf="!onCheckPassword(passwordCheck)" status="danger" nbSuffix class="action-icon" icon="close-outline" pack="eva"></nb-icon>
+                            </nb-form-field>
+
                         </div>
                     </div>
                 </div>
@@ -120,14 +127,17 @@
                 <div class="col-lg-6 col-md-6">
 
                     <div class="form-group row">
-                        <label for="email" class="label col-md-4 col-sm-4 col-form-label">Mã phương tiện:
+                        <label for="email" class="label col-md-4 col-sm-4 col-form-label">Email:
                         </label>
                         <div class="col-md-8 col-sm-8">
-                            <input type="text" class="form-control" nbInput fullWidth id="email"
+                            <!-- <input type="text" class="form-control" nbInput fullWidth id="email"
                                 [(ngModel)]="item.email" name="email" #email="ngModel" required [ngxReadOnly]="view"
                                 [ngClass]="{
               'invalid-data': email.invalid && (email.touched || email.dirty)
-            }" placeholder="Địa chỉ email" />
+            }" placeholder="Địa chỉ email" /> -->
+                            <input type="text" class="form-control" nbInput fullWidth id="email"
+                                [(ngModel)]="item.email" name="email" [ngxReadOnly]="view"
+                                placeholder="Địa chỉ email" />
                         </div>
                     </div>
                 </div>
@@ -135,9 +145,8 @@
                     <div class="form-group row">
                         <label for="activated" class="label col-md-4 col-sm-4 col-form-label">Trạng thái:</label>
                         <div class="col-md-8 col-sm-8">
-                            <nb-select matRipple type="text" class="form-control" nbInput fullWidth id="activated"
-                                [(ngModel)]="item.activated" name="activated" [ngxReadOnly]="view"
-                                placeholder="Trạng thái người dùng">
+                            <nb-select matRipple fullWidth id="activated"
+                                [(ngModel)]="item.activated" name="activated" [ngxReadOnly]="view" [(selected)]="selectedStatus">
                                 <nb-option matRipple *ngFor="let item of listStatus" [value]="item.id">{{item.name}}
                                 </nb-option>
                             </nb-select>
@@ -159,8 +168,8 @@
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="form-group row">
-                        <label for="activationkey" class="label col-md-4 col-sm-4 col-form-label">Trạng thái:</label>
-                        <div class="col-md-8 col-sm-8">
+                        <label for="activationkey" class="label col-md-2 col-sm-2 col-form-label">Activationkey:</label>
+                        <div class="col-md-10 col-sm-10">
                             <input type="text" class="form-control" nbInput fullWidth id="activationkey"
                                 [(ngModel)]="item.activationkey" name="activationkey" [ngxReadOnly]="view"
                                 placeholder="activationkey" />

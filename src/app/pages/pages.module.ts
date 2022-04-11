@@ -7,6 +7,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptorService } from '../auth/_helper/jwt-interceptor.service';
 
 @NgModule({
   imports: [
@@ -16,14 +18,18 @@ import { FormsModule } from '@angular/forms';
     DashboardModule,
     NbIconModule,
     NbCheckboxModule,
-    // NbDialogModule.forChild(),
     NbCardModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     PagesComponent,
   ],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true,
+    // },
+  ]
 })
 export class PagesModule {
 }

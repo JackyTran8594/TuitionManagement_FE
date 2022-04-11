@@ -1,0 +1,42 @@
+::ng-deep .checkbox-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  ::ng-deep .btn-custom {
+    margin-right: 10px;
+  }
+  
+  .modal-custom {
+    min-width: 150% !important;
+    // margin-left: -10%;
+  }
+  
+  ::ng-deep nb-select {
+    width: 100% !important;
+  }
+  
+  // modal css
+  .modal-close-custom {
+    float: right;
+    font-weight: 700;
+    line-height: 1;
+    border: none;
+    opacity: 0.5;
+  }
+  
+  ::ng-deep .modal-close-custom nb-icon:hover {
+    color: black;
+  }
+  
+  .invalid-data {
+    border: 1px solid red;
+  }
+  
+  .modal-title-custom {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    left: 12%;
+  }
+  

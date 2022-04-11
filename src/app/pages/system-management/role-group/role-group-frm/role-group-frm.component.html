@@ -1,1 +1,75 @@
-<p>role-group-frm works!</p>
+<nb-card class="modal-custom">
+    <nb-card-header>
+        <div class="form-group row">
+            <div class="col-12 col-md-10 mb-2">
+                <h6 class="modal-title-custom">
+                    <b>{{ title }}</b>
+                </h6>
+            </div>
+            <div class="col-12 col-md-2 mb-2">
+                <nb-action matRipple icon="close-outline" class="modal-close-custom" (click)="close()"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form name="form" #formModal="ngForm">
+
+            <div class="form-group row">
+                <label for="name" class="label col-md-3 col-sm-3 col-form-label">Tên nhóm quyền &nbsp;<span
+                        style="color: red">*</span></label>
+                <div class="col-md-9 col-sm-9">
+                    <input type="text" class="form-control" nbInput fullWidth id="name" name="description"
+                        #description="ngModel" [(ngModel)]="item.description" placeholder="Nhập thông tin..." required
+                        [maxLength]="255"
+                        [ngClass]="{'invalid-data': description.invalid && (description.touched || description.dirty)}" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="description" class="label col-md-3 col-sm-3 col-form-label">Cấp </label>
+                <div class="col-md-9 col-sm-9">
+                    <div class="checkbox-item">
+                        <nb-checkbox status="basic" name="ofTw" [(ngModel)]="item.ofTw">Công ty BHQ</nb-checkbox>
+                        <nb-checkbox status="basic" name="ofProvince" [(ngModel)]="item.ofProvince">Đại lý</nb-checkbox>
+                        <nb-checkbox status="basic" name="ofDistrict" [(ngModel)]="item.ofDistrict">Cơ sở đào tạo</nb-checkbox>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="label col-md-3 col-sm-3 col-form-label">Thiết lập quyền</label>
+                <div class="col-md-9 col-sm-9">
+                    <div class="tree">
+                        <tree-root #tree [(state)]="state" [nodes]="nodes" (select)="onActivate($event)"
+                            [options]="options">
+                        </tree-root>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="form-group row text-center">
+            <div class="col-md-6 offset-md-3">
+                <div class="buttons-row">
+                    <button type="submit" nbButton status="info" class="btn-custom" (click)="save(tree.treeModel)"
+                        [hidden]="view" [disabled]="!formModal.form.valid">
+                        <nb-icon class="action-icon" icon="save-outline"></nb-icon>
+                        Lưu
+                    </button>
+                    <button type="button" nbButton status="danger" class="btn-custom" (click)="close()">
+                        <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
+                        Hủy
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

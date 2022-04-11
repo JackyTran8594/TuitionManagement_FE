@@ -1,1 +1,113 @@
-<p>role-group works!</p>
+<nb-card>
+    <nb-card-header>
+        <div class="row">
+            <div class="col-12 col-md-8 mb-2">
+                <h6>Dánh sách người dùng</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-8 mb-2">
+                <div class="input-group input-group-md">
+                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="txtSearch"
+                        (keyup.enter)="search()" placeholder="Nhập thông tin tìm kiếm ..." aria-label="">
+                    <span class="input-group-btn ml-2">
+                        <button class="btn btn-primary" nbButton aria-label="">
+                            <nb-icon class="action-icon" icon="search-outline"></nb-icon>
+                            Tìm kiếm
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="float-right">
+                    <div class="input-group input-group-md">
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="onCreate()">
+                                <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
+                                Thêm mới
+                            </button>
+                        </span>
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="danger" (click)="onDeleteAll($event)">
+                                <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
+                                Xóa tất cả
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="table-content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center table-col-0">
+                            <nb-checkbox (checkedChange)="CheckedAll($event)"></nb-checkbox>
+                        </th>
+                        <th scope="col" class="text-center table-col-0">STT</th>
+                        <th scope="col" class="text-center table-col-0">Mô tả</th>
+                        <th scope="col" class="text-center table-col-0">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="listData && listData.length < 1">
+                    <tr>
+                        <td colspan="4" class="text-center"><b>Không có dữ liệu</b></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="listData && listData.length >= 1">
+                    <tr *ngFor="let item of listData | paginate: {
+                        itemsPerPage:pageSize,
+                        currentPage:pageNumber,
+                        totalItems: totalItems
+                    }; let idx = index">
+                        <td class="text-center table-col-0">
+                            <nb-checkbox [checked]="item.isChecked" (checkedChange)="isChecked($event, idx)">
+                            </nb-checkbox>
+                        </td>
+                        <td class="text-center table-col-3">{{ (pageNumber - 1) * pageSize + (idx + 1) }}</td>
+                        <td class="text-center table-col-3">{{item.description}}</td>
+                        <td class="text-center table-col-4">
+                            <div class="buttons-row">
+                                <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">
+                                    <nb-icon class="action-icon" icon="eye-outline"></nb-icon>
+                                </button>
+                                <button class="btn-custom" nbButton status="info" matRipple shape="round"
+                                    (click)="onEdit(item)">
+                                    <nb-icon class="action-icon" icon="edit-outline"></nb-icon>
+                                </button>
+                                <button class="btn-custom" status="danger" nbButton matRipple shape="round"
+                                    (click)="onDelete(item.id)">
+                                    <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-table">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Tổng số bản ghi: {{ totalItems }} bản ghi</p>
+                </div>
+                <div class="col-md-4 offset-md-4">
+                    <div class="pagination">
+                        <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
+                            <nb-option [value]="10">10</nb-option>
+                            <nb-option [value]="20">20</nb-option>
+                            <nb-option [value]="30">30</nb-option>
+                            <nb-option [value]="40">40</nb-option>
+                            <nb-option [value]="50">50</nb-option>
+                        </nb-select>
+                        <pagination-controls maxSize="5" responsive="true" (pageChange)="pageChanged($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nb-card-body>
+</nb-card>

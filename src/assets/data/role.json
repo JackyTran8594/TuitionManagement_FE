@@ -1,0 +1,56 @@
+[
+  {
+    "roleID": 0,
+    "description": "Super Administrator",
+    "ofTw": true,
+    "ofProvince": false,
+    "ofDistrict": false,
+    "lastUpdateTime": 1636387643,
+    "creationTime": 1636387643
+  },
+  {
+    "roleID": 1,
+    "description": "Super Administrator Cơ sở đào tạo",
+    "ofTw": true,
+    "ofProvince": false,
+    "ofDistrict": true,
+    "lastUpdateTime": 1636387643,
+    "creationTime": 1636387643
+  },
+  {
+    "roleID": 2,
+    "description": "Admin Cơ sở đào tạo",
+    "ofTw": true,
+    "ofProvince": false,
+    "ofDistrict": true,
+    "lastUpdateTime": 1636387643,
+    "creationTime": 1636387643
+  },
+  {
+    "roleID": 3,
+    "description": "Phòng đào tạo",
+    "ofTw": true,
+    "ofProvince": false,
+    "ofDistrict": true,
+    "lastUpdateTime": 1636387643,
+    "creationTime": 1636387643
+  },
+  {
+    "roleID": 4,
+    "description": "Guest cơ sở đào tạo",
+    "ofTw": true,
+    "ofProvince": false,
+    "ofDistrict": true,
+    "lastUpdateTime": 1636387643,
+    "creationTime": 1636387643
+  },
+  {
+    "roleID": 5,
+    "description": "Admin Đại lý",
+    "ofTw": true,
+    "ofProvince": true,
+    "ofDistrict": false,
+    "lastUpdateTime": 1636387643,
+    "creationTime": 1636387643
+  }
+]

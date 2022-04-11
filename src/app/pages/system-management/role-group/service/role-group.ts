@@ -1,8 +1,17 @@
+import { NumberValueAccessor } from "@angular/forms";
 import { Observable } from "rxjs";
 import { TableData } from "../../../../shared/table-data";
 
 export interface RoleGroup {
     id?: number;
+    roleID?:number;
+    description?:string;
+    ofTw?:boolean;
+    ofProvince?: boolean;
+    ofDistrict?: boolean;
+    lastUpdateTime?: number;
+    creationTime?: number;
+    isChecked?: boolean;
 }
 
 
@@ -14,4 +23,6 @@ export abstract class RoleGroupData {
     abstract get(id: number): Observable<RoleGroup>;
     abstract delete(id: number): Observable<boolean>;
     abstract deleteAll(ids: number[]): Observable<boolean>;
+    abstract getAll(): Observable<RoleGroup[]>;
+    
 }

@@ -8,7 +8,7 @@ import { RoleGroup } from './role-group';
 @Injectable()
 export class RoleGroupApi {
 
-  private readonly apiController: string = 'role';
+  private readonly apiController: string = 'roles';
 
   constructor(private http: HttpService) {
 
@@ -18,9 +18,20 @@ export class RoleGroupApi {
     let params = new HttpParams()
       .set("pageNumber", pageNumber)
       .set("pageSize", pageSize)
-      .set("txtSearch", txtSearch);
+      // .set("txtSearch", txtSearch);
     return this.http.get(this.apiController, { params });
   }
+
+  getAll(): Observable<RoleGroup[]> {
+    // let params = new HttpParams()
+    //   .set("pageNumber", pageNumber)
+    //   .set("pageSize", pageSize)
+    //   .set("txtSearch", txtSearch);
+    return this.http.get(this.apiController);
+  }
+
+  
+  
   create(item: RoleGroup): Observable<RoleGroup> {
     return this.http.post(this.apiController, item);
   }

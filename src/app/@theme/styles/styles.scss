@@ -22,6 +22,8 @@
 @import './overrides';
 @import './material/material-overrides';
 
+@import '~@circlon/angular-tree-component/css/angular-tree-component.css';
+
 // install the framework and custom global styles
 @include nb-install() {
 
@@ -38,5 +40,12 @@
   @include nb-overrides();
   @include material-overrides();
 };
+
+// remove scrollbar in y
+.cdk-global-scrollblock {
+  position: initial;
+  width: initial;
+  overflow: hidden;
+}
 
 

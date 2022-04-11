@@ -18,13 +18,16 @@ export class UserFrmComponent implements OnInit {
   UserTypes: UserType[] = [];
   listStatus: Status[] = [];
   selected: number;
-  passwordCheck: string;
+  selectedStatus: number;
+  
+  passwordCheck: any = {};
 
   constructor(private dialogRef: NbDialogRef<UserFrmComponent>, private service: UserData) { }
 
   ngOnInit(): void {
     if (this.create) {
-      this.selected = 5
+      this.selected = 5;
+      this.selectedStatus = 0;
     }
     this.UserTypes = UserTypes;
     this.listStatus = StatusList;
@@ -35,7 +38,7 @@ export class UserFrmComponent implements OnInit {
   }
 
   onCheckPassword(item) {
-    if (this.item.passwordhash.trim() == item.trim()) {
+    if (this.item.passwordhash == item) {
       return true;
     }
     return false;

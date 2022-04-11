@@ -31,7 +31,10 @@ const routes: Routes = [{
       path: 'system-management/role-group',
       loadChildren: () => import('./system-management/role-group/role-group.module').then(m => m.RoleGroupModule)
     },
-
+    {
+      path: 'system-management/accounts',
+      loadChildren: () => import('./system-management/account/account.module').then(m => m.AccountModule)
+    },
     {
       path: '',
       redirectTo: 'dashboard',

@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'settings-outline',
     children: [
       {
-        title: 'Quản lý người dung',
+        title: 'Quản lý người dùng',
         icon:'person-outline',
         link: '/pages/system-management/user',
       },
@@ -26,49 +26,54 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon:'person-done-outline',
         link: '/pages/system-management/role-group',
       },
-    ],
-  },
-  {
-    title: 'Charts',
-    icon: 'pie-chart-outline',
-    children: [
       {
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
-      },
-      {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
+        title: 'Quản lý đơn vị',
+        icon:'person-done-outline',
+        link: '/pages/system-management/accounts',
       },
     ],
   },
+  // {
+  //   title: 'Charts',
+  //   icon: 'pie-chart-outline',
+  //   children: [
+  //     {
+  //       title: 'Echarts',
+  //       link: '/pages/charts/echarts',
+  //     },
+  //     {
+  //       title: 'Charts.js',
+  //       link: '/pages/charts/chartjs',
+  //     },
+  //     {
+  //       title: 'D3',
+  //       link: '/pages/charts/d3',
+  //     },
+  //   ],
+  // },
  
  
  
-  {
-    title: 'Auth',
-    icon: 'lock-outline',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
+  // {
+  //   title: 'Auth',
+  //   icon: 'lock-outline',
+  //   children: [
+  //     {
+  //       title: 'Login',
+  //       link: '/auth/login',
+  //     },
+  //     {
+  //       title: 'Register',
+  //       link: '/auth/register',
+  //     },
+  //     {
+  //       title: 'Request Password',
+  //       link: '/auth/request-password',
+  //     },
+  //     {
+  //       title: 'Reset Password',
+  //       link: '/auth/reset-password',
+  //     },
+  //   ],
+  // },
 ];

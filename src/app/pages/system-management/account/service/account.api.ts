@@ -8,7 +8,7 @@ import { Account } from './account';
 @Injectable()
 export class AccountApi {
 
-  private readonly apiController: string = 'account';
+  private readonly apiController: string = 'accounts';
 
   constructor(private http: HttpService) {
 
@@ -18,7 +18,7 @@ export class AccountApi {
     let params = new HttpParams()
       .set("pageNumber", pageNumber)
       .set("pageSize", pageSize)
-      .set("txtSearch", txtSearch);
+      // .set("txtSearch", txtSearch);
     return this.http.get(this.apiController, { params });
   }
   create(item: Account): Observable<Account> {

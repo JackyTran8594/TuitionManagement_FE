@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
-import { User } from '../user/service/user';
 import { AccountFrmComponent } from './account-frm/account-frm.component';
-import { AccountData } from './service/account';
+import { Account, AccountData } from './service/account';
 
 @Component({
   selector: 'ngx-account',
@@ -18,7 +17,7 @@ export class AccountComponent implements OnInit {
   pageSize: number = 10;
   pageNumber: number = 1;
   totalItems: number = 0;
-  listData: User[] = [];
+  listData: Account[] = [];
   protected readonly $unsubcribe = new Subject<void>();
 
   constructor(private service: AccountData, private dialog: NbDialogService, private toastr: NbToastrService) { }

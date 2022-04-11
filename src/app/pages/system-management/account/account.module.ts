@@ -6,6 +6,8 @@ import { AccountComponent } from './account.component';
 import { AccountFrmComponent } from './account-frm/account-frm.component';
 import { NbCardModule, NbIconModule, NbButtonModule, NbInputModule, NbSelectModule, NbOptionModule, NbActionsModule, NbCheckboxModule, NbFormFieldModule } from '@nebular/theme';
 import { SharedModule } from '../../../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 const NB_MODULES = [
   NbCardModule,
@@ -19,8 +21,6 @@ const NB_MODULES = [
   NbFormFieldModule,
 ]
 
-
-
 @NgModule({
   declarations: [
     AccountComponent,
@@ -29,7 +29,10 @@ const NB_MODULES = [
   imports: [
     CommonModule,
     AccountRoutingModule,
-    SharedModule
+    FormsModule,
+    NgxPaginationModule,
+    SharedModule,
+    NB_MODULES
   ]
 })
 export class AccountModule { }

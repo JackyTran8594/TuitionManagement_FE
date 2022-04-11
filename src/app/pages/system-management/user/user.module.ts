@@ -22,7 +22,6 @@ const NB_MODULES = [
   NbActionsModule,
   NbCheckboxModule,
   NbFormFieldModule,
-  // NbDialogModule.forChild(),
 ]
 
 const API = [UserApi]

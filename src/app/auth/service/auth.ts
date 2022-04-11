@@ -12,7 +12,7 @@ export interface Account {
     departmentCode?: string;
     maximumDevices?: number;
     displayName?: string
-    active?: boolean;
+    isActive?: boolean;
     creationTime?: number;
     lastUpdateTime?: number;
 }

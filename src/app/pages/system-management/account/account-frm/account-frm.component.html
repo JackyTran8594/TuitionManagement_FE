@@ -1,123 +1,144 @@
-<nb-card>
+<nb-card class="modal-custom">
     <nb-card-header>
         <div class="row">
-            <div class="col-12 col-md-8 mb-2">
-                <h6>Dánh sách người dùng</h6>
+            <div class="col-md-6 offset-md-3">
+                <h6 class="modal-title-custom">
+                    <b>{{ title }}</b>
+                </h6>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 mb-2">
-                <div class="input-group input-group-md">
-                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="txtSearch"
-                        (keyup.enter)="search()" placeholder="Nhập thông tin tìm kiếm ..." aria-label="">
-                    <span class="input-group-btn ml-2">
-                        <button class="btn btn-primary" nbButton aria-label="">
-                            <nb-icon class="action-icon" icon="search-outline"></nb-icon>
-                            Tìm kiếm
-                        </button>
-                    </span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4">
-                <div class="float-right">
-                    <div class="input-group input-group-md">
-                        <span class="input-group-btn ml-2">
-                            <button nbButton status="info" (click)="onCreate()">
-                                <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
-                                Thêm mới
-                            </button>
-                        </span>
-                        <span class="input-group-btn ml-2">
-                            <button nbButton status="danger" (click)="onDeleteAll($event)">
-                                <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
-                                Xóa tất cả
-                            </button>
-                        </span>
-                    </div>
-                </div>
+            <div class="col-md-3">
+                <nb-action matRipple icon="close-outline" class="modal-close-custom" (click)="close()"></nb-action>
             </div>
         </div>
     </nb-card-header>
     <nb-card-body>
-        <div class="table-content">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col" class="text-center table-col-0">
-                            <nb-checkbox (checkedChange)="CheckedAll($event)"></nb-checkbox>
-                        </th>
-                        <th scope="col" class="text-center table-col-0">STT</th>
-                        <th scope="col" class="text-center table-col-0">Tên đăng nhập</th>
-                        <th scope="col" class="text-center table-col-0">Loại người dùng</th>
-                        <th scope="col" class="text-center table-col-0">Họ và đệm</th>
-                        <th scope="col" class="text-center table-col-0">Tên</th>
-                        <th scope="col" class="text-center table-col-0">Email</th>
-                        <th scope="col" class="text-center table-col-0">Trạng thái</th>
-                        <th scope="col" class="text-center table-col-0">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="listData && listData.length < 1">
-                    <tr>
-                        <td colspan="8" class="text-center"><b>Không có dữ liệu</b></td>
-                    </tr>
-                </tbody>
-                <tbody *ngIf="listData && listData.length >= 1">
-                    <tr *ngFor="let item of listData | paginate: {
-                        itemsPerPage:pageSize,
-                        currentPage:pageNumber,
-                        totalItems: totalItems
-                    }; let idx = index">
-                        <td class="text-center table-col-0">
-                            <nb-checkbox [checked]="item.isChecked" (checkedChange)="isChecked($event, idx)">
-                            </nb-checkbox>
-                        </td>
-                        <td class="text-center table-col-0">{{ (pageNumber - 1) * pageSize + (idx + 1) }}</td>
-                        <td class="text-center table-col-0">{{item.login}}</td>
-                        <td class="text-center table-col-0">{{item.usertype}}</td>
-                        <td class="text-center table-col-0">{{item.firstname}}</td>
-                        <td class="text-center table-col-0">{{item.lastname}}</td>
-                        <td class="text-center table-col-0">{{item.email}}</td>
-                        <td class="text-center table-col-0">{{item.activated}}</td>
-                        <td class="text-center table-col-4">
-                            <div class="buttons-row">
-                                <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">
-                                    <nb-icon class="action-icon" icon="eye-outline"></nb-icon>
-                                </button>
-                                <button class="btn-custom" nbButton status="info" matRipple shape="round"
-                                    (click)="onEdit(item)">
-                                    <nb-icon class="action-icon" icon="edit-outline"></nb-icon>
-                                </button>
-                                <button class="btn-custom" status="danger" nbButton matRipple shape="round"
-                                    (click)="onDelete(item.id)">
-                                    <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="footer-table">
+        <form name="form" #formModal="ngForm">
+            <!-- row 1 -->
             <div class="row">
-                <div class="col-md-4">
-                    <p>Tổng số bản ghi: {{ totalItems }} bản ghi</p>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <label for="login" class="label col-md-4 col-sm-4 col-form-label">unitCode: &nbsp;<span
+                                [hidden]="view" style="color: red">*</span></label>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="text" class="form-control" nbInput fullWidth id="login"
+                                [(ngModel)]="item.unitCode" name="unitCode" #unitCode="ngModel" required
+                                [ngxReadOnly]="view" [ngClass]="{
+                'invalid-data': unitCode.invalid && (unitCode.touched || unitCode.dirty)
+              }" placeholder="Tên đăng nhập" />
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-md-4 offset-md-4">
-                    <div class="pagination">
-                        <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
-                            <nb-option [value]="10">10</nb-option>
-                            <nb-option [value]="20">20</nb-option>
-                            <nb-option [value]="30">30</nb-option>
-                            <nb-option [value]="40">40</nb-option>
-                            <nb-option [value]="50">50</nb-option>
-                        </nb-select>
-                        <pagination-controls maxSize="5" responsive="true" (pageChange)="pageChanged($event)">
-                        </pagination-controls>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <label for="parentCode" class="label col-md-4 col-sm-4 col-form-label">parentCode:
+                            &nbsp;<span [hidden]="view" style="color: red">*</span></label>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="text" class="form-control" nbInput fullWidth id="parentCode"
+                                [(ngModel)]="item.parentCode" name="parentCode" #parentCode="ngModel" required
+                                [ngxReadOnly]="view" [ngClass]="{
+              'invalid-data': parentCode.invalid && (parentCode.touched || parentCode.dirty)
+            }" placeholder="Tài khoản" />
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group row">
+                        <label for="parentCode" class="label col-md-4 col-sm-4 col-form-label">parentCode:
+                        </label>
+                        <div class="col-md-8 col-sm-8">
+                            <nb-select  matRipple fullWidth id="parentCode" name="parentCode" [(selected)]="selected"
+                                [(ngModel)]="item.parentCode" [ngxReadOnly]="view">
+                                <nb-option matRipple *ngFor="let type of parentCodes" [value]="type.id">{{type.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+
+
+            <!-- row 2 -->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="form-group row">
+                        <label for="departmentCode " class="label col-md-4 col-sm-4 col-form-label">Phòng ban:
+                            &nbsp;<span [hidden]="view" style="color: red">*</span></label>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="text" class="form-control" nbInput fullWidth id="departmentCode "
+                                [(ngModel)]="item.departmentCode " name="departmentCode " #departmentCode="ngModel"
+                                required [ngxReadOnly]="view" [ngClass]="{
+                  'invalid-data': departmentCode.invalid && (departmentCode .touched || departmentCode.dirty)
+                }" placeholder="Mật khẩu" />
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <label for="maximumDevices " class="label col-md-4 col-sm-4 col-form-label">Số lượng thiết bị Max:
+                            &nbsp;<span [hidden]="view" style="color: red">*</span></label>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="number" class="form-control" nbInput fullWidth id="maximumDevices "
+                                [(ngModel)]="item.maximumDevices " name="maximumDevices " #maximumDevices="ngModel"
+                                required [ngxReadOnly]="view" [ngClass]="{
+              'invalid-data': maximumDevices.invalid && (maximumDevices .touched || maximumDevices.dirty)
+            }" placeholder="Lượng thiết bị" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- row 4 -->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <label for="displayName" class="label col-md-4 col-sm-4 col-form-label">Tên hiển thị:</label>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="text" class="form-control" nbInput fullWidth id="displayName "
+                            [(ngModel)]="item.displayName " name="displayName" [ngxReadOnly]="view" placeholder="Lượng thiết bị" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <label for="activated" class="label col-md-4 col-sm-4 col-form-label">Trạng thái:</label>
+                        <div class="col-md-8 col-sm-8">
+                            <nb-select matRipple fullWidth id="isActive" [(ngModel)]="item.isActive" name="isActive"
+                                [ngxReadOnly]="view" [(selected)]="selectedStatus">
+                                <nb-option matRipple *ngFor="let item of listStatus" [value]="item.id">{{item.name}}
+                                </nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         
+        </form>
+
+
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="text-center">
+                    <div class="buttons-row">
+                        <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="view"
+                            [disabled]="!formModal.form.valid">
+                            <nb-icon class="action-icon" icon="save-outline"></nb-icon>
+                            Lưu
+                        </button>
+                        <button nbButton status="danger" class="btn-custom" (click)="close()">
+                            <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
+                            Hủy
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-
-    </nb-card-body>
+    </nb-card-footer>
 </nb-card>

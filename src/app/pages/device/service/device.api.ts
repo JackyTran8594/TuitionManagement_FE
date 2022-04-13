@@ -14,9 +14,9 @@ export class DeviceApi {
 
   paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Device>> {
     const params = new HttpParams()
-      .set('pageNumber', pageNumber)
-      .set('pageSize', pageSize)
-      .set('txtSearch', txtSearch);
+      .set('page', pageNumber)
+      .set('size', pageSize)
+      // .set('txtSearch', txtSearch);
 
     return this.http.get(this.apiController, { params });
   }

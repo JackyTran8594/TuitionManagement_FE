@@ -6,6 +6,8 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
+import { Router } from '@angular/router';
+import { NbTokenLocalStorage } from '@nebular/auth';
 
 @Component({
   selector: 'ngx-header',
@@ -48,7 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [ { title: 'Thông tin người dùng', link:'/user/profile' }, { title: 'Đăng xuất', link:'/auth/logout' } ];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -58,6 +60,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
+    private router: Router,
+    private localStorage: NbTokenLocalStorage
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
@@ -112,4 +116,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
 }

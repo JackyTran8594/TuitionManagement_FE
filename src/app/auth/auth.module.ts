@@ -17,6 +17,7 @@ import { HttpService } from '../shared/http.service';
 import { JwtInterceptorService } from './_helper/jwt-interceptor.service';
 import { AuthApi } from './service/auth.api';
 import { AuthService } from './service/auth.service';
+import { LogoutComponent } from './logout.component';
 
 
 const GUARDS = [AuthGuardService]
@@ -43,7 +44,8 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     AuthComponent,
     LoginComponent,
     AuthBlockComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

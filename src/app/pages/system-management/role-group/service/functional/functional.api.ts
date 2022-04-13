@@ -14,8 +14,8 @@ export class FunctionalApi {
 
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Functional>> {
     let params = new HttpParams()
-      .set("pageNumber", pageNumber)
-      .set("pageSize", pageSize)
+      .set("page", pageNumber)
+      .set("size", pageSize)
       .set("txtSearch", txtSearch);
     return this.http.get(this.apiController, { params });
   }

@@ -4,7 +4,7 @@ import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MenuRoleTree } from '../../../../shared/other-object';
-import { Functional } from '../service/functional/functional';
+import { Functional, FunctionalData } from '../service/functional/functional';
 import { RoleGroup, RoleGroupData } from '../service/role-group';
 
 @Component({
@@ -19,6 +19,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   @Input() update: boolean;
   @Input() view: boolean;
   item: RoleGroup = {};
+  funcList: Functional[] = [];
   selected: number;
 
   //Tree custom
@@ -35,7 +36,14 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
 
   protected readonly $unsubscribe = new Subject<void>();
 
-  constructor(private service: RoleGroupData, private dialogRef: NbDialogRef<RoleGroupFrmComponent>, private toastr: NbToastrService) { }
+  constructor(private service: RoleGroupData, 
+    private dialogRef: NbDialogRef<RoleGroupFrmComponent>, 
+    private toastr: NbToastrService,
+    private serviceFunc: FunctionalData
+    ) {
+      
+
+     }
 
 
   ngOnDestroy(): void {
@@ -44,15 +52,22 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-   
+      this.getFunc();
+  }
+
+  getFunc() {
+    this.serviceFunc.getFunctional().subscribe(res => {
+        this.funcList = res;
+        console.log(res);
+    })
   }
 
   close() {
     this.dialogRef.close();
   }
 
-  initTree():any {
-    
+  initTree(): any {
+
   }
 
   buildRoleTree(menu: MenuRoleTree[]): any {
@@ -167,18 +182,5 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
       );
   }
 
-  // save() {
-  //   if (this.create) {
-  //     this.service.create(this.item).subscribe(res => {
-  //       console.log(res);
-  //       this.dialogRef.close(res);
-  //     });
-  //   }
-  //   if (this.update) {
-  //     this.service.update(this.item).subscribe(res => {
-  //       console.log(res);
-  //       this.dialogRef.close(res);
-  //     });
-  //   }
-  // }
+ 
 }

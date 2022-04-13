@@ -9,6 +9,10 @@ export class UserService implements UserData {
 
   constructor(private api: UserApi) { }
 
+  getByUsername(username: string): Observable<User> {
+    return this.api.getByUsername(username);
+  }
+
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>> {
     return this.api.list(pageNumber, pageSize, txtSearch);
   }

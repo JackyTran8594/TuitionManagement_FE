@@ -17,7 +17,7 @@ import { HttpService } from '../shared/http.service';
 import { JwtInterceptorService } from './_helper/jwt-interceptor.service';
 import { AuthApi } from './service/auth.api';
 import { AuthService } from './service/auth.service';
-import { LogoutComponent } from './logout.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const GUARDS = [AuthGuardService]
@@ -65,15 +65,10 @@ export class AuthModule {
     return {
       ngModule: AuthModule,
       providers: [
-        // {
-        //   provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest
-        // },
         {
           provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,
         },
-        // {
-        //   provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true,
-        // },
+       
         ...GUARDS,
         ...SERVICES,
         ...API

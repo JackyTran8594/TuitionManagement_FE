@@ -5,8 +5,8 @@ export interface User {
     id?: number;
     login?: string;
     usertype?: number;
-    passwordhash?: string;
-    // passwordCheck?: string;
+    password?: string;
+    passwordCheck?: string;
     firstname?: string;
     lastname?: string;
     email?: string;
@@ -18,6 +18,9 @@ export interface User {
     resetdate?: Date;
     lastUpdateTime?: Date;
     isChecked?: Boolean;
+    authorities?: number[];
+    accounts?: number[];
+    functions?: number[];
 }
 
 export abstract class UserData {
@@ -28,6 +31,7 @@ export abstract class UserData {
     abstract get(id: number): Observable<User>;
     abstract delete(id: number): Observable<boolean>;
     abstract deleteAll(ids: number[]): Observable<boolean>;
+    abstract getByUsername(username: string): Observable<User>
 
 }
 

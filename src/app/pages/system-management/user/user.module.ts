@@ -11,6 +11,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { UserData } from './service/user';
 import { UserService } from './service/user.service';
 import { UserApi } from './service/user.api';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const NB_MODULES = [
   NbCardModule,
@@ -27,7 +28,7 @@ const NB_MODULES = [
 const API = [UserApi]
 
 @NgModule({
-  declarations: [UserComponent, UserFrmComponent],
+  declarations: [UserComponent, UserFrmComponent, UserProfileComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

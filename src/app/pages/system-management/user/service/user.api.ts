@@ -17,8 +17,8 @@ export class UserApi {
 
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>> {
     let params = new HttpParams()
-      .set("pageNumber", pageNumber)
-      .set("pageSize", pageSize)
+      .set("page", pageNumber)
+      .set("size", pageSize)
       // .set("txtSearch", txtSearch);
     return this.http.get(this.apiControllerV2, { params });
   }
@@ -38,5 +38,9 @@ export class UserApi {
   deleteAll(ids: number[]): Observable<boolean> {
     let params = new HttpParams().set('ids', ids.toString());
     return this.http.delete(this.apiController, { params });
+  }
+
+  getByUsername(username: string): Observable<User> {
+    return this.http.get(this.apiController + '/' + username);
   }
 }

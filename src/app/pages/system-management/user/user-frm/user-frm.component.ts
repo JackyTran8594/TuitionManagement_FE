@@ -38,7 +38,7 @@ export class UserFrmComponent implements OnInit {
   }
 
   onCheckPassword(item) {
-    if (this.item.passwordhash == item) {
+    if (this.item.password == item) {
       return true;
     }
     return false;

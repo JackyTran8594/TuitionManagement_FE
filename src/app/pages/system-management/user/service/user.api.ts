@@ -15,13 +15,22 @@ export class UserApi {
 
   }
 
-  list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>> {
+  // list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>> {
+  //   let params = new HttpParams()
+  //     .set("page", pageNumber)
+  //     .set("size", pageSize)
+  //     // .set("txtSearch", txtSearch);
+  //   return this.http.get(this.apiControllerV2, { params });
+  // }
+
+  list(pageNumber: number, pageSize: number, txtSearch: string): Observable<User[]> {
     let params = new HttpParams()
       .set("page", pageNumber)
       .set("size", pageSize)
       // .set("txtSearch", txtSearch);
     return this.http.get(this.apiControllerV2, { params });
   }
+
   create(item: User): Observable<User> {
     return this.http.post(this.apiController, item);
   }

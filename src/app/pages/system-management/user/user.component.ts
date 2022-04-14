@@ -13,8 +13,8 @@ import { UserFrmComponent } from './user-frm/user-frm.component';
 export class UserComponent implements OnInit, OnDestroy {
 
   txtSearch = "";
-  pageSize: number = 10;
-  pageNumber: number = 1;
+  pageSize: number = 5;
+  pageNumber: number = 2;
   totalItems: number = 0;
   listData: User[] = [];
   protected readonly $unsubcribe = new Subject<void>();
@@ -33,8 +33,9 @@ export class UserComponent implements OnInit, OnDestroy {
   search() {
     this.service.list(this.pageNumber, this.pageSize, this.txtSearch).subscribe(res => {
       console.log(res);
-      this.totalItems = res.totalElements;
-      this.listData = res.content;
+      // this.totalItems = res.totalElements;
+      // this.listData = res.content;
+      this.listData = res;
     })
   }
 

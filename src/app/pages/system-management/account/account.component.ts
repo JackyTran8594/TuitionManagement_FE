@@ -12,7 +12,7 @@ import { Account, AccountData } from './service/account';
 })
 export class AccountComponent implements OnInit {
 
- 
+
   txtSearch = "";
   pageSize: number = 10;
   pageNumber: number = 1;
@@ -191,8 +191,8 @@ export class AccountComponent implements OnInit {
             setTimeout(() => {
               this.search();
             }, 1000);
-          }
-        })
+          };
+        });
 
       };
     }, err => {

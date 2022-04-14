@@ -8,8 +8,8 @@
 }
 
 .modal-custom {
-  min-width: 150% !important;
-  // margin-left: -10%;
+  width: 170%;
+  margin-left: -35%;
 }
 
 ::ng-deep nb-select {
@@ -38,4 +38,13 @@
   text-transform: uppercase;
   text-align: center;
   left: 12%;
+}
+
+.tree {
+  max-height: 300px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: auto;
 }

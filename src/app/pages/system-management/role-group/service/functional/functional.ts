@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { TableData } from "../../../../../shared/table-data";
 
 export interface Functional {
     id?: number;
@@ -16,5 +17,5 @@ export interface Functional {
 }
 
 export abstract class FunctionalData {
-    abstract getFunctional(): Observable<Functional[]>;
+    abstract getFunctional(): Observable<TableData<Functional>>;
 }

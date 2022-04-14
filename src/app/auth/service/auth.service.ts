@@ -31,7 +31,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     let token = <AccessToken>JSON.parse(localStorage.getItem('access_token'));
-    console.log(token);
+    // console.log(token);
     // console.log(token.id_token);
 
     if (token) {

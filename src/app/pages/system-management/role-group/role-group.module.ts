@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from '../../../shared/shared.module';
 import { TreeModule } from '@circlon/angular-tree-component';
+import { FunctionalApi } from './service/functional/functional.api';
+import { FunctionalData } from './service/functional/functional';
+import { FunctionalService } from './service/functional/functional.service';
 
 const NB_MODULES = [
   NbCardModule,
@@ -25,7 +28,7 @@ const NB_MODULES = [
   // NbDialogModule.forChild(),
 ]
 
-const API = [RoleGroupApi]
+const API = [RoleGroupApi, FunctionalApi]
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ const API = [RoleGroupApi]
   providers: [
     {
       provide: RoleGroupData, useClass: RoleGroupService
+    },
+    {
+      provide: FunctionalData, useClass: FunctionalService
     },
     [...API]
   ]

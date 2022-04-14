@@ -13,15 +13,20 @@ export class FunctionalApi {
   constructor(private http: HttpService) { }
 
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Functional>> {
-    let params = new HttpParams()
-      .set("page", pageNumber)
-      .set("size", pageSize)
-      .set("txtSearch", txtSearch);
+    let params = new HttpParams();
+    if (pageSize) {
+      params.set("page", pageNumber);
+    }
+    if (pageNumber) {
+      params.set("size", pageSize);
+    }
+    // .set("txtSearch", txtSearch);
     return this.http.get(this.apiController, { params });
   }
 
-  getAll(): Observable<Functional[]> {
-    return this.http.get(this.apiController);
+  getAll(): Observable<TableData<Functional>> {
+    let params = new HttpParams().set("size", 10000);
+    return this.http.get(this.apiController, { params });
   }
 
 

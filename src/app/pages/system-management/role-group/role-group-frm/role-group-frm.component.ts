@@ -30,20 +30,20 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     useCheckbox: true,
     idField: 'id',
     childrenField: 'children',
-    displayField: 'description',
+    displayField: 'name',
   };
   // end tree
 
   protected readonly $unsubscribe = new Subject<void>();
 
-  constructor(private service: RoleGroupData, 
-    private dialogRef: NbDialogRef<RoleGroupFrmComponent>, 
+  constructor(private service: RoleGroupData,
+    private dialogRef: NbDialogRef<RoleGroupFrmComponent>,
     private toastr: NbToastrService,
     private serviceFunc: FunctionalData
-    ) {
-      
+  ) {
 
-     }
+
+  }
 
 
   ngOnDestroy(): void {
@@ -52,13 +52,17 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-      this.getFunc();
+    this.getFunc();
+
+    setTimeout(() => {
+      return this.nodes = this.buildRoleTree(this.funcList);
+    }, 1000);
   }
 
   getFunc() {
     this.serviceFunc.getFunctional().subscribe(res => {
-        this.funcList = res;
-        console.log(res);
+      this.funcList = res.content;
+      console.log(res);
     })
   }
 
@@ -66,12 +70,8 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
 
-  initTree(): any {
-
-  }
-
   buildRoleTree(menu: MenuRoleTree[]): any {
-
+    console.log(menu);
     let root: MenuRoleTree[] = menu.filter(x => x.parentCode == '#').map(o => {
       return {
         id: o.id,
@@ -83,7 +83,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     }) as MenuRoleTree[];
 
     let parentNode: MenuRoleTree[] = menu.filter(x =>
-      (x.parentCode.trim().length == 2 && x.parentCode != '#')
+      (x.parentCode.trim().length == 2 && x.unitCode.includes(x.parentCode))
     ).map(o => {
       return {
         id: o.id,
@@ -95,7 +95,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     }) as MenuRoleTree[];
 
     let childNode: MenuRoleTree[] = menu.filter(x =>
-      (x.parentCode.trim().length == 6 && x.parentCode != '#')
+      (x.parentCode.trim().length == 4 && x.unitCode.includes(x.parentCode))
     ).map(o => {
       return {
         id: o.id,
@@ -123,6 +123,8 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
         }
       })
     })
+
+    console.log(root);
 
     return root;
 
@@ -182,5 +184,5 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
       );
   }
 
- 
+
 }

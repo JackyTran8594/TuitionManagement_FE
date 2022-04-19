@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../../../shared/http.service';
 import { TableData } from '../../../../shared/table-data';
-import { Account } from './account';
+import { Account, RequestDTO } from './account';
 
 @Injectable()
 export class AccountApi {
@@ -21,7 +21,7 @@ export class AccountApi {
       // .set("txtSearch", txtSearch);
     return this.http.get(this.apiController, { params });
   }
-  create(item: Account): Observable<Account> {
+  create(item: RequestDTO): Observable<Account> {
     return this.http.post(this.apiController, item);
   }
   update(item: Account): Observable<Account> {

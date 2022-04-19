@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TableData } from '../../../../shared/table-data';
-import { Account, AccountData } from './account';
+import { Account, AccountData, RequestDTO } from './account';
 import { AccountApi } from './account.api';
 
 @Injectable()
@@ -11,9 +11,9 @@ export class AccountService implements AccountData{
 
 
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Account>> {
-    return this.api.list(pageNumber, pageSize, txtSearch);
+    return this.api.list(pageNumber - 1, pageSize, txtSearch);
   }
-  create(item: Account): Observable<Account> {
+  create(item: RequestDTO): Observable<Account> {
     return this.api.create(item);
   }
   update(item: Account): Observable<Account> {

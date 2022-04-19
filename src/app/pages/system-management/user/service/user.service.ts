@@ -18,7 +18,7 @@ export class UserService implements UserData {
   // }
 
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<User[]> {
-    return this.api.list(pageNumber, pageSize, txtSearch);
+    return this.api.list(pageNumber - 1, pageSize, txtSearch);
   }
 
   create(item: User): Observable<User> {

@@ -12,17 +12,32 @@ export class Account {
     creationTime?: number;
     lastUpdateTime?: number;
     isChecked?: boolean;
-    autoExtendCreate?: boolean;
+    
 
     constructor() {
-        this.autoExtendCreate = true;
+        this.id = 0;
+        this.unitCode = '';
+        this.parentCode = '';
+        this.departmentCode = '';
+        this.maximumDevices = 0;
+        this.isActive = 1;
+        this.displayName = '';
         this.isChecked = false;
+    }
+}
+
+export class RequestDTO {
+    account?: Account;
+    autoExtendCreate: boolean;
+
+    constructor() {
+        this.autoExtendCreate = false;
     }
 }
 
 export abstract class AccountData {
     abstract list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Account>>;
-    abstract create(item: Account): Observable<Account>;
+    abstract create(item: RequestDTO): Observable<Account>;
     abstract update(item: Account): Observable<Account>;
     abstract get(id: number): Observable<Account>;
     abstract delete(id: number): Observable<boolean>;

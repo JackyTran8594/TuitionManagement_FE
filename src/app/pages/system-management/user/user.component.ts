@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
@@ -19,7 +20,7 @@ export class UserComponent implements OnInit, OnDestroy {
   listData: User[] = [];
   protected readonly $unsubcribe = new Subject<void>();
 
-  constructor(private service: UserData, private dialog: NbDialogService, private toastr: NbToastrService) { }
+  constructor(private service: UserData, private dialog: NbDialogService, private toastr: NbToastrService, private router: Router) { }
 
   ngOnDestroy(): void {
     this.$unsubcribe.next();
@@ -33,10 +34,9 @@ export class UserComponent implements OnInit, OnDestroy {
   search() {
     this.service.list(this.pageNumber, this.pageSize, this.txtSearch).subscribe(res => {
       console.log(res);
-      // this.totalItems = res.totalElements;
-      // this.listData = res.content;
-      this.listData = res;
-    })
+      this.listData = res.content;
+      this.totalItems = res.totalElements
+    });
   }
 
   changePageSize(event) {
@@ -90,34 +90,38 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
 
-  onUpdate() {
-    this.dialog.open(UserFrmComponent, {
-      context: {
-        title: "Chỉnh sửa người dùng",
-        update: true,
-      },
-      hasBackdrop: true,
-      closeOnBackdropClick: false
-    }).onClose.subscribe(result => {
-      if (result) {
-        this.toastr.show("Chỉnh sửa thành công", "", {
-          status: "success",
-          destroyByClick: true,
-          duration: 2000,
-        })
+  onEdit(item: User) {
+    this.router.navigate(['pages/user/profile'], { state: { username: item.login } });
+  }
 
-        setTimeout(() => {
-          this.search();
-        }, 1000);
-      };
-    }, err => {
-      this.toastr.show("Có lỗi khi chính sửa", err.message, {
-        status: "danger",
-        destroyByClick: true,
-        duration: 2000,
-      });
-    });
-  };
+  // onEdit() {
+  //   this.dialog.open(UserFrmComponent, {
+  //     context: {
+  //       title: "Chỉnh sửa người dùng",
+  //       update: true,
+  //     },
+  //     hasBackdrop: true,
+  //     closeOnBackdropClick: false
+  //   }).onClose.subscribe(result => {
+  //     if (result) {
+  //       this.toastr.show("Chỉnh sửa thành công", "", {
+  //         status: "success",
+  //         destroyByClick: true,
+  //         duration: 2000,
+  //       })
+
+  //       setTimeout(() => {
+  //         this.search();
+  //       }, 1000);
+  //     };
+  //   }, err => {
+  //     this.toastr.show("Có lỗi khi chính sửa", err.message, {
+  //       status: "danger",
+  //       destroyByClick: true,
+  //       duration: 2000,
+  //     });
+  //   });
+  // };
 
   onView() {
     this.dialog.open(UserFrmComponent, {
@@ -202,6 +206,6 @@ export class UserComponent implements OnInit, OnDestroy {
         duration: 2000,
       });
     });
-  }
+  };
 
 }

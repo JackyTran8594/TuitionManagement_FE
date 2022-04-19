@@ -10,7 +10,7 @@ import { User, UserData } from '../service/user';
   selector: 'ngx-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserProfileComponent implements OnInit, OnChanges {
 

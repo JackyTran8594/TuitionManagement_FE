@@ -13,7 +13,7 @@ export class RoleGroupService implements RoleGroupData {
     return this.api.getAll();
   }
   list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<RoleGroup>> {
-    return this.api.list(pageNumber, pageSize, txtSearch);
+    return this.api.list(pageNumber - 1, pageSize, txtSearch);
 
   }
   create(item: RoleGroup): Observable<RoleGroup> {

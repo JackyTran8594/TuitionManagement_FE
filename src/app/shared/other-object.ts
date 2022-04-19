@@ -4,10 +4,10 @@ export interface Status {
 }
 
 export const StatusList: Status[] = [
-    {
-        id: 0,
-        name: "---Lựa chọn trạng thái---"
-    },
+    // {
+    //     id: 0,
+    //     name: "---Lựa chọn trạng thái---"
+    // },
     {
         id: 1,
         name: "ACTIVE"
@@ -42,10 +42,10 @@ export const UserTypes: UserType[] = [
         id: 3,
         name: "Cơ sở đào tạo"
     },
-    {
-        id: 5,
-        name: "---Lựa chọn loại người dùng---"
-    }
+    // {
+    //     id: 5,
+    //     name: "---Lựa chọn loại người dùng---"
+    // }
 ]
 
 

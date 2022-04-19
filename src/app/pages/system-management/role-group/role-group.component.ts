@@ -66,7 +66,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
   onCreate() {
     this.dialog.open(RoleGroupFrmComponent, {
       context: {
-        title: "Thêm mới người dùng",
+        title: "Thêm mới nhóm quyền",
         create: true,
       },
       hasBackdrop: true,
@@ -92,11 +92,12 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
     });
   }
 
-  onUpdate() {
+  onEdit(item) {
     this.dialog.open(RoleGroupFrmComponent, {
       context: {
-        title: "Chỉnh sửa người dùng",
+        title: "Chỉnh sửa nhóm quyền",
         update: true,
+        item: item
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -124,7 +125,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
   onView() {
     this.dialog.open(RoleGroupFrmComponent, {
       context: {
-        title: "Chi tiết người dùng",
+        title: "Chi tiết nhóm quyền",
         view: true,
       },
       hasBackdrop: true,
@@ -136,8 +137,8 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
   onDelete(id) {
     this.dialog.open(DeleteComponent, {
       context: {
-        title: "Xóa người dùng",
-        data: "Bạn có chắc muốn xóa người dùng này không"
+        title: "Xóa nhóm quyền",
+        data: "Bạn có chắc muốn xóa nhóm quyền này không"
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -145,7 +146,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
       if (result) {
         this.service.delete(id).subscribe(res => {
           if (res) {
-            this.toastr.show("Xóa người dùng thành công", "", {
+            this.toastr.show("Xóa nhóm quyền thành công", "", {
               status: "success",
               destroyByClick: true,
               duration: 2000,
@@ -159,7 +160,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
 
       };
     }, err => {
-      this.toastr.show("Có lỗi khi xóa người dùng", err.message, {
+      this.toastr.show("Có lỗi khi xóa nhóm quyền", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,
@@ -172,7 +173,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
   onDeleteAll(event) {
     this.dialog.open(DeleteComponent, {
       context: {
-        title: "Xóa nhiều người dùng"
+        title: "Xóa nhiều nhóm quyền"
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -184,7 +185,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
 
         this.service.deleteAll(listId).subscribe(res => {
           if (res) {
-            this.toastr.show("Xóa người dùng thành công", "", {
+            this.toastr.show("Xóa nhóm quyền thành công", "", {
               status: "success",
               destroyByClick: true,
               duration: 2000,
@@ -198,7 +199,7 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
 
       };
     }, err => {
-      this.toastr.show("Có lỗi khi xóa người dùng", err.message, {
+      this.toastr.show("Có lỗi khi xóa nhóm quyền", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,

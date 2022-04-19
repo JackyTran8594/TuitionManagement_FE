@@ -25,9 +25,9 @@ export interface User {
 
 export abstract class UserData {
 
-    // abstract list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>>;
+    abstract list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>>;
 
-    abstract list(pageNumber: number, pageSize: number, txtSearch: string): Observable<User[]>;
+    // abstract list(pageNumber: number, pageSize: number, txtSearch: string): Observable<User[]>;
     abstract create(item: User): Observable<User>;
     abstract update(item: User): Observable<User>;
     abstract get(id: number): Observable<User>;

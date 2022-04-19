@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { Status, StatusList } from '../../../../shared/other-object';
-import { Account, AccountData } from '../service/account';
+import { Account, AccountData, RequestDTO } from '../service/account';
 
 @Component({
   selector: 'ngx-account-frm',
@@ -16,6 +16,7 @@ export class AccountFrmComponent implements OnInit {
   @Input() update: boolean;
   @Input() view: boolean;
   item: Account = {};
+  reqDTO: RequestDTO;
   listStatus: Status[] = [];
   selected: number;
   selectedStatus: number;
@@ -30,6 +31,7 @@ export class AccountFrmComponent implements OnInit {
       // this.selectedStatus = 0;
     }
     this.listStatus = StatusList;
+    
   }
 
   close() {
@@ -39,7 +41,10 @@ export class AccountFrmComponent implements OnInit {
  
   save() {
     if (this.create) {
-      this.service.create(this.item).subscribe(res => {
+      this.reqDTO = new RequestDTO();
+      this.reqDTO.account = this.item;
+      
+      this.service.create(this.reqDTO).subscribe(res => {
         console.log(res);
         this.dialogRef.close(res);
       });

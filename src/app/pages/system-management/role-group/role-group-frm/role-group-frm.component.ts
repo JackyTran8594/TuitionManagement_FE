@@ -18,7 +18,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   @Input() create: boolean;
   @Input() update: boolean;
   @Input() view: boolean;
-  item: RoleGroup = {};
+  @Input() item: RoleGroup = {};
   funcList: Functional[] = [];
   selected: number;
 
@@ -57,6 +57,8 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       return this.nodes = this.buildRoleTree(this.funcList);
     }, 1000);
+
+    console.log(this.item);
   }
 
   getFunc() {
@@ -71,7 +73,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   }
 
   buildRoleTree(menu: MenuRoleTree[]): any {
-    console.log(menu);
+    // console.log(menu);
     let root: MenuRoleTree[] = menu.filter(x => x.parentCode == '#').map(o => {
       return {
         id: o.id,
@@ -157,9 +159,10 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
             result[node.data.id] = {} //create
         }
       }
-    })
+    });
 
-    // this.item.roles = resultRole;
+    console.log(resultRole);
+    this.item.functionals = resultRole;
 
     const observable = this.item.id
       ? this.service.update(this.item)

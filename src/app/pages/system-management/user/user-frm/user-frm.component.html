@@ -30,24 +30,12 @@
 
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <!-- <div class="form-group row">
-                        <label for="usertype" class="label col-md-4 col-sm-4 col-form-label">Loại người dùng:
-                            &nbsp;<span [hidden]="view" style="color: red">*</span></label>
-                        <div class="col-md-8 col-sm-8">
-                            <input type="text" class="form-control" nbInput fullWidth id="usertype"
-                                [(ngModel)]="item.usertype" name="usertype" #usertype="ngModel" required
-                                [ngxReadOnly]="view" [ngClass]="{
-              'invalid-data': usertype.invalid && (usertype.touched || usertype.dirty)
-            }" placeholder="Tài khoản" />
-                        </div>
-                    </div> -->
-
                     <div class="form-group row">
                         <label for="usertype" class="label col-md-4 col-sm-4 col-form-label">Loại người dùng:
                         </label>
                         <div class="col-md-8 col-sm-8">
                             <nb-select  matRipple fullWidth id="usertype" name="usertype" [(selected)]="selected"
-                                [(ngModel)]="item.usertype" [ngxReadOnly]="view">
+                                [(ngModel)]="item.usertype" [ngxReadOnly]="view" placeholder="Lựa chọn loại người dùng">
                                 <nb-option matRipple *ngFor="let type of UserTypes" [value]="type.id">{{type.name}}</nb-option>
                             </nb-select>
                         </div>

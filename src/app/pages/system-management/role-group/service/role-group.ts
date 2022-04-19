@@ -12,6 +12,7 @@ export interface RoleGroup {
     lastUpdateTime?: number;
     creationTime?: number;
     isChecked?: boolean;
+    functionals? : any;
 }
 
 

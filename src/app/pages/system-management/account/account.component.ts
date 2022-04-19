@@ -64,7 +64,7 @@ export class AccountComponent implements OnInit {
   onCreate() {
     this.dialog.open(AccountFrmComponent, {
       context: {
-        title: "Thêm mới người dùng",
+        title: "Thêm mới đơn vị",
         create: true,
       },
       hasBackdrop: true,
@@ -93,7 +93,7 @@ export class AccountComponent implements OnInit {
   onUpdate() {
     this.dialog.open(AccountFrmComponent, {
       context: {
-        title: "Chỉnh sửa người dùng",
+        title: "Chỉnh sửa đơn vị",
         update: true,
       },
       hasBackdrop: true,
@@ -122,7 +122,7 @@ export class AccountComponent implements OnInit {
   onView() {
     this.dialog.open(AccountFrmComponent, {
       context: {
-        title: "Chi tiết người dùng",
+        title: "Chi tiết đơn vị",
         view: true,
       },
       hasBackdrop: true,
@@ -134,8 +134,8 @@ export class AccountComponent implements OnInit {
   onDelete(id) {
     this.dialog.open(DeleteComponent, {
       context: {
-        title: "Xóa người dùng",
-        data: "Bạn có chắc muốn xóa người dùng này không"
+        title: "Xóa đơn vị",
+        data: "Bạn có chắc muốn xóa đơn vị này không"
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -143,7 +143,7 @@ export class AccountComponent implements OnInit {
       if (result) {
         this.service.delete(id).subscribe(res => {
           if (res) {
-            this.toastr.show("Xóa người dùng thành công", "", {
+            this.toastr.show("Xóa đơn vị thành công", "", {
               status: "success",
               destroyByClick: true,
               duration: 2000,
@@ -157,7 +157,7 @@ export class AccountComponent implements OnInit {
 
       };
     }, err => {
-      this.toastr.show("Có lỗi khi xóa người dùng", err.message, {
+      this.toastr.show("Có lỗi khi xóa đơn vị", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,
@@ -170,7 +170,7 @@ export class AccountComponent implements OnInit {
   onDeleteAll(event) {
     this.dialog.open(DeleteComponent, {
       context: {
-        title: "Xóa nhiều người dùng"
+        title: "Xóa nhiều đơn vị"
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -182,7 +182,7 @@ export class AccountComponent implements OnInit {
 
         this.service.deleteAll(listId).subscribe(res => {
           if (res) {
-            this.toastr.show("Xóa người dùng thành công", "", {
+            this.toastr.show("Xóa đơn vị thành công", "", {
               status: "success",
               destroyByClick: true,
               duration: 2000,
@@ -196,7 +196,7 @@ export class AccountComponent implements OnInit {
 
       };
     }, err => {
-      this.toastr.show("Có lỗi khi xóa người dùng", err.message, {
+      this.toastr.show("Có lỗi khi xóa đơn vị", err.message, {
         status: "danger",
         destroyByClick: true,
         duration: 2000,

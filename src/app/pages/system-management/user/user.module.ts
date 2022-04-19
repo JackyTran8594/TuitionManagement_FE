@@ -12,6 +12,7 @@ import { UserData } from './service/user';
 import { UserService } from './service/user.service';
 import { UserApi } from './service/user.api';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const NB_MODULES = [
   NbCardModule,
@@ -28,7 +29,7 @@ const NB_MODULES = [
 const API = [UserApi]
 
 @NgModule({
-  declarations: [UserComponent, UserFrmComponent, UserProfileComponent],
+  declarations: [UserComponent, UserFrmComponent, UserProfileComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

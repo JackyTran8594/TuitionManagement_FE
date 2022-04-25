@@ -18,7 +18,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   @Input() create: boolean;
   @Input() update: boolean;
   @Input() view: boolean;
-  @Input() item: RoleGroup = {};
+  @Input() item: RoleGroup;
   funcList: Functional[] = [];
   selected: number;
 
@@ -41,15 +41,15 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     private toastr: NbToastrService,
     private serviceFunc: FunctionalData
   ) {
+    
 
-
-  }
+  };
 
 
   ngOnDestroy(): void {
     this.$unsubscribe.next();
     this.$unsubscribe.complete();
-  }
+  };
 
   ngOnInit(): void {
     this.getFunc();
@@ -59,7 +59,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     }, 1000);
 
     console.log(this.item);
-  }
+  };
 
   getFunc() {
     this.serviceFunc.getFunctional().subscribe(res => {
@@ -113,7 +113,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
         if (value.unitCode == val.parentCode) {
           value.children.push(val);
         }
-      })
+      });
     });
 
     // root = root.filter(x => x.id != "DASHBOARD");

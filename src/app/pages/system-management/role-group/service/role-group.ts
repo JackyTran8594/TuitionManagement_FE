@@ -2,17 +2,29 @@ import { NumberValueAccessor } from "@angular/forms";
 import { Observable } from "rxjs";
 import { TableData } from "../../../../shared/table-data";
 
-export interface RoleGroup {
+export class RoleGroup {
     id?: number;
     roleID?:number;
     description?:string;
     ofTw?:boolean;
-    ofProvince?: boolean;
-    ofDistrict?: boolean;
+    ofTinh?: boolean;
+    ofHuyen?: boolean;
     lastUpdateTime?: number;
     creationTime?: number;
     isChecked?: boolean;
     functionals? : any;
+    
+    constructor() {
+        this.id = 0;
+        this.roleID = 0;
+        this.description = '';
+        this.ofTw = false;
+        this.ofTinh = false;
+        this.ofHuyen= false;
+        this.lastUpdateTime = 0;
+        this.creationTime = 0;
+        this.functionals = [];
+    }
 }
 
 

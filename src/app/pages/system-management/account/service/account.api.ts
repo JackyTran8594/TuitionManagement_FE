@@ -25,7 +25,7 @@ export class AccountApi {
     return this.http.post(this.apiController, item);
   }
   update(item: Account): Observable<Account> {
-    return this.http.put(this.apiController + '/' + item.id, item);
+    return this.http.put(this.apiController, item);
   }
   get(id: number): Observable<Account> {
     return this.http.get(this.apiController + '/' + id);

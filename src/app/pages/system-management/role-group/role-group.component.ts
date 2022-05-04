@@ -122,11 +122,12 @@ export class RoleGroupComponent implements OnInit, OnDestroy {
     });
   };
 
-  onView() {
+  onView(item) {
     this.dialog.open(RoleGroupFrmComponent, {
       context: {
         title: "Chi tiết nhóm quyền",
         view: true,
+        item: item
       },
       hasBackdrop: true,
       closeOnBackdropClick: false

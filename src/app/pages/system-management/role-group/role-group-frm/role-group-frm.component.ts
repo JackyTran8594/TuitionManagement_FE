@@ -30,7 +30,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     useCheckbox: true,
     idField: 'id',
     childrenField: 'children',
-    displayField: 'name',
+    displayField: 'description',
   };
   // end tree
 
@@ -41,7 +41,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     private toastr: NbToastrService,
     private serviceFunc: FunctionalData
   ) {
-    
+    this.item = new RoleGroup();
 
   };
 
@@ -52,6 +52,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
+    
     this.getFunc();
 
     setTimeout(() => {
@@ -79,7 +80,11 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
         id: o.id,
         unitCode: o.unitCode,
         parentCode: o.parentCode,
-        name: o.description,
+        description: o.description,
+        target: o.target,
+        ofTw: o.ofTw,
+        ofProvince: o.ofProvince,
+        ofDistrict: o.ofDistrict,
         children: []
       }
     }) as MenuRoleTree[];
@@ -91,7 +96,11 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
         id: o.id,
         unitCode: o.unitCode,
         parentCode: o.parentCode,
-        name: o.description,
+        description: o.description,
+        target: o.target,
+        ofTw: o.ofTw,
+        ofProvince: o.ofProvince,
+        ofDistrict: o.ofDistrict,
         children: []
       }
     }) as MenuRoleTree[];
@@ -103,7 +112,11 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
         id: o.id,
         unitCode: o.unitCode,
         parentCode: o.parentCode,
-        name: o.description,
+        description: o.description,
+        target: o.target,
+        ofTw: o.ofTw,
+        ofProvince: o.ofProvince,
+        ofDistrict: o.ofDistrict,
         children: []
       }
     }) as Functional[];
@@ -123,8 +136,10 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
         if (value.unitCode == val.parentCode) {
           value.children.push(val);
         }
-      })
-    })
+      });
+    });
+
+    root = root.filter(x => ![11,12].includes(Number(x.unitCode)));
 
     console.log(root);
 
@@ -145,14 +160,14 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
       let node: TreeNode = treeModel.getNodeById(x);
       if (node.isSelected) {
         console.log("Selected:", node.data.id,
-          "Parent:", node.parent.data.name);
-        if (node.parent.data.name) //if the node has parent
+          "Parent:", node.parent.data.description);
+        if (node.parent.data.description) //if the node has parent
         {
-          if (!result[node.parent.data.name]) //If the parent is not in the object
-            result[node.parent.data.name] = {} //create
+          if (!result[node.parent.data.description]) //If the parent is not in the object
+            result[node.parent.data.description] = {} //create
 
-          result[node.parent.data.name][node.data.id] = true;
-          resultRole.push(node.data.id);
+          result[node.parent.data.description][node.data.id] = true;
+          resultRole.push(node.data);
         }
         else {
           if (!result[node.data.id]) //If the node is not in the object

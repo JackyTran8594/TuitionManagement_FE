@@ -36,7 +36,7 @@ export class RoleGroupApi {
     return this.http.post(this.apiController, item);
   }
   update(item: RoleGroup): Observable<RoleGroup> {
-    return this.http.put(this.apiController + '/' + item.id, item);
+    return this.http.put(this.apiController, item);
   }
   get(id: number): Observable<RoleGroup> {
     return this.http.get(this.apiController + '/' + id);

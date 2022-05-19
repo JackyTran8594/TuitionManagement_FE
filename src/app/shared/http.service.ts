@@ -23,7 +23,7 @@ export class HttpService {
   }
 
   put(endpoint: string, data, options?): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${endpoint}`, data, options);
+    return this.http.put(`${this.apiUrl}/${endpoint}`, data, options);
   }
 
   delete(endpoint: string, options?): Observable<any> {

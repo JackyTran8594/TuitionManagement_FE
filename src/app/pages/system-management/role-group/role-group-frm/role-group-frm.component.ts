@@ -52,7 +52,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    
+
     this.getFunc();
 
     setTimeout(() => {
@@ -139,7 +139,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
       });
     });
 
-    root = root.filter(x => ![11,12].includes(Number(x.unitCode)));
+    root = root.filter(x => ![11, 12].includes(Number(x.unitCode)));
 
     console.log(root);
 
@@ -167,7 +167,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
             result[node.parent.data.description] = {} //create
 
           result[node.parent.data.description][node.data.id] = true;
-          resultRole.push(node.data);
+          resultRole.push(node.data.id);
         }
         else {
           if (!result[node.data.id]) //If the node is not in the object
@@ -179,7 +179,15 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     console.log(resultRole);
     this.item.functionals = resultRole;
 
-    const observable = this.item.id
+    // let observable = null;
+
+    // if (this.item.id != null) {
+    //   observable = this.service.update(this.item);
+    // } else {
+    //   observable = this.service.create(this.item);
+    // }
+
+    const observable = (this.item.id != null)
       ? this.service.update(this.item)
       : this.service.create(this.item);
 

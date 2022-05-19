@@ -6,8 +6,7 @@ import { AccessToken, User } from './auth';
 @Injectable()
 export class AuthApi {
 
-  // private readonly apiController: string = 'authenticate';
-  private readonly apiController: string = 'auth';
+  private readonly apiController: string = 'authenticate';
 
   token: AccessToken = {};
 
@@ -17,7 +16,7 @@ export class AuthApi {
   }
 
   authenticate(item: User): Observable<AccessToken> {
-    return this.http.post(this.apiController + "/login", item);
+    return this.http.post(this.apiController , item);
   }
 
 

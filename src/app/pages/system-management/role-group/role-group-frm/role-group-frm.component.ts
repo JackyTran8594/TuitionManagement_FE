@@ -167,7 +167,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
             result[node.parent.data.description] = {} //create
 
           result[node.parent.data.description][node.data.id] = true;
-          resultRole.push(node.data);
+          resultRole.push(node.data.id);
         }
         else {
           if (!result[node.data.id]) //If the node is not in the object
@@ -179,7 +179,7 @@ export class RoleGroupFrmComponent implements OnInit, OnDestroy {
     console.log(resultRole);
     this.item.functionals = resultRole;
 
-    const observable = this.item.id
+    const observable = (this.item.id != null)
       ? this.service.update(this.item)
       : this.service.create(this.item);
 

@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     let helper = new JwtHelperService();
     let accessToken = <AccessToken>JSON.parse(localStorage.getItem('access_token'));
-    let userObject = helper.decodeToken(accessToken.id_token);
+    let userObject = helper.decodeToken(accessToken.accessToken);
     console.log(userObject);
     this.getByUsername(userObject.sub);
   }

@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptorService } from '../auth/_helper/jwt-interceptor.service';
+import { ComponentModule } from '../@component/component.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,8 @@ import { JwtInterceptorService } from '../auth/_helper/jwt-interceptor.service';
     NbCardModule,
     FormsModule,
     SharedModule,
+    
+    
   ],
   declarations: [
     PagesComponent,

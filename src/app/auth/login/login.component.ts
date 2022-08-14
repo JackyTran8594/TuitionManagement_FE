@@ -73,12 +73,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     let user: User = this.loginForm.value;
     this.submitted = true;
     this.service.authenticate(user).subscribe(res => {
-      if (res.id_token != null) {
+      if (res.accessToken != null) {
         this.submitted = false;
         console.log("---init access token---");
         console.log(res);
           localStorage.setItem("access_token", JSON.stringify(res));
           setTimeout(() => {
+            console.log("--init")
             return this.router.navigate(['pages/dashboard']);
           }, 1000);
           

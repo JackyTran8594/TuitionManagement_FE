@@ -10,10 +10,5 @@
 
 export const environment = {
   production: false,
-  // apiUrl:'http://api02-dat.bhq.vn:9082/api',
-  apiUrl:'http://localhost:8082/api',
-<<<<<<< HEAD
-=======
-
->>>>>>> 97d1ff16d21d3fb59a318f988b2e5273d38af4c7
+  apiUrl:'http://localhost:8090/api',
 };

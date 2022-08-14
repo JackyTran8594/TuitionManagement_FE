@@ -1,8 +1,13 @@
 import { NbAuthSimpleToken } from "@nebular/auth";
 
 export interface AccessToken {
-    id_token?: string;
-    accounts?: Account[];
+    accessToken: string;
+    permissions: string[];
+    role: [];
+    success: boolean
+    tokenResponse?: string;
+    tokenType: string;
+    username: string;
 }
 
 export interface Account {

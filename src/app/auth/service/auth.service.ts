@@ -18,10 +18,10 @@ export class AuthService {
     let helper = new JwtHelperService();
     this.token = <AccessToken>(JSON.parse(localStorage.getItem('access_token')));
     if(this.token) {
-      let user = helper.decodeToken(this.token.id_token)['sub'];
+      let user = helper.decodeToken(this.token.accessToken)['sub'];
       this.currentUserSubject = new BehaviorSubject<any>(user);
       this.currentUser = this.currentUserSubject.asObservable();
-      this.tokenSubject = new BehaviorSubject<any>(this.token.id_token);
+      this.tokenSubject = new BehaviorSubject<any>(this.token.accessToken);
     }
   }
 
@@ -35,7 +35,7 @@ export class AuthService {
     // console.log(token.id_token);
 
     if (token) {
-      if (token.id_token) {
+      if (token.accessToken) {
         return true;
 
       } else { return false; }

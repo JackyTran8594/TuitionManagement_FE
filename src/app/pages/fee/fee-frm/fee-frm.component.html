@@ -1,0 +1,147 @@
+<nb-card class="modal-custom">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h6 class="modal-title-custom">
+                    <b>{{ title }}</b>
+                </h6>
+            </div>
+            <div class="col-md-3">
+                <nb-action matRipple icon="close-outline" class="modal-close-custom" (click)="close()"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="formFee">
+            <!-- row 1 -->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <nb-form-field>
+                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Header: &nbsp;<span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-md-8 col-sm-8">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mã thiết bị" />
+                            </div>
+                        </nb-form-field>
+                        <ngx-validation-message label="header" [showRequired]="header?.errors?.required">
+                        </ngx-validation-message>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <nb-form-field>
+                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Header: &nbsp;<span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-md-8 col-sm-8">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mã thiết bị" />
+                            </div>
+                        </nb-form-field>
+                        <ngx-validation-message label="header" [showRequired]="header?.errors?.required">
+                        </ngx-validation-message>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="form-group row">
+                        <nb-form-field>
+                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Header: &nbsp;<span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-md-8 col-sm-8">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mã thiết bị" />
+                            </div>
+                        </nb-form-field>
+                        <ngx-validation-message label="header" [showRequired]="header?.errors?.required">
+                        </ngx-validation-message>
+                    </div>
+
+                </div>
+                <!-- row 2 -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <nb-form-field>
+                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Header: &nbsp;<span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-md-8 col-sm-8">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mã thiết bị" />
+                            </div>
+                        </nb-form-field>
+                        <ngx-validation-message label="header" [showRequired]="header?.errors?.required">
+                        </ngx-validation-message>
+                    </div>
+                </div>
+            </div>
+
+            <!-- row 3 -->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="form-group row">
+                        <nb-form-field>
+                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Header: &nbsp;<span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-md-8 col-sm-8">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mã thiết bị" />
+                            </div>
+                        </nb-form-field>
+                        <ngx-validation-message label="header" [showRequired]="header?.errors?.required">
+                        </ngx-validation-message>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <nb-form-field>
+                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Header: &nbsp;<span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-md-8 col-sm-8">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mã thiết bị" />
+                            </div>
+                        </nb-form-field>
+                        <ngx-validation-message label="header" [showRequired]="header?.errors?.required">
+                        </ngx-validation-message>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="text-center">
+                    <div class="buttons-row">
+                        <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="mode =='view'"
+                            [disabled]="!formFee.valid">
+                            <nb-icon class="action-icon" icon="save-outline"></nb-icon>
+                            Lưu
+                        </button>
+                        <button nbButton status="danger" class="btn-custom" (click)="close()">
+                            <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
+                            Hủy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

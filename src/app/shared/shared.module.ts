@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptorService } from '../auth/_helper/jwt-interceptor.service';
 import { HttpService } from './http.service';
 import { AuthService } from '../auth/service/auth.service';
+import { ComponentModule } from '../@component/component.module';
 
 const NB_MODULES = [
   NbButtonModule,
@@ -28,7 +29,8 @@ const COMPONENTS = [DeleteComponent]
   imports: [
     CommonModule,
     HttpClientModule,
-    ...NB_MODULES
+    ...NB_MODULES,
+    
   ],
   exports: [...COMPONENTS, ...DIRECTIVES],
   providers: [

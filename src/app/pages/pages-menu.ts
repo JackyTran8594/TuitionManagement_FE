@@ -8,9 +8,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/dashboard',
   },
   {
-    title: 'Quản lý thiết bị',
+    title: 'Quản lý học viên',
     icon: 'archive-outline',
-    link: '/pages/device',
+    link: '/pages/student',
+  },
+  {
+    title: 'Thu phí',
+    icon: 'archive-outline',
+    link: '/pages/fee',
   },
   {
     title: 'Quản trị hệ thống',
@@ -33,26 +38,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  // {
-  //   title: 'Charts',
-  //   icon: 'pie-chart-outline',
-  //   children: [
-  //     {
-  //       title: 'Echarts',
-  //       link: '/pages/charts/echarts',
-  //     },
-  //     {
-  //       title: 'Charts.js',
-  //       link: '/pages/charts/chartjs',
-  //     },
-  //     {
-  //       title: 'D3',
-  //       link: '/pages/charts/d3',
-  //     },
-  //   ],
-  // },
- 
- 
  
   // {
   //   title: 'Auth',

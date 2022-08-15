@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FeeRoutingModule } from './fee-routing.module';
@@ -49,7 +49,14 @@ const SERVICES = [{ provide: FeeData, useClass: FeeService }]
     ComponentModule
   ],
   providers: [
-    ...API, ...SERVICES
+
   ]
 })
-export class FeeModule { }
+export class FeeModule {
+  static forRoot(): ModuleWithProviders<FeeModule> {
+    return {
+      ngModule: FeeModule,
+      providers: [...API, ...SERVICES]
+    }
+  }
+}

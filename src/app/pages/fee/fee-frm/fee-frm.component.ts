@@ -60,16 +60,16 @@ export class FeeFrmComponent implements OnInit {
 
   ngOnInit(): void {
     this.formBuilder();
-   
+
   }
 
   formBuilder() {
     this.formFee = this.fb.group({
-      id: [0, []],
-      header: ['', [],],
-      description: ['', [Validators.maxLength(1000)]],
-      money: [0, []],
-      fee_id: [0, []]
+      id: this.fb.control(0, []),
+      header: this.fb.control(0, []),
+      description: this.fb.control(0, [Validators.maxLength(1000)]),
+      money: this.fb.control(0, []),
+      fee_id: this.fb.control(0, [])
     })
   }
 

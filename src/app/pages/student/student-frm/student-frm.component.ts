@@ -18,31 +18,71 @@ export class StudentFrmComponent implements OnInit {
   @Input() title: string = "";
   item: Student = {
     id: 0,
-    header: '',
-    description: '',
-    money: 0,
-    Student_id: 0
+    studentId: '',
+    courseId: '',
+    citizenId: '',
+    firstName: '',
+    tempName: '',
+    fullName: '',
+    image: '',
+    trainClassId: '',
+    note: '',
+    tuitionId: 0,
+    feeId: 0,
+    isChecked: false
   }
+
   @Input() mode: string = '';
 
   get id() {
     return this.formStudent.get("id");
   }
 
-  get header() {
-    return this.formStudent.get("header");
+  get studentId() {
+    return this.formStudent.get("studentId");
   }
 
-  get description() {
-    return this.formStudent.get("description");
+  get courseId() {
+    return this.formStudent.get("courseId");
   }
 
-  get money() {
-    return this.formStudent.get("money");
+  get citizenId() {
+    return this.formStudent.get("citizenId");
   }
 
-  get Student_id() {
-    return this.formStudent.get("Student_id");
+  get firstName() {
+    return this.formStudent.get("firstName");
+  }
+
+  get tempName() {
+    return this.formStudent.get("tempName");
+  }
+
+  get fullName() {
+    return this.formStudent.get("fullName");
+  }
+
+  get image() {
+    return this.formStudent.get("image");
+  }
+  get trainClassId() {
+    return this.formStudent.get("trainClassId");
+  }
+
+  get note() {
+    return this.formStudent.get("note");
+  }
+
+  get tuitionId() {
+    return this.formStudent.get("tuitionId");
+  }
+
+  get feeId() {
+    return this.formStudent.get("feeId");
+  }
+
+  get isChecked() {
+    return this.formStudent.get("isChecked");
   }
 
   // listStatus: Status[] = []
@@ -58,16 +98,24 @@ export class StudentFrmComponent implements OnInit {
 
   ngOnInit(): void {
     this.formBuilder();
-   
+
   }
 
   formBuilder() {
     this.formStudent = this.fb.group({
       id: [0, []],
-      header: ['', [],],
-      description: ['', [Validators.maxLength(1000)]],
-      money: [0, []],
-      Student_id: [0, []]
+      studentId: ['', []],
+      courseId: ['', []],
+      citizenId: ['', []],
+      firstName: ['', []],
+      tempName: ['', []],
+      fullName: ['', []],
+      image: ['', []],
+      trainClassId: ['', []],
+      note: ['', []],
+      // tuitionId: [0, []],
+      // feeId: [0, []],
+      isChecked: [false, []],
     })
   }
 

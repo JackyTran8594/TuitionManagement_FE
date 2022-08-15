@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RoleGroupRoutingModule } from './role-group-routing.module';
@@ -29,6 +29,14 @@ const NB_MODULES = [
 ]
 
 const API = [RoleGroupApi, FunctionalApi]
+const SERVICES = [
+  {
+    provide: RoleGroupData, useClass: RoleGroupService
+  },
+  {
+    provide: FunctionalData, useClass: FunctionalService
+  },
+]
 
 @NgModule({
   declarations: [
@@ -45,13 +53,17 @@ const API = [RoleGroupApi, FunctionalApi]
     NB_MODULES
   ],
   providers: [
-    {
-      provide: RoleGroupData, useClass: RoleGroupService
-    },
-    {
-      provide: FunctionalData, useClass: FunctionalService
-    },
-    [...API]
+
   ]
 })
-export class RoleGroupModule { }
+export class RoleGroupModule {
+  static forRoot(): ModuleWithProviders<RoleGroupModule> {
+    return {
+      ngModule: RoleGroupModule,
+      providers: [
+        ...SERVICES,
+        ...API
+      ]
+    }
+  }
+}

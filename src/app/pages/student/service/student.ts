@@ -3,14 +3,18 @@ import { TableData } from "../../../shared/table-data";
 
 export interface Student {
     id: number;
-
-    header: string;
-    description: string;
-
-    money: number;
-    Student_id: number;
-    status?: string
-    isChecked?: boolean
+    studentId: string;
+    courseId: string;
+    citizenId: string;
+    firstName: string;
+    tempName: string;
+    fullName: string;
+    image: string;
+    trainClassId: string;
+    note: string;
+    tuitionId: number;
+    feeId: number;
+    isChecked: boolean
 }
 
 export abstract class StudentData {

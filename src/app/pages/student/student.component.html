@@ -1,14 +1,8 @@
-<!--
-  ~ Copyright (c) Akveo 2019. All Rights Reserved.
-  ~ Licensed under the Single Application / Multi Application License.
-  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
-  -->
-
-  <nb-card>
+<nb-card>
     <nb-card-header style="background-color: white">
         <div class="row">
             <div class="col-12 col-md-8 mb-2">
-                <h6>Danh mục học phí</h6>
+                <h6>Danh sách học viên</h6>
             </div>
         </div>
         <div class="row">
@@ -55,25 +49,11 @@
                             <nb-checkbox (checkedChange)="checkedAll($event)"></nb-checkbox>
                         </th>
                         <th scope="col" class="text-center table-col-0">STT</th>
-                        <th scope="col" class="text-center table-col-1">Mã thiết bị</th>
-                        <th scope="col" class="text-center table-col-2">Tài khoản</th>
-                        <th scope="col" class="text-center table-col-3">Mã đăng ký</th>
-                        <th scope="col" class="text-center table-col-0">Serial</th>
-                        <th scope="col" class="text-center table-col-3">
-                            Imei
-                        </th>
-                        <th scope="col" class="text-center table-col-3">
-                            Sim
-                        </th>
-                        <th scope="col" class="text-center table-col-1">
-                            Mã phương tiện
-                        </th>
-                        <th scope="col" class="text-center table-col-3">Người dùng</th>
-                        <th scope="col" class="text-center table-col-3">Ngày khởi tạo</th>
-                        <th scope="col" class="text-center table-col-3">
-                            Trạng thái
-                        </th>
-
+                        <th scope="col" class="text-center table-col-1">Mã học viên</th>
+                        <th scope="col" class="text-center table-col-2">Mã khóa học</th>
+                        <th scope="col" class="text-center table-col-2">CMT/CCCD</th>
+                        <th scope="col" class="text-center table-col-3">Họ và tên</th>
+                        <th scope="col" class="text-center table-col-0">Mã lớp học</th>
                         <th scope="col" class="text-center col col-lg-2 table-col-4">
                             Thao tác
                         </th>
@@ -81,7 +61,7 @@
                 </thead>
                 <tbody *ngIf="listData && listData.length < 1">
                     <tr>
-                        <td colspan="13" class="text-center"><b>Không có dữ liệu</b></td>
+                        <td colspan="7" class="text-center"><b>Không có dữ liệu</b></td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="listData && listData.length >= 1">
@@ -102,29 +82,13 @@
                         <th class="text-center table-col-0" scope="row">
                             {{ (currentPage - 1) * pageSize + (idx + 1) }}
                         </th>
-                        <td class="text-center table-col-1">{{ item.header }}</td>
-                        <td class="table-col-3">{{ item.description }}</td>
-                        <td class="text-center table-col-3">{{ item.created_date | date: "dd/MM/YYYY hh:mm:ss"  }}</td>
+                        <td class="text-center table-col-1">{{ item.studentId }}</td>
+                        <td class="table-col-3">{{ item.courseId }}</td>
+                        <td class="text-center table-col-3">{{ item.citizenId }}</td>
                         <td class="text-center table-col-0">
-                            {{item.serialNumber}}
+                            {{item.fullName}}
                         </td>
-                        <td class="table-col-3">{{ item.imeiNumber }}</td>
-                        <td class="text-center table-col-3">
-                            {{item.simID}}
-                        </td>
-                        <td class="text-center table-col-1">
-                            {{ item.vehicleID }}
-                        </td>
-                        <td class="text-center table-col-3">
-                            {{ item.userID }}
-                        </td>
-                        <td class="text-center table-col-3">
-                            {{ item.creationTime | date: "dd/MM/YYYY hh:mm:ss" }}
-                        </td>
-
-                        <td class="table-col-3">
-                            {{item.status}}
-                        </td>
+                        <td class="table-col-3">{{ item.trainClassId }}</td>
                         <td class="text-center col col-lg-2 table-col-4">
                             <div class="buttons-row">
                                 <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">

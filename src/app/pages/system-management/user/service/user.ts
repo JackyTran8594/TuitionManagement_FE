@@ -19,7 +19,7 @@ export interface User {
     lastUpdateTime?: Date;
     isChecked?: Boolean;
     authorities?: number[];
-    accounts?: number[];
+    // accounts?: number[];
     functions?: number[];
 }
 

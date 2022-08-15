@@ -3,10 +3,8 @@ import { TableData } from "../../../shared/table-data";
 
 export interface Fee {
     id: number;
-
     header: string;
     description: string;
-
     money: number;
     fee_id: number;
     status?: string

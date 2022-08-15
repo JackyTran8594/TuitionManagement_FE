@@ -1,0 +1,34 @@
+
+
+.modal-custom  {
+    min-width: 40rem !important;
+   
+}
+
+.modal-title-custom {
+    position: relative;
+    top:10px;
+    left: 43%;
+    text-transform: uppercase;
+}
+
+.modal-close-custom {
+    float: right;
+    font-weight: 700;
+    line-height: 1;
+    border: none;
+    opacity: 0.5;
+}
+
+::ng-deep .modal-close-custom nb-icon:hover {
+    color: black;
+}
+
+::ng-deep nb-select {
+    width: 100% !important;
+}
+
+.invalid-data {
+    border: 1px solid red;
+}
+

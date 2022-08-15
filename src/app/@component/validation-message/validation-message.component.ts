@@ -5,6 +5,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'ngx-validation-message',
   styleUrls: ['./validation-message.component.scss'],
   template: `
+  <ng-container>
     <div class="warning">
     <span class="caption status-danger"
       *ngIf="showMinLength"> Min {{ label }} length is {{ minLength }} symbols </span>
@@ -15,6 +16,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     <span class="caption status-danger" *ngIf="showMin">Min value of {{ label }} is {{ min }}</span>
     <span class="caption status-danger" *ngIf="showMax">Max value of {{ label }} is {{ max }}</span>
   </div>
+</ng-container>
   `,
   providers: [
     {

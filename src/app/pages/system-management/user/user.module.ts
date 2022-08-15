@@ -27,6 +27,9 @@ const NB_MODULES = [
 ]
 
 const API = [UserApi]
+const SERVICES = [{
+  provide: UserData, useClass: UserService
+}]
 
 @NgModule({
   declarations: [UserComponent, UserFrmComponent, UserProfileComponent, ResetPasswordComponent],
@@ -39,12 +42,17 @@ const API = [UserApi]
     NB_MODULES,
   ],
   providers: [
-    {
-      provide: UserData, useClass: UserService
-    },
-    ...API
+
   ]
 })
 export class UserModule {
- 
+  static forRoot(): ModuleWithProviders<UserModule> {
+    return {
+      ngModule: UserModule,
+      providers: [
+        ...API,
+        ...SERVICES
+      ]
+    }
+  }
 }

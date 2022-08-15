@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StudentRoutingModule } from './student-routing.module';
@@ -39,13 +39,25 @@ const SERVICES = [{ provide: StudentData, useClass: StudentService }]
     StudentFrmComponent
   ],
   imports: [
-    CommonModule,  
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     ...NB_MODULES,
     SharedModule,
     ComponentModule,
     StudentRoutingModule
+  ],
+  providers: [
+
   ]
 })
-export class StudentModule { }
+export class StudentModule {
+  static forRoot(): ModuleWithProviders<StudentModule> {
+    return {
+      ngModule: StudentModule,
+      providers: [
+        ...API, ...SERVICES
+      ]
+    }
+  }
+}

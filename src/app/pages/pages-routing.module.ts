@@ -36,6 +36,14 @@ const routes: Routes = [{
       loadChildren: () => import('./system-management/account/account.module').then(m => m.AccountModule)
     },
     {
+      path: 'student',
+      loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
+    },
+    {
+      path: 'fee',
+      loadChildren: () => import('./fee/fee.module').then(m => m.FeeModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

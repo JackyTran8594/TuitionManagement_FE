@@ -12,114 +12,48 @@
         </div>
     </nb-card-header>
     <nb-card-body>
-        <form [formGroup]="formStudent">
+        <form [formGroup]="formStudent" class="form-horizontal">
             <!-- row 1 -->
             <div class="row">
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-6 col-md-6">
                     <div class="form-group row">
-                        <nb-form-field>
-                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Mã học viên:
-                                &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="studentId" class="form-control" nbInput fullWidth
-                                    formControlName="studentId" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Mã học viên" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="studentId" [showRequired]="studentId?.errors?.required">
-                        </ngx-validation-message>
-
+                        <label for="studentId" class="label col-sm-4 col-form-label">Mã học viên:
+                            &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="studentId" class="form-control" nbInput fullWidth
+                                formControlName="studentId" required [ngxReadOnly]="mode == 'view'"
+                                placeholder="Mã học viên" />
+                        </div>
                     </div>
 
+                    <!-- </nb-form-field> -->
+                    <ng-container *ngTemplateOutlet="studentIdTemplate"></ng-container>
+                    <ng-template #studentIdTemplate>
+                        <ng-container *ngIf="formStudent.controls['studentId'].hasError('required')"></ng-container>
+                    </ng-template>
+                    <!-- <ngx-validation-message label="studentId" [showRequired]="studentId?.errors?.required">
+                        </ngx-validation-message> -->
+
                 </div>
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-6 col-md-6">
                     <div class="form-group row">
-                        <nb-form-field>
-                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Mã khóa học:
-                                &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="courseId" class="form-control" nbInput fullWidth
-                                    formControlName="courseId" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Mã khóa học" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="courseId" [showRequired]="courseId?.errors?.required">
-                        </ngx-validation-message>
+                        <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">Mã khóa học:
+                            &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="text" id="courseId" class="form-control" nbInput fullWidth
+                                formControlName="courseId" required [ngxReadOnly]="mode == 'view'"
+                                placeholder="Mã khóa học" />
+                        </div>
                     </div>
 
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-
-                    <div class="form-group row">
-                        <nb-form-field>
-                            <label for="deviceID" class="label col-md-4 col-sm-4 col-form-label">CMT/CCCD: &nbsp;<span
-                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="citizenId" class="form-control" nbInput fullWidth
-                                    formControlName="citizenId" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Mã thiết bị" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="citizenId" [showRequired]="citizenId?.errors?.required">
-                        </ngx-validation-message>
-                    </div>
+                    <!-- <ngx-validation-message label="courseId" [showRequired]="courseId?.errors?.required">
+                    </ngx-validation-message> -->
+                    <ng-container *ngTemplateOutlet="courseIdTemplate"></ng-container>
+                    <ng-template #courseIdTemplate>
+                        <ng-container *ngIf="formStudent.controls['courseId'].hasError('required')"></ng-container>
+                    </ng-template>
 
                 </div>
-            </div>
-
-            <!-- row 2 -->
-            <div class="row">
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="form-group row">
-                        <nb-form-field>
-                            <label for="firstName" class="label col-md-4 col-sm-4 col-form-label">Họ: &nbsp;<span
-                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="firstName" class="form-control" nbInput fullWidth
-                                    formControlName="firstName" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Họ" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="firstName" [showRequired]="firstName?.errors?.required">
-                        </ngx-validation-message>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="form-group row">
-                        <nb-form-field>
-                            <label for="tempName" class="label col-md-4 col-sm-4 col-form-label">Đệm: &nbsp;<span
-                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="tempName" class="form-control" nbInput fullWidth
-                                    formControlName="tempName" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Tên đệm" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="tempName" [showRequired]="tempName?.errors?.required">
-                        </ngx-validation-message>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="form-group row">
-                        <nb-form-field>
-                            <label for="fullName" class="label col-md-4 col-sm-4 col-form-label">Họ và tên: &nbsp;<span
-                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="fullName" class="form-control" nbInput fullWidth
-                                    formControlName="fullName" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Họ và tên" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="fullName" [showRequired]="fullName?.errors?.required">
-                        </ngx-validation-message>
-                    </div>
-                </div>
-
-
 
 
             </div>
@@ -129,49 +63,124 @@
                 <div class="col-lg-6 col-md-6">
 
                     <div class="form-group row">
-                        <nb-form-field>
-                            <label for="image" class="label col-md-4 col-sm-4 col-form-label">Ảnh: &nbsp;<span
-                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="image" class="form-control" nbInput fullWidth
-                                    formControlName="image" required [ngxReadOnly]="mode == 'view'" placeholder="" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="image" [showRequired]="image?.errors?.required">
-                        </ngx-validation-message>
+                        <label for="deviceID" class="label col-sm-4 col-form-label">CMT/CCCD: &nbsp;<span
+                                [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="citizenId" class="form-control" nbInput fullWidth
+                                formControlName="citizenId" required [ngxReadOnly]="mode == 'view'"
+                                placeholder="Mã thiết bị" />
+                        </div>
+                        <!-- <ngx-validation-message label="citizenId" [showRequired]="citizenId?.errors?.required">
+                    </ngx-validation-message> -->
+                        <ng-container *ngTemplateOutlet="citizenIdTemplate"></ng-container>
+                        <ng-template #citizenIdTemplate>
+                            <ng-container *ngIf="formStudent.controls['citizenId'].hasError('required')"></ng-container>
+                        </ng-template>
                     </div>
+
+
+
+                    <div class="form-group row">
+                        <label for="firstName" class="label col-sm-4 col-form-label">Họ: &nbsp;<span
+                                [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="firstName" class="form-control" nbInput fullWidth
+                                formControlName="firstName" required [ngxReadOnly]="mode == 'view'" placeholder="Họ" />
+                        </div>
+                        <!-- <ngx-validation-message label="firstName" [showRequired]="firstName?.errors?.required">
+                        </ngx-validation-message> -->
+                        <ng-container *ngTemplateOutlet="firstNameTemplate"></ng-container>
+                        <ng-template #firstNameTemplate>
+                            <ng-container *ngIf="formStudent.controls['firstName'].hasError('required')"></ng-container>
+                        </ng-template>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <label for="tempName" class="label col-sm-4 col-form-label">Đệm: &nbsp;<span
+                                [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="tempName" class="form-control" nbInput fullWidth
+                                formControlName="tempName" required [ngxReadOnly]="mode == 'view'"
+                                placeholder="Tên đệm" />
+                        </div>
+                        <!-- <ngx-validation-message label="tempName" [showRequired]="tempName?.errors?.required">
+                        </ngx-validation-message> -->
+                        <ng-container *ngTemplateOutlet="tempNameTemplate"></ng-container>
+                        <ng-template #tempNameTemplate>
+                            <ng-container *ngIf="formStudent.controls['tempName'].hasError('required')"></ng-container>
+                        </ng-template>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="fullName" class="label col-sm-4 col-form-label">Họ và tên: &nbsp;<span
+                                [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="fullName" class="form-control" nbInput fullWidth
+                                formControlName="fullName" required [ngxReadOnly]="mode == 'view'"
+                                placeholder="Họ và tên" />
+                        </div>
+                        <!-- <ngx-validation-message label="fullName" [showRequired]="fullName?.errors?.required">
+                        </ngx-validation-message> -->
+                        <ng-container *ngTemplateOutlet="fullNameTemplate"></ng-container>
+                        <ng-template #fullNameTemplate>
+                            <ng-container *ngIf="formStudent.controls['fullName'].hasError('required')"></ng-container>
+                        </ng-template>
+                    </div>
+
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="form-group row">
-                        <nb-form-field>
-                            <label for="trainClassId" class="label col-md-4 col-sm-4 col-form-label">Mã khóa học:
-                                &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="trainClassId" class="form-control" nbInput fullWidth
-                                    formControlName="trainClassId" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Mã khóa học" />
-                            </div>
-                        </nb-form-field>
-                        <ngx-validation-message label="trainClassId" [showRequired]="trainClassId?.errors?.required">
-                        </ngx-validation-message>
+                    <div class="text-center">
+                        <img src="..." class="rounded" alt="...">
                     </div>
+                    <!-- <div class="form-group row">
+                        <label for="image" class="label col-sm-4 col-form-label">Ảnh: &nbsp;<span
+                                [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="image" class="form-control" nbInput fullWidth formControlName="image"
+                                [ngxReadOnly]="mode == 'view'" placeholder="" />
+                        </div>
+                    </div> -->
+
+
                 </div>
             </div>
 
             <!-- row 3 -->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+
+                        <label for="trainClassId" class="label col-sm-4 col-form-label">Mã lớp học:
+                            &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" id="trainClassId" class="form-control" nbInput fullWidth
+                                formControlName="trainClassId" required [ngxReadOnly]="mode == 'view'"
+                                placeholder="Mã khóa học" />
+                        </div>
+                        <ng-container *ngTemplateOutlet="trainClassIdTemplate"></ng-container>
+                        <ng-template #trainClassIdTemplate>
+                            <ng-container *ngIf="formStudent.controls['trainClassId'].hasError('required')">
+                            </ng-container>
+                        </ng-template>
+                    </div>
+                    <!-- <ngx-validation-message label="trainClassId" [showRequired]="trainClassId?.errors?.required">
+                    </ngx-validation-message> -->
+                </div>
+
+            </div>
+
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-
                     <div class="form-group row">
-                        <nb-form-field>
-                            <label for="note" class="label col-md-4 col-sm-4 col-form-label">Ghi chú: &nbsp;
-                            </label>
-                            <div class="col-md-8 col-sm-8">
-                                <input type="text" id="note" class="form-control" nbInput fullWidth
-                                    formControlName="note" [ngxReadOnly]="mode == 'view'" placeholder="" />
-                            </div>
-                        </nb-form-field>
-
+                        <label for="note" class="label col-sm-2 col-form-label">Ghi chú: &nbsp;
+                        </label>
+                        <div class="col-sm-10">
+                            <textarea type="text" id="note" class="form-control" nbInput fullWidth
+                                formControlName="note" [ngxReadOnly]="mode == 'view'" placeholder="Ghi chú"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>

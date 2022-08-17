@@ -1,0 +1,165 @@
+<nb-card class="modal-custom">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h6 class="modal-title-custom">
+                    <b>{{ title }}</b>
+                </h6>
+            </div>
+            <div class="col-md-3">
+                <nb-action matRipple icon="close-outline" class="modal-close-custom" (click)="close()"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="formObjectList" class="form-horizontal">
+            <!-- row 1 -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <nb-form-field>
+                        <div class="form-group row">
+                            <label for="header" class="label col-sm-1 col-form-label">Header:
+                                &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-sm-11">
+                                <input type="text" id="header" class="form-control" nbInput fullWidth
+                                    formControlName="header" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Header" />
+                                <ngx-validation-message label="header"
+                                    [showRequired]="header?.errors?.required && header.touched">
+                                </ngx-validation-message>
+                            </div>
+
+
+                        </div>
+
+                    </nb-form-field>
+
+
+
+                </div>
+
+            </div>
+
+            <!-- row 2 -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <nb-form-field>
+                        <div class="form-group row">
+                            <label for="description" class="label col-sm-1 col-form-label">Mô tả:
+                                &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-sm-11">
+                                <textarea type="text" id="description" class="form-control" nbInput fullWidth rows="4"
+                                    formControlName="description" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Mô tả"></textarea>
+                                <ngx-validation-message label="Mô tả"
+                                    [showRequired]="description?.errors?.required && description.touched">
+                                </ngx-validation-message>
+                            </div>
+
+                        </div>
+                    </nb-form-field>
+
+
+
+                </div>
+
+            </div>
+
+
+            <!-- row 3 -->
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <nb-form-field>
+                        <div class="form-group row">
+                            <label for="money" class="label col-sm-3 col-form-label">Học phí <span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="number" id="money" class="form-control" nbInput fullWidth
+                                    formControlName="money" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Học phí" />
+                                <ngx-validation-message label="Học phí"
+                                    [showRequired]="money?.errors?.required && money.touched">
+                                </ngx-validation-message>
+                            </div>
+                        </div>
+                    </nb-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <nb-form-field>
+                        <div class="form-group row">
+                            <label for="slop" class="label col-sm-3 col-form-label">Slop <span [hidden]="mode == 'view'"
+                                    style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="number" id="slop" class="form-control" nbInput fullWidth
+                                    formControlName="slop" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Hệ số a" />
+                                <ngx-validation-message label="slop"
+                                    [showRequired]="slop?.errors?.required && slop.touched">
+                                </ngx-validation-message>
+                            </div>
+
+                        </div>
+                    </nb-form-field>
+
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                    <nb-form-field>
+                        <div class="form-group row">
+                            <label for="shift" class="label col-sm-3 col-form-label">Shift <span
+                                    [hidden]="mode == 'view'" style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="number" id="shift" class="form-control" nbInput fullWidth
+                                    formControlName="shift" required [ngxReadOnly]="mode == 'view'"
+                                    placeholder="Hệ số b" />
+                                <ngx-validation-message label="shift"
+                                    [showRequired]="shift?.errors?.required && shift.touched">
+                                </ngx-validation-message>
+                            </div>
+
+                        </div>
+                    </nb-form-field>
+
+                </div>
+            </div>
+
+            <!-- row 3 -->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+
+                        <label for="isSpecific" class="label col-sm-3 col-form-label">Loại đặc biệt:
+                            &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
+                        <div class="col-sm-9">
+                            <nb-checkbox formControlName="isSpecific"></nb-checkbox>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="text-center">
+                    <div class="buttons-row">
+                        <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="mode =='view'"
+                            [disabled]="!formObjectList.valid">
+                            <nb-icon class="action-icon" icon="save-outline"></nb-icon>
+                            Lưu
+                        </button>
+                        <button nbButton status="danger" class="btn-custom" (click)="close()">
+                            <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
+                            Hủy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

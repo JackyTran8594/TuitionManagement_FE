@@ -8,13 +8,13 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   <ng-container>
     <div class="warning">
     <span class="caption status-danger"
-      *ngIf="showMinLength"> Min {{ label }} length is {{ minLength }} symbols </span>
+      *ngIf="showMinLength"> Tối thiểu trường {{ label }} là {{ minLength }} ký tự </span>
     <span class="caption status-danger"
-      *ngIf="showMaxLength"> Max {{ label }} length is {{ maxLength }} symbols </span>
-    <span class="caption status-danger" *ngIf="showPattern"> Incorrect {{ label }} </span>
-    <span class="caption status-danger" *ngIf="showRequired"> {{ label }} is required</span>
-    <span class="caption status-danger" *ngIf="showMin">Min value of {{ label }} is {{ min }}</span>
-    <span class="caption status-danger" *ngIf="showMax">Max value of {{ label }} is {{ max }}</span>
+      *ngIf="showMaxLength"> Tối đa trường {{ label }} là {{ maxLength }} ký tự </span>
+    <span class="caption status-danger" *ngIf="showPattern"> Sai định dạng trường {{ label }} </span>
+    <span class="caption status-danger" *ngIf="showRequired">Trường {{ label }} là bắt buộc</span>
+    <span class="caption status-danger" *ngIf="showMin">Giá trị tối thiểu của {{ label }} là {{ min }}</span>
+    <span class="caption status-danger" *ngIf="showMax">Giá trị tối đa của {{ label }} là {{ max }}</span>
   </div>
 </ng-container>
   `,

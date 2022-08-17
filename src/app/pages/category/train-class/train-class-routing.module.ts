@@ -1,0 +1,16 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TrainClassComponent } from './train-class.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: TrainClassComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class TrainClassRoutingModule { }

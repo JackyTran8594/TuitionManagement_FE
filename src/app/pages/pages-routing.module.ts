@@ -34,6 +34,18 @@ const routes: Routes = [{
       loadChildren: () => import('./fee/fee.module').then(m => m.FeeModule)
     },
     {
+      path: 'category/fee-list',
+      loadChildren: () => import('./category/fee-list/fee-list.module').then(m => m.FeeListModule)
+    },
+    {
+      path: 'category/object-list',
+      loadChildren: () => import('./category/object-list/object-list.module').then(m => m.ObjectListModule)
+    },
+    {
+      path: 'category/train-class',
+      loadChildren: () => import('./category/train-class/train-class.module').then(m => m.TrainClassModule)
+    },
+    {
       path: '',
       redirectTo: 'student',
       pathMatch: 'full',

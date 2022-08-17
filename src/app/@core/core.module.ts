@@ -20,6 +20,7 @@ import { FeeModule } from '../pages/fee/fee.module';
 import { StudentModule } from '../pages/student/student.module';
 import { RoleGroupModule } from '../pages/system-management/role-group/role-group.module';
 import { UserModule } from '../pages/system-management/user/user.module';
+import { FeeListModule } from '../pages/category/fee-list/fee-list.module';
 
 const DATA_SERVICES = [
 
@@ -40,6 +41,7 @@ export const NB_CORE_PROVIDERS = [
   ...StudentModule.forRoot().providers,
   // ...UserModule.forRoot().providers,
   ...RoleGroupModule.forRoot().providers,
+  ...FeeListModule.forRoot().providers,
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },

@@ -4,6 +4,7 @@ import { TableData } from "../../../../shared/table-data";
 export interface User {
     id?: number;
     login?: string;
+    username?: string;
     usertype?: number;
     password?: string;
     passwordCheck?: string;

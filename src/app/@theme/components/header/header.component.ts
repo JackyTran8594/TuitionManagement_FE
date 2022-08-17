@@ -8,6 +8,8 @@ import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import { Router } from '@angular/router';
 import { NbTokenLocalStorage } from '@nebular/auth';
+import { UserStore } from '../../../@core/stores/user.store';
+import { User } from '../../../pages/system-management/user/service/user';
 
 @Component({
   selector: 'ngx-header',
@@ -19,7 +21,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
-  user: any;
+  user: User;
+  imageUserUrl: string = '';
 
   themes = [
     {
@@ -50,13 +53,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Thông tin người dùng', link:'/pages/system-management/user/profile' }, { title: 'Đăng xuất', link:'/auth/logout' } ];
+  userMenu = [{ title: 'Thông tin người dùng', link: '/pages/system-management/user/profile' }, { title: 'Đăng xuất', link: '/auth/logout' }];
 
   public constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
     // private userService: UserData,
+    private userStore: UserStore,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
@@ -68,14 +72,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const themeName: string = theme?.name || '';
         return themeName.startsWith('material');
       }));
+
+    this.imageUserUrl = 'http://' + window.location.host + '/assets/images/user.png';
+  }
+
+  getMenuItems() {
+    const userLink = this.user ? '/pages/user/profile' : '';
+    console.log(userLink);
+
+    return [
+      { title: 'Người dùng', link: userLink },
+      { title: 'Đăng xuất', link: '/auth/logout' },
+    ];
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    // this.userService.getUsers()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((users: any) => this.user = users.nick);
+    this.userStore.onUserStateChange()
+      .pipe(
+        takeUntil(this.destroy$),
+      )
+      .subscribe((user: User) => {
+        this.user = user;
+        this.userMenu = this.getMenuItems();
+      });
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

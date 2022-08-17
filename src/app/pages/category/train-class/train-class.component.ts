@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
-import { FormModeEnum } from '../../common/enum/FormModeEnum';
-import { DeleteComponent } from '../../shared/delete/delete.component';
-import { StudentData, Student } from './service/student';
-import { StudentFrmComponent } from './student-frm/student-frm.component';
+import { DeleteComponent } from '../../../shared/delete/delete.component';
+import { TrainClassData, TrainClass } from './service/train-class';
+import { TrainClassFrmComponent } from './train-class-frm/train-class-frm.component';
 
 @Component({
-  selector: 'ngx-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  selector: 'ngx-train-class',
+  templateUrl: './train-class.component.html',
+  styleUrls: ['./train-class.component.scss']
 })
-export class StudentComponent implements OnInit {
+export class TrainClassComponent implements OnInit {
 
-  constructor(private service: StudentData,
+  constructor(private service: TrainClassData,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService
   ) { }
@@ -30,7 +29,7 @@ export class StudentComponent implements OnInit {
   size = 0;
   totalElements = 0;
   //
-  listData: Student[] = []
+  listData: TrainClass[] = []
 
 
   searchData() {
@@ -63,10 +62,9 @@ export class StudentComponent implements OnInit {
   }
 
   onView(item): void {
-    this.dialogService.open(StudentFrmComponent, {
+    this.dialogService.open(TrainClassFrmComponent, {
       context: {
-        title: "Xem chi tiết thiết bị",
-        mode: FormModeEnum.VIEW
+        title: "Xem chi tiết khóa học",
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -74,10 +72,9 @@ export class StudentComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.dialogService.open(StudentFrmComponent, {
+    this.dialogService.open(TrainClassFrmComponent, {
       context: {
-        title: "Tạo mới thiết bị",
-        mode: FormModeEnum.CREATE
+        title: "Tạo mới khóa học",
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -85,7 +82,7 @@ export class StudentComponent implements OnInit {
       if (res) {
         this.toastrService.show(
           "Thành công",
-          "Thêm thiết bị thành công",
+          "Thêm khóa học thành công",
           {
             status: "success",
             destroyByClick: true,
@@ -109,10 +106,9 @@ export class StudentComponent implements OnInit {
   }
 
   onEdit(): void {
-    this.dialogService.open(StudentFrmComponent, {
+    this.dialogService.open(TrainClassFrmComponent, {
       context: {
-        title: "Chỉnh sửa thiết bị",
-        mode: FormModeEnum.UPDATE
+        title: "Chỉnh sửa khóa học",
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -120,7 +116,7 @@ export class StudentComponent implements OnInit {
       if (res) {
         this.toastrService.show(
           "Thành công",
-          "Chỉnh sửa thiết bị thành công",
+          "Chỉnh sửa khóa học thành công",
           {
             status: "success",
             destroyByClick: true,
@@ -146,8 +142,8 @@ export class StudentComponent implements OnInit {
   onDelete(item): void {
     this.dialogService.open(DeleteComponent, {
       context: {
-        title: "Xóa thiết bị ",
-        content: "thiết bị với mã " + item.id
+        title: "Xóa khóa học ",
+        content: "khóa học với mã " + item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -157,7 +153,7 @@ export class StudentComponent implements OnInit {
           if (res) {
             this.toastrService.show(
               "Thành công",
-              "Xóa thiết bị thành công",
+              "Xóa khóa học thành công",
               {
                 status: "success",
                 destroyByClick: true,
@@ -186,8 +182,8 @@ export class StudentComponent implements OnInit {
   onDeleteAll(item): void {
     this.dialogService.open(DeleteComponent, {
       context: {
-        title: "Xóa nhiều thiết bị ",
-        content: "các thiết bị này "
+        title: "Xóa nhiều danh sách ",
+        content: "các khóa học này "
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -201,7 +197,7 @@ export class StudentComponent implements OnInit {
           if (res) {
             this.toastrService.show(
               "Thành công",
-              "Xóa thiết bị thành công",
+              "Xóa khóa học thành công",
               {
                 status: "success",
                 destroyByClick: true,
@@ -226,4 +222,5 @@ export class StudentComponent implements OnInit {
         });
     })
   }
+
 }

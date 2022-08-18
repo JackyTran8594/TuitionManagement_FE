@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
+import { FormModeEnum } from '../../../common/enum/FormModeEnum';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
 import { TrainClassData, TrainClass } from './service/train-class';
 import { TrainClassFrmComponent } from './train-class-frm/train-class-frm.component';
@@ -65,6 +66,7 @@ export class TrainClassComponent implements OnInit {
     this.dialogService.open(TrainClassFrmComponent, {
       context: {
         title: "Xem chi tiết khóa học",
+        mode: FormModeEnum.VIEW
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -75,6 +77,7 @@ export class TrainClassComponent implements OnInit {
     this.dialogService.open(TrainClassFrmComponent, {
       context: {
         title: "Tạo mới khóa học",
+        mode: FormModeEnum.CREATE
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -109,6 +112,7 @@ export class TrainClassComponent implements OnInit {
     this.dialogService.open(TrainClassFrmComponent, {
       context: {
         title: "Chỉnh sửa khóa học",
+        mode: FormModeEnum.UPDATE
       },
       hasBackdrop: true,
       closeOnBackdropClick: false

@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule } from '@nebular/theme';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuardService } from './_helper/auth-guard.service';
-import { NbAuthJWTInterceptor, NbTokenLocalStorage, NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
+import { NbAuthJWTInterceptor, NbAuthModule, NbTokenLocalStorage, NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
 import { HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './_helper/auth-interceptor.service';
 import { AuthBlockComponent } from './auth-block/auth-block.component';
@@ -55,7 +55,8 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     AuthRoutingModule,
     ReactiveFormsModule,
     NB_MODULES,
-    ComponentModule
+    ComponentModule,
+    NbAuthModule.forRoot()
   ],
   providers: [
     NbSecurityModule.forRoot({
@@ -64,9 +65,9 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     {
       provide: NbRoleProvider, useClass: RoleProvider,
     },
-    // {
-    //   provide: NbTokenLocalStorage, useClass: NbTokenLocalStorage,
-    // },
+    {
+      provide: NbTokenLocalStorage, useClass: NbTokenLocalStorage,
+    },
   ]
 })
 export class AuthModule {
@@ -74,13 +75,13 @@ export class AuthModule {
     return {
       ngModule: AuthModule,
       providers: [
+        // using nb authentication
+        { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest },
         {
           provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,
         },
         { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
-        // {
-        //   provide: NbTokenLocalStorage, useClass: NbTokenLocalStorage,
-        // },
+
         ...GUARDS,
         ...SERVICES,
         ...API

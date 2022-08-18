@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
+import { FormModeEnum } from '../../../common/enum/FormModeEnum';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
 import { ObjectListFrmComponent } from './object-list-frm/object-list-frm.component';
 import { ObjectListData, ObjectList } from './service/object-list';
@@ -65,6 +66,7 @@ export class ObjectListComponent implements OnInit {
     this.dialogService.open(ObjectListFrmComponent, {
       context: {
         title: "Xem chi tiết đối tượng",
+        mode: FormModeEnum.VIEW
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -75,6 +77,7 @@ export class ObjectListComponent implements OnInit {
     this.dialogService.open(ObjectListFrmComponent, {
       context: {
         title: "Tạo mới đối tượng",
+        mode: FormModeEnum.CREATE
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -109,6 +112,7 @@ export class ObjectListComponent implements OnInit {
     this.dialogService.open(ObjectListFrmComponent, {
       context: {
         title: "Chỉnh sửa đối tượng",
+        mode: FormModeEnum.UPDATE
       },
       hasBackdrop: true,
       closeOnBackdropClick: false

@@ -16,16 +16,16 @@ export class ObjectListFrmComponent implements OnInit {
   formObjectList!: FormGroup;
 
   @Input() title: string = "";
-  item: ObjectList = {
-    id: 0,
-    header: '',
-    description: '',
-    money: 0,
-    slop: 0,
-    shift: 0,
-    isSpecific: false,
-    isChecked: false
-  }
+  // item: ObjectList = {
+  //   id: 0,
+  //   header: '',
+  //   description: '',
+  //   money: 0,
+  //   slop: 0,
+  //   shift: 0,
+  //   isSpecific: false,
+  //   isChecked: false
+  // }
 
   @Input() mode: string = '';
 
@@ -70,7 +70,7 @@ export class ObjectListFrmComponent implements OnInit {
 
   ngOnInit(): void {
     this.formBuilder();
-
+    console.log(this.mode);
   }
 
   formBuilder() {
@@ -93,7 +93,7 @@ export class ObjectListFrmComponent implements OnInit {
       next: (res) => {
         console.log(res)
         if (res) {
-          resetForm(this.formObjectList, this.item);
+          resetForm(this.formObjectList, res);
         }
       },
       error: (err) => {
@@ -107,13 +107,26 @@ export class ObjectListFrmComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  save() {
+  buildObject(): ObjectList {
+    let item = {} as ObjectList;
+    item.id = this.id.value;
+    item.header = this.header.value;
+    item.description = this.description.value;
+    item.money = this.money.value;
+    item.slop = this.slop.value;
+    item.shift = this.shift.value;
+    item.isSpecific = this.isSpecific.value;
+    return item;
+  }
 
-    const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(this.item) : this.service.update(this.item);
+  save() {
+    let item = this.buildObject();
+    const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(item) : this.service.update(item);
 
     result$.subscribe(
       {
         next: (res) => {
+          console.log(res);
           if (res) {
             this.dialogRef.close(res);
           }
@@ -124,6 +137,6 @@ export class ObjectListFrmComponent implements OnInit {
       })
 
   }
-  
+
 
 }

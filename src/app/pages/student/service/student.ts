@@ -1,8 +1,9 @@
 import { Observable } from "rxjs";
 import { TableData } from "../../../shared/table-data";
+import { BaseObject } from "../../models/baseObject";
 
-export interface Student {
-    id: number;
+export interface Student extends BaseObject {
+    id?: number;
     studentId: string;
     courseId: string;
     citizenId: string;

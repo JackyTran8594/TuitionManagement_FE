@@ -37,7 +37,7 @@ export class AuthService {
     if (token) {
       if (token.accessToken) {
         return true;
-
+        
       } else { return false; }
     } else { return false; }
   }
@@ -47,6 +47,7 @@ export class AuthService {
   }
 
   public get tokenValue(): string {
+    console.log(this.tokenSubject.value);
     return this.tokenSubject.value;
   }
 

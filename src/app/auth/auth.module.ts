@@ -80,7 +80,8 @@ export class AuthModule {
         {
           provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,
         },
-        { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
 
         ...GUARDS,
         ...SERVICES,

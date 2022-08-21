@@ -17,7 +17,6 @@ export class StudentFrmComponent implements OnInit {
 
   @Input() title: string = "";
   item: Student = {
-    id: 0,
     studentId: '',
     courseId: '',
     citizenId: '',
@@ -103,7 +102,7 @@ export class StudentFrmComponent implements OnInit {
 
   formBuilder() {
     this.formStudent = this.fb.group({
-      id: [0, []],
+      id: [null, []],
       studentId: ['', []],
       courseId: ['', []],
       citizenId: ['', []],
@@ -113,8 +112,13 @@ export class StudentFrmComponent implements OnInit {
       image: ['', []],
       trainClassId: ['', []],
       note: ['', []],
-      // tuitionId: [0, []],
-      // feeId: [0, []],
+      createdBy: ['', []],
+      createdDate:['', []],
+      lastModifiedBy: ['', []],
+      lastModifiedDate: ['', []],
+      status: ['', []],
+      tuitionId: [0, []],
+      feeId: [0, []],
       isChecked: [false, []],
     })
   }
@@ -140,13 +144,24 @@ export class StudentFrmComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
+  public convertStudent() {
+    let item = {} as Student;
+    item.id = this.id.value;
+    item.citizenId = this.citizenId.value;
+    item.courseId = this.courseId.value;
+    // item.createdBy = this.
+  }
+
   save() {
+
 
     const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(this.item) : this.service.update(this.item);
 
     result$.subscribe(
       {
         next: (res) => {
+          console.log(res);
           if (res) {
             this.dialogRef.close(res);
           }

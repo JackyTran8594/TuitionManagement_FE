@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../../../shared/http.service';
 import { TableData } from '../../../../shared/table-data';
-import { ObjectList } from './object-list';
+import { ObjectType } from './object-type';
 
 @Injectable()
-export class ObjectListApi {
+export class ObjectTypeApi {
 
-  private readonly apiController: string = 'objectList';
+  private readonly apiController: string = 'objectType';
 
   constructor(private http: HttpService) { }
 
-  paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<ObjectList>> {
+  paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<ObjectType>> {
     const params = new HttpParams()
       .set('page', pageNumber)
       .set('size', pageSize)
@@ -21,15 +21,15 @@ export class ObjectListApi {
     return this.http.get(this.apiController, { params });
   }
 
-  getById(id: number): Observable<ObjectList> {
+  getById(id: number): Observable<ObjectType> {
     return this.http.get(`${this.apiController}/${id}`);
   }
 
-  create(ObjectList: ObjectList): Observable<ObjectList> {
+  create(ObjectList: ObjectType): Observable<ObjectType> {
     return this.http.post(this.apiController, ObjectList);
   }
 
-  update(ObjectList: ObjectList): Observable<ObjectList> {
+  update(ObjectList: ObjectType): Observable<ObjectType> {
     return this.http.put(`${this.apiController}/${ObjectList.id}`, ObjectList);
   }
 

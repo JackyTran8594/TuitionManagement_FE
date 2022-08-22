@@ -39,7 +39,7 @@ const routes: Routes = [{
     },
     {
       path: 'category/object-list',
-      loadChildren: () => import('./category/object-list/object-list.module').then(m => m.ObjectListModule)
+      loadChildren: () => import('./category/object-type/object-type.module').then(m => m.ObjectTypeModule)
     },
     {
       path: 'category/train-class',

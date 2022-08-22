@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
-import { FormModeEnum } from '../../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { Status, StatusList } from '../../../shared/other-object';
 import { resetForm } from '../../../utils/utils';
 import { FeeData } from '../../Fee/service/Fee';

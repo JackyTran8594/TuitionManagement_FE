@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NbDialogRef } from '@nebular/theme';
+import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
-import { FormModeEnum } from '../../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { resetForm } from '../../../utils/utils';
 import { Student, StudentData } from '../service/student';
 
@@ -88,7 +88,10 @@ export class StudentFrmComponent implements OnInit {
 
   protected readonly unsubcribe$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder, private dialogRef: NbDialogRef<StudentFrmComponent>, private service: StudentData) { }
+  constructor(private fb: FormBuilder, 
+    private dialogRef: NbDialogRef<StudentFrmComponent>, 
+    private service: StudentData,
+    private toastrService: NbToastrService) { }
 
   ngOnDestroy(): void {
     this.unsubcribe$.next();
@@ -163,7 +166,20 @@ export class StudentFrmComponent implements OnInit {
         next: (res) => {
           console.log(res);
           if (res) {
-            this.dialogRef.close(res);
+            this.toastrService.show(
+              "Thành công",
+              "Thêm thiết bị thành công",
+              {
+                status: "success",
+                destroyByClick: true,
+                duration: 2000,
+              });
+    
+              setTimeout(() => {
+                this.dialogRef.close(res);
+              }, 2000);
+            
+
           }
         },
         error: (err) => {

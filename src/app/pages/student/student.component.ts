@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
-import { FormModeEnum } from '../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../common/enum/formModeEnum';
 import { DeleteComponent } from '../../shared/delete/delete.component';
 import { StudentData, Student } from './service/student';
 import { StudentFrmComponent } from './student-frm/student-frm.component';
@@ -83,18 +83,8 @@ export class StudentComponent implements OnInit {
       closeOnBackdropClick: false
     }).onClose.subscribe(res => {
       if (res) {
-        this.toastrService.show(
-          "Thành công",
-          "Thêm thiết bị thành công",
-          {
-            status: "success",
-            destroyByClick: true,
-            duration: 2000,
-          });
-
-        setTimeout(() => {
-          this.searchData();
-        }, 1000);
+        console.log(res)
+        this.searchData();
       }
     }, error => {
       this.toastrService.show(

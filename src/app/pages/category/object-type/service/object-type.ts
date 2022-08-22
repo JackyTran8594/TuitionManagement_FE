@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { TableData } from "../../../../shared/table-data";
 
-export interface ObjectList {
+export interface ObjectType {
     id: number;
     header: string;
     description: string;
@@ -12,11 +12,11 @@ export interface ObjectList {
     isChecked: boolean
 }
 
-export abstract class ObjectListData {
-    abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<ObjectList>>;
-    abstract getById(id: number): Observable<ObjectList>;
-    abstract create(ObjectList: ObjectList): Observable<ObjectList>;
-    abstract update(ObjectList: ObjectList): Observable<ObjectList>;
+export abstract class ObjectTypeData {
+    abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<ObjectType>>;
+    abstract getById(id: number): Observable<ObjectType>;
+    abstract create(ObjectList: ObjectType): Observable<ObjectType>;
+    abstract update(ObjectList: ObjectType): Observable<ObjectType>;
     abstract delete(id: number): Observable<boolean>;
     abstract deleteList(listId: number[]): Observable<boolean>;
 }

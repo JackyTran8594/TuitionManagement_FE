@@ -1,16 +1,16 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ObjectListRoutingModule } from './object-list-routing.module';
-import { ObjectListComponent } from './object-list.component';
-import { ObjectListFrmComponent } from './object-list-frm/object-list-frm.component';
+import { ObjectTypeComponent } from './object-type.component';
 import { NbActionsModule, NbButtonModule, NbCardModule, NbInputModule, NbTabsetModule, NbRadioModule, NbSelectModule, NbListModule, NbIconModule, NbDatepickerModule, NbCheckboxModule, NbFormFieldModule, NbDialogModule } from '@nebular/theme';
-import { ObjectListData } from './service/object-list';
-import { ObjectListApi } from './service/object-list.api';
-import { ObjectListService } from './service/object-list.service';
+import { ObjectTypeData } from './service/object-type';
+import { ObjectTypeApi } from './service/object-type.api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { ComponentModule } from '../../../@component/component.module';
+import { ObjectTypeFrmComponent } from './object-type-frm/object-type-frm.component';
+import { ObjectTypeRoutingModule } from './object-type-routing.module';
+import { ObjectTypeService } from './service/object-type.service';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -29,17 +29,17 @@ const NB_MODULES = [
   NbDialogModule.forChild(),
 ]
 
-const API = [ObjectListApi]
-const SERVICES = [{ provide: ObjectListData, useClass: ObjectListService }]
+const API = [ObjectTypeApi]
+const SERVICES = [{ provide: ObjectTypeData, useClass: ObjectTypeService }]
 
 @NgModule({
   declarations: [
-    ObjectListComponent,
-    ObjectListFrmComponent
+    ObjectTypeComponent,
+    ObjectTypeFrmComponent
   ],
   imports: [
     CommonModule,
-    ObjectListRoutingModule,
+    ObjectTypeRoutingModule,
     ...NB_MODULES,
     ReactiveFormsModule,
     FormsModule,
@@ -47,10 +47,10 @@ const SERVICES = [{ provide: ObjectListData, useClass: ObjectListService }]
     ComponentModule
   ]
 })
-export class ObjectListModule {
-  static forRoot(): ModuleWithProviders<ObjectListModule> { 
+export class ObjectTypeModule {
+  static forRoot(): ModuleWithProviders<ObjectTypeModule> { 
     return {
-      ngModule: ObjectListModule,
+      ngModule: ObjectTypeModule,
       providers: [
         ...API,
         ...SERVICES

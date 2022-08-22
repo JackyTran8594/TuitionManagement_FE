@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
-import { FormModeEnum } from '../../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { resetForm } from '../../../utils/utils';
 import { Tuition, TuitionData } from '../service/tuition';
 

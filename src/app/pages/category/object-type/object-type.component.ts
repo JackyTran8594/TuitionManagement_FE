@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
-import { FormModeEnum } from '../../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
-import { ObjectListFrmComponent } from './object-list-frm/object-list-frm.component';
-import { ObjectListData, ObjectList } from './service/object-list';
+import { ObjectTypeFrmComponent } from './object-type-frm/object-type-frm.component';
+import { ObjectTypeData, ObjectType } from './service/object-type';
 
 @Component({
-  selector: 'ngx-object-list',
-  templateUrl: './object-list.component.html',
-  styleUrls: ['./object-list.component.scss']
+  selector: 'ngx-object-type',
+  templateUrl: './object-Type.component.html',
+  styleUrls: ['./object-Type.component.scss']
 })
-export class ObjectListComponent implements OnInit {
+export class ObjectTypeComponent implements OnInit {
 
-  constructor(private service: ObjectListData,
+  constructor(private service: ObjectTypeData,
     private toastrService: NbToastrService,
     private dialogService: NbDialogService
   ) { }
@@ -30,12 +30,12 @@ export class ObjectListComponent implements OnInit {
   size = 0;
   totalElements = 0;
   //
-  listData: ObjectList[] = []
+  TypeData: ObjectType[] = []
 
 
   searchData() {
     this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
-      this.listData = res.content;
+      this.TypeData = res.content;
     })
   }
 
@@ -53,17 +53,17 @@ export class ObjectListComponent implements OnInit {
   }
 
   checkedAll(event) {
-    this.listData.forEach(item => {
+    this.TypeData.forEach(item => {
       item.isChecked = event;
     })
   }
 
   isChecked(event, index: number) {
-    this.listData[index].isChecked = event;
+    this.TypeData[index].isChecked = event;
   }
 
   onView(item): void {
-    this.dialogService.open(ObjectListFrmComponent, {
+    this.dialogService.open(ObjectTypeFrmComponent, {
       context: {
         title: "Xem chi tiết đối tượng",
         mode: FormModeEnum.VIEW
@@ -74,7 +74,7 @@ export class ObjectListComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.dialogService.open(ObjectListFrmComponent, {
+    this.dialogService.open(ObjectTypeFrmComponent, {
       context: {
         title: "Tạo mới đối tượng",
         mode: FormModeEnum.CREATE
@@ -109,7 +109,7 @@ export class ObjectListComponent implements OnInit {
   }
 
   onEdit(): void {
-    this.dialogService.open(ObjectListFrmComponent, {
+    this.dialogService.open(ObjectTypeFrmComponent, {
       context: {
         title: "Chỉnh sửa đối tượng",
         mode: FormModeEnum.UPDATE
@@ -193,11 +193,11 @@ export class ObjectListComponent implements OnInit {
       closeOnBackdropClick: false
     }).onClose.subscribe(res => {
       if (res) {
-        let removeList: number[] = this.listData.filter((item) => item.isChecked).map(o => {
+        let removeType: number[] = this.TypeData.filter((item) => item.isChecked).map(o => {
           return o.id;
         }) as number[];
 
-        this.service.deleteList(removeList).subscribe(res => {
+        this.service.deleteList(removeType).subscribe(res => {
           if (res) {
             this.toastrService.show(
               "Thành công",

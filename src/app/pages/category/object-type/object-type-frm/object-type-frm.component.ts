@@ -2,21 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
 import { Subject } from 'rxjs';
-import { FormModeEnum } from '../../../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../../../common/enum/formModeEnum';
 import { resetForm } from '../../../../utils/utils';
-import { ObjectList, ObjectListData } from '../service/object-list';
+import { ObjectType, ObjectTypeData } from '../service/object-type';
 
 @Component({
-  selector: 'ngx-object-list-frm',
-  templateUrl: './object-list-frm.component.html',
-  styleUrls: ['./object-list-frm.component.scss']
+  selector: 'ngx-object-type-frm',
+  templateUrl: './object-type-frm.component.html',
+  styleUrls: ['./object-type-frm.component.scss']
 })
-export class ObjectListFrmComponent implements OnInit {
+export class ObjectTypeFrmComponent implements OnInit {
 
-  formObjectList!: FormGroup;
+  formObjectType!: FormGroup;
 
   @Input() title: string = "";
-  // item: ObjectList = {
+  // item: ObjectType = {
   //   id: 0,
   //   header: '',
   //   description: '',
@@ -30,38 +30,38 @@ export class ObjectListFrmComponent implements OnInit {
   @Input() mode: string = '';
 
   get id() {
-    return this.formObjectList.get("id");
+    return this.formObjectType.get("id");
   }
 
   get header() {
-    return this.formObjectList.get("header");
+    return this.formObjectType.get("header");
   }
 
   get description() {
-    return this.formObjectList.get("description");
+    return this.formObjectType.get("description");
   }
 
   get money() {
-    return this.formObjectList.get("money");
+    return this.formObjectType.get("money");
   }
 
   get slop() {
-    return this.formObjectList.get("slop");
+    return this.formObjectType.get("slop");
   }
 
   get shift() {
-    return this.formObjectList.get("shift");
+    return this.formObjectType.get("shift");
   }
 
   get isSpecific() {
-    return this.formObjectList.get("isSpecific");
+    return this.formObjectType.get("isSpecific");
   }
 
   // listStatus: Status[] = []
 
   protected readonly unsubcribe$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder, private dialogRef: NbDialogRef<ObjectListFrmComponent>, private service: ObjectListData) { }
+  constructor(private fb: FormBuilder, private dialogRef: NbDialogRef<ObjectTypeFrmComponent>, private service: ObjectTypeData) { }
 
   ngOnDestroy(): void {
     this.unsubcribe$.next();
@@ -74,7 +74,7 @@ export class ObjectListFrmComponent implements OnInit {
   }
 
   formBuilder() {
-    this.formObjectList = this.fb.group({
+    this.formObjectType = this.fb.group({
       id: [0, []],
       header: ['', []],
       description: ['', []],
@@ -93,7 +93,7 @@ export class ObjectListFrmComponent implements OnInit {
       next: (res) => {
         console.log(res)
         if (res) {
-          resetForm(this.formObjectList, res);
+          resetForm(this.formObjectType, res);
         }
       },
       error: (err) => {
@@ -107,8 +107,8 @@ export class ObjectListFrmComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  buildObject(): ObjectList {
-    let item = {} as ObjectList;
+  buildObject(): ObjectType {
+    let item = {} as ObjectType;
     item.id = this.id.value;
     item.header = this.header.value;
     item.description = this.description.value;

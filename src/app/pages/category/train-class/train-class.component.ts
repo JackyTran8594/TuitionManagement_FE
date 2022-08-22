@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
-import { FormModeEnum } from '../../../common/enum/FormModeEnum';
+import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
 import { TrainClassData, TrainClass } from './service/train-class';
 import { TrainClassFrmComponent } from './train-class-frm/train-class-frm.component';

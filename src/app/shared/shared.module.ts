@@ -9,6 +9,7 @@ import { JwtInterceptorService } from '../auth/_helper/jwt-interceptor.service';
 import { HttpService } from './http.service';
 import { AuthService } from '../auth/service/auth.service';
 import { ComponentModule } from '../@component/component.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const NB_MODULES = [
   NbButtonModule,

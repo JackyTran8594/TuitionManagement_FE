@@ -13,7 +13,7 @@ export class JwtInterceptorService implements HttpInterceptor {
     let token = this.authService.tokenValue;
     // console.log(currentUser)
     // console.log(token)
-    console.log(token);
+    // console.log(token);
 
     if (currentUser && token) {
       req = req.clone({

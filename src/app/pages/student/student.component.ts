@@ -73,7 +73,8 @@ export class StudentComponent implements OnInit {
     this.dialogService.open(StudentFrmComponent, {
       context: {
         title: "Xem chi tiết thiết bị",
-        mode: FormModeEnum.VIEW
+        mode: FormModeEnum.VIEW,
+        student_id: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -105,11 +106,12 @@ export class StudentComponent implements OnInit {
     })
   }
 
-  onEdit(): void {
+  onEdit(item): void {
     this.dialogService.open(StudentFrmComponent, {
       context: {
         title: "Chỉnh sửa thiết bị",
-        mode: FormModeEnum.UPDATE
+        mode: FormModeEnum.UPDATE,
+        student_id: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false

@@ -18,7 +18,8 @@ export class StudentFrmComponent implements OnInit {
   formStudent!: FormGroup;
 
   @Input() title: string = "";
-  
+
+  @Input() student_id!: number;
 
   @Input() mode: string = '';
 
@@ -95,8 +96,8 @@ export class StudentFrmComponent implements OnInit {
 
   protected readonly unsubcribe$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder, 
-    private dialogRef: NbDialogRef<StudentFrmComponent>, 
+  constructor(private fb: FormBuilder,
+    private dialogRef: NbDialogRef<StudentFrmComponent>,
     private service: StudentData,
     private toastrService: NbToastrService) { }
 
@@ -107,7 +108,9 @@ export class StudentFrmComponent implements OnInit {
 
   ngOnInit(): void {
     this.formBuilder();
-
+    if(this.student_id && this.student_id > 0) {
+        this.getById(this.student_id);
+    }
   }
 
   formBuilder() {
@@ -123,7 +126,7 @@ export class StudentFrmComponent implements OnInit {
       trainClassId: ['', []],
       note: ['', []],
       createdBy: ['', []],
-      createdDate:['', []],
+      createdDate: ['', []],
       lastModifiedBy: ['', []],
       lastModifiedDate: ['', []],
       status: ['', []],
@@ -136,7 +139,7 @@ export class StudentFrmComponent implements OnInit {
 
 
   getById(id) {
-    this.service.getById(id).subscribe({
+    this.service.getById(id).pipe(take(1)).subscribe({
       next: (res) => {
         console.log(res)
         if (res.result === StatusEnum.OK) {
@@ -180,7 +183,9 @@ export class StudentFrmComponent implements OnInit {
 
     let item = this.formValueToDto();
     const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(item) : this.service.update(item);
-    result$.pipe(take(1)).subscribe(
+    result$
+    .pipe(take(1))
+    .subscribe(
       {
         next: (res) => {
           console.log(res);
@@ -193,11 +198,11 @@ export class StudentFrmComponent implements OnInit {
                 destroyByClick: true,
                 duration: 2000,
               });
-    
-              setTimeout(() => {
-                this.dialogRef.close(res);
-              }, 2000);
-          } 
+
+            setTimeout(() => {
+              this.dialogRef.close(res);
+            }, 2000);
+          }
         },
         error: (err) => {
           console.log(err);

@@ -14,8 +14,8 @@ export class TrainClassApi {
 
   paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<TrainClass>> {
     const params = new HttpParams()
-      .set('page', pageNumber)
-      .set('size', pageSize)
+    .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize);
       // .set('txtSearch', txtSearch);
 
     return this.http.get(this.apiController, { params });

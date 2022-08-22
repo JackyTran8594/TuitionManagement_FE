@@ -1,6 +1,6 @@
 export interface MessageResponse<T> {
     status: number,
-    errorCode?: string,
+    result?: string,
     message: string,
     listData: T[],
     data: T;

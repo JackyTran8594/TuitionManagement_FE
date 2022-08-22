@@ -1,7 +1,5 @@
-import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { NbTokenLocalStorage } from '@nebular/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AccessToken, User } from './auth';
 import { AuthApi } from './auth.api';
@@ -47,7 +45,7 @@ export class AuthService {
   }
 
   public get tokenValue(): string {
-    console.log(this.tokenSubject.value);
+    // console.log(this.tokenSubject.value);
     return this.tokenSubject.value;
   }
 

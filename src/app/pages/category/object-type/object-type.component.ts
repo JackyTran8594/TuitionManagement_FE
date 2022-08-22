@@ -30,12 +30,12 @@ export class ObjectTypeComponent implements OnInit {
   size = 0;
   totalElements = 0;
   //
-  TypeData: ObjectType[] = []
+  listData: ObjectType[] = []
 
 
   searchData() {
     this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
-      this.TypeData = res.content;
+      this.listData = res.content;
     })
   }
 
@@ -53,13 +53,13 @@ export class ObjectTypeComponent implements OnInit {
   }
 
   checkedAll(event) {
-    this.TypeData.forEach(item => {
+    this.listData.forEach(item => {
       item.isChecked = event;
     })
   }
 
   isChecked(event, index: number) {
-    this.TypeData[index].isChecked = event;
+    this.listData[index].isChecked = event;
   }
 
   onView(item): void {
@@ -193,7 +193,7 @@ export class ObjectTypeComponent implements OnInit {
       closeOnBackdropClick: false
     }).onClose.subscribe(res => {
       if (res) {
-        let removeType: number[] = this.TypeData.filter((item) => item.isChecked).map(o => {
+        let removeType: number[] = this.listData.filter((item) => item.isChecked).map(o => {
           return o.id;
         }) as number[];
 

@@ -12,7 +12,7 @@
         </div>
     </nb-card-header>
     <nb-card-body>
-        <form [formGroup]="formObjectList" class="form-horizontal">
+        <form [formGroup]="formObjectType" class="form-horizontal">
             <!-- row 1 -->
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -149,7 +149,7 @@
                 <div class="text-center">
                     <div class="buttons-row">
                         <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="mode =='view'"
-                            [disabled]="!formObjectList.valid">
+                            [disabled]="!formObjectType.valid">
                             <nb-icon class="action-icon" icon="save-outline"></nb-icon>
                             Lưu
                         </button>

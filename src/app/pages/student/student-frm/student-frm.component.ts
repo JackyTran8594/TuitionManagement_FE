@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 import { FormModeEnum } from '../../../common/enum/formModeEnum';
+import { StatusEnum } from '../../../common/enum/statusEnum';
 import { resetForm } from '../../../utils/utils';
 import { Student, StudentData } from '../service/student';
 
@@ -16,22 +18,11 @@ export class StudentFrmComponent implements OnInit {
   formStudent!: FormGroup;
 
   @Input() title: string = "";
-  item: Student = {
-    studentId: '',
-    courseId: '',
-    citizenId: '',
-    firstName: '',
-    tempName: '',
-    fullName: '',
-    image: '',
-    trainClassId: '',
-    note: '',
-    tuitionId: 0,
-    feeId: 0,
-    isChecked: false
-  }
+  
 
   @Input() mode: string = '';
+
+  public $unsubscribe: Subject<boolean> = new Subject()
 
   get id() {
     return this.formStudent.get("id");
@@ -84,6 +75,22 @@ export class StudentFrmComponent implements OnInit {
     return this.formStudent.get("isChecked");
   }
 
+  get createdBy() {
+    return this.formStudent.get("createdBy");
+  }
+
+  get createdDate() {
+    return this.formStudent.get("createdDate");
+  }
+
+  get lastModifiedBy() {
+    return this.formStudent.get("lastModifiedBy");
+  }
+
+  get lastModifiedDate() {
+    return this.formStudent.get("lastModifiedDate");
+  }
+
   // listStatus: Status[] = []
 
   protected readonly unsubcribe$ = new Subject<void>();
@@ -132,8 +139,8 @@ export class StudentFrmComponent implements OnInit {
     this.service.getById(id).subscribe({
       next: (res) => {
         console.log(res)
-        if (res) {
-          resetForm(this.formStudent, this.item);
+        if (res.result === StatusEnum.OK) {
+          resetForm(this.formStudent, res.data);
         }
       },
       error: (err) => {
@@ -148,24 +155,36 @@ export class StudentFrmComponent implements OnInit {
   }
 
 
-  public convertStudent() {
+  public formValueToDto() {
     let item = {} as Student;
     item.id = this.id.value;
     item.citizenId = this.citizenId.value;
     item.courseId = this.courseId.value;
-    // item.createdBy = this.
+    item.createdBy = this.createdBy.value;
+    item.createdDate = this.createdDate.value;
+    item.feeId = this.feeId.value;
+    item.firstName = this.firstName.value;
+    item.fullName = this.fullName.value;
+    item.image = this.image.value;
+    item.lastModifiedBy = this.lastModifiedBy.value;
+    item.lastModifiedDate = this.lastModifiedDate.value;
+    item.note = this.note.value;
+    item.studentId = this.studentId.value;
+    item.tempName = this.tempName.value;
+    item.trainClassId = this.trainClassId.value;
+    item.tuitionId = this.tuitionId.value;
+    return item;
   }
 
   save() {
 
-
-    const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(this.item) : this.service.update(this.item);
-
-    result$.subscribe(
+    let item = this.formValueToDto();
+    const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(item) : this.service.update(item);
+    result$.pipe(take(1)).subscribe(
       {
         next: (res) => {
           console.log(res);
-          if (res) {
+          if (res.result === StatusEnum.OK) {
             this.toastrService.show(
               "Thành công",
               "Thêm thiết bị thành công",
@@ -178,9 +197,7 @@ export class StudentFrmComponent implements OnInit {
               setTimeout(() => {
                 this.dialogRef.close(res);
               }, 2000);
-            
-
-          }
+          } 
         },
         error: (err) => {
           console.log(err);

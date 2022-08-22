@@ -21,6 +21,7 @@ export class StudentComponent implements OnInit {
     this.currentPage = 1;
     this.pageSize = 10;
     this.txtSearch = "";
+    this.searchData();
   }
 
   currentPage: number;
@@ -34,9 +35,15 @@ export class StudentComponent implements OnInit {
 
 
   searchData() {
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
-      this.listData = res.content;
-    })
+    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.listData = res.content;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   changePageSize(event) {
@@ -76,7 +83,7 @@ export class StudentComponent implements OnInit {
   onCreate(): void {
     this.dialogService.open(StudentFrmComponent, {
       context: {
-        title: "Tạo mới thiết bị",
+        title: "Tạo mới học viên",
         mode: FormModeEnum.CREATE
       },
       hasBackdrop: true,

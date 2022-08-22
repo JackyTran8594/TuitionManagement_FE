@@ -14,9 +14,9 @@ export class FeeListApi {
 
   paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<FeeList>> {
     const params = new HttpParams()
-      .set('page', pageNumber)
-      .set('size', pageSize)
-      // .set('txtSearch', txtSearch);
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize)
+    // .set('txtSearch', txtSearch);
 
     return this.http.get(this.apiController, { params });
   }

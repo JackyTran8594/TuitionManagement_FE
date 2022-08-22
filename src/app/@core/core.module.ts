@@ -24,7 +24,7 @@ import { FeeListModule } from '../pages/category/fee-list/fee-list.module';
 import { TrainClassModule } from '../pages/category/train-class/train-class.module';
 import { TuitionModule } from '../pages/tuition/tuition.module';
 import { AuthModule } from '../auth/auth.module';
-import { ObjectTypeModule } from '../pages/category/object-list/object-type.module';
+import { ObjectTypeModule } from '../pages/category/object-type/object-type.module';
 
 const DATA_SERVICES = [
 

@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private api: AuthApi) {
     let helper = new JwtHelperService();
     this.token = <AccessToken>(JSON.parse(localStorage.getItem('access_token')));
-    if(this.token) {
+    if (this.token) {
       let user = helper.decodeToken(this.token.accessToken)['sub'];
       this.currentUserSubject = new BehaviorSubject<any>(user);
       this.currentUser = this.currentUserSubject.asObservable();
@@ -35,18 +35,18 @@ export class AuthService {
     if (token) {
       if (token.accessToken) {
         return true;
-        
+
       } else { return false; }
     } else { return false; }
   }
 
   public get currentUserValue(): string {
-    return this.currentUserSubject.value;
+    return (this.currentUserSubject) ? (this.currentUserSubject.value) : '';
   }
 
   public get tokenValue(): string {
     // console.log(this.tokenSubject.value);
-    return this.tokenSubject.value;
+    return (this.tokenSubject) ? (this.tokenSubject.value) : '';
   }
 
 

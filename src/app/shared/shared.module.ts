@@ -10,6 +10,7 @@ import { HttpService } from './http.service';
 import { AuthService } from '../auth/service/auth.service';
 import { ComponentModule } from '../@component/component.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ShareService } from './share.service';
 
 const NB_MODULES = [
   NbButtonModule,
@@ -20,7 +21,7 @@ const NB_MODULES = [
   NbDialogModule.forChild()
 ]
 
-const SERVICES = [AuthService, HttpService]
+const SERVICES = [AuthService, HttpService, ShareService]
 
 const DIRECTIVES = [ReadOnlyDirective]
 const COMPONENTS = [DeleteComponent]
@@ -37,6 +38,7 @@ const COMPONENTS = [DeleteComponent]
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true,
+      
     },
     ...SERVICES
   ]

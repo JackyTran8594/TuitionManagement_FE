@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentModule } from '../../@component/component.module';
 import { SharedModule } from '../../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ImportXmlComponent } from './import-xml/import-xml.component';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -37,7 +38,8 @@ const SERVICES = [{ provide: StudentData, useClass: StudentService }]
 @NgModule({
   declarations: [
     StudentComponent,
-    StudentFrmComponent
+    StudentFrmComponent,
+    ImportXmlComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
 import { FormModeEnum } from '../../common/enum/formModeEnum';
 import { DeleteComponent } from '../../shared/delete/delete.component';
+import { ImportXmlComponent } from './import-xml/import-xml.component';
 import { StudentData, Student } from './service/student';
 import { StudentFrmComponent } from './student-frm/student-frm.component';
 
@@ -67,6 +68,16 @@ export class StudentComponent implements OnInit {
 
   isChecked(event, index: number) {
     this.listData[index].isChecked = event;
+  }
+
+  onAttach() {
+    this.dialogService.open(ImportXmlComponent, {
+      context: {
+        title: "Import file XML",
+      },
+      hasBackdrop: true,
+      closeOnBackdropClick: false
+    })
   }
 
   onView(item): void {

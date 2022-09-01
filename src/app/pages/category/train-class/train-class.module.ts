@@ -11,6 +11,7 @@ import { TrainClassService } from './service/train-class.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentModule } from '../../../@component/component.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -44,7 +45,8 @@ const SERVICES = [{ provide: TrainClassData, useClass: TrainClassService }]
     ReactiveFormsModule,
     FormsModule,
     ComponentModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ]
 })
 export class TrainClassModule {

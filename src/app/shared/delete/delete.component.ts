@@ -19,7 +19,7 @@ export class DeleteComponent implements OnInit {
   ngOnInit(): void {
     this.data = "Bạn có chắc muốn xóa"
     if (this.content) {
-      this.data = this.data + "" + this.content;
+      this.data = this.data + " " + this.content;
     }
   }
 

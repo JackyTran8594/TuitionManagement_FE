@@ -11,6 +11,7 @@ import { FeeService } from './service/fee.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { ComponentModule } from '../../@component/component.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 const NB_MODULES = [
@@ -46,7 +47,8 @@ const SERVICES = [{ provide: FeeData, useClass: FeeService }]
     FormsModule,
     ...NB_MODULES,
     SharedModule,
-    ComponentModule
+    ComponentModule,
+    NgxPaginationModule
   ],
   providers: [
 

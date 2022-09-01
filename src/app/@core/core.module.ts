@@ -43,7 +43,7 @@ export const NB_CORE_PROVIDERS = [
   ...DATA_SERVICES,
   ...FeeModule.forRoot().providers,
   ...StudentModule.forRoot().providers,
-  // ...UserModule.forRoot().providers,
+  ...UserModule.forRoot().providers,
   ...RoleGroupModule.forRoot().providers,
   ...FeeListModule.forRoot().providers,
   ...ObjectTypeModule.forRoot().providers,

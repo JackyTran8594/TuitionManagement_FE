@@ -52,8 +52,6 @@
                         <th scope="col" class="text-center table-col-1">Header</th>
                         <th scope="col" class="text-center table-col-2">Mô tả</th>
                         <th scope="col" class="text-center table-col-2">Học phí</th>
-                        <th scope="col" class="text-center table-col-3">Hệ số a (Slop)</th>
-                        <th scope="col" class="text-center table-col-0">Hệ số b (Shift)</th>
                         <th scope="col" class="text-center col col-lg-2 table-col-4">
                             Thao tác
                         </th>
@@ -82,13 +80,9 @@
                         <th class="text-center table-col-0" scope="row">
                             {{ (currentPage - 1) * pageSize + (idx + 1) }}
                         </th>
-                        <td class="text-center table-col-1">{{ item.studentId }}</td>
-                        <td class="table-col-3">{{ item.courseId }}</td>
-                        <td class="text-center table-col-3">{{ item.citizenId }}</td>
-                        <td class="text-center table-col-0">
-                            {{item.fullName}}
-                        </td>
-                        <td class="table-col-3">{{ item.trainClassId }}</td>
+                        <td class="text-center table-col-3">{{ item.header }}</td>
+                        <td class="table-col-3">{{ item.description }}</td>
+                        <td class="text-center table-col-1">{{ item.money | currency:'VND' }}</td>
                         <td class="text-center col col-lg-2 table-col-4">
                             <div class="buttons-row">
                                 <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">

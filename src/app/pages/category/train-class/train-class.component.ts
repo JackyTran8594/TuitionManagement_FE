@@ -18,14 +18,12 @@ export class TrainClassComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentPage = 1;
-    this.pageSize = 10;
-    this.txtSearch = "";
+    this.searchData()
   }
 
-  currentPage: number;
-  pageSize: number;
-  txtSearch: string;
+  currentPage: number = 1;
+  pageSize: number = 10;
+  txtSearch: string = '';
   // page from server
   size = 0;
   totalElements = 0;
@@ -35,6 +33,7 @@ export class TrainClassComponent implements OnInit {
 
   searchData() {
     this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
+      console.log(res);
       this.listData = res.content;
     })
   }
@@ -66,7 +65,8 @@ export class TrainClassComponent implements OnInit {
     this.dialogService.open(TrainClassFrmComponent, {
       context: {
         title: "Xem chi tiết khóa học",
-        mode: FormModeEnum.VIEW
+        mode: FormModeEnum.VIEW,
+        trainClassId: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -108,11 +108,12 @@ export class TrainClassComponent implements OnInit {
     })
   }
 
-  onEdit(): void {
+  onEdit(item): void {
     this.dialogService.open(TrainClassFrmComponent, {
       context: {
         title: "Chỉnh sửa khóa học",
-        mode: FormModeEnum.UPDATE
+        mode: FormModeEnum.UPDATE,
+        trainClassId: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -147,7 +148,7 @@ export class TrainClassComponent implements OnInit {
     this.dialogService.open(DeleteComponent, {
       context: {
         title: "Xóa khóa học ",
-        content: "khóa học với mã " + item.id
+        content: "khóa học với mã " + item.id,
       },
       hasBackdrop: true,
       closeOnBackdropClick: false

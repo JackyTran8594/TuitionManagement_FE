@@ -18,26 +18,34 @@ export class ObjectTypeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentPage = 1;
-    this.pageSize = 10;
-    this.txtSearch = "";
+    this.searchData();
   }
 
-  currentPage: number;
-  pageSize: number;
-  txtSearch: string;
+  currentPage: number = 1;
+  pageSize: number = 10;
+  txtSearch: string = '';
   // page from server
-  size = 0;
+  size = 0
+  totalPages = 0;
   totalElements = 0;
   //
   listData: ObjectType[] = []
 
 
   searchData() {
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
-      this.listData = res.content;
-    })
+    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.listData = res.content;
+        this.totalElements = res.totalElements;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
+
 
   changePageSize(event) {
     console.log(event);
@@ -66,7 +74,8 @@ export class ObjectTypeComponent implements OnInit {
     this.dialogService.open(ObjectTypeFrmComponent, {
       context: {
         title: "Xem chi tiết đối tượng",
-        mode: FormModeEnum.VIEW
+        mode: FormModeEnum.VIEW,
+        objectTypeId: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -108,11 +117,12 @@ export class ObjectTypeComponent implements OnInit {
     })
   }
 
-  onEdit(): void {
+  onEdit(item): void {
     this.dialogService.open(ObjectTypeFrmComponent, {
       context: {
         title: "Chỉnh sửa đối tượng",
-        mode: FormModeEnum.UPDATE
+        mode: FormModeEnum.UPDATE,
+        objectTypeId: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false

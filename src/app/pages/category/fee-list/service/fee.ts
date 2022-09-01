@@ -1,8 +1,9 @@
 import { Observable } from "rxjs";
+import { ResponseData } from "../../../../shared/responseData";
 import { TableData } from "../../../../shared/table-data";
 
 export interface FeeList {
-    id: number;
+    id?: number;
     header: string;
     description: string;
     money: number;
@@ -11,9 +12,9 @@ export interface FeeList {
 
 export abstract class FeeListData {
     abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<FeeList>>;
-    abstract getById(id: number): Observable<FeeList>;
-    abstract create(Fee: FeeList): Observable<FeeList>;
-    abstract update(Fee: FeeList): Observable<FeeList>;
-    abstract delete(id: number): Observable<boolean>;
-    abstract deleteList(listId: number[]): Observable<boolean>;
+    abstract getById(id: number): Observable<ResponseData<FeeList>>;
+    abstract create(Fee: FeeList): Observable<ResponseData<FeeList>>;
+    abstract update(Fee: FeeList): Observable<ResponseData<FeeList>>;
+    abstract delete(id: number): Observable<ResponseData<Boolean>>;
+    abstract deleteList(listId: number[]): Observable<ResponseData<Boolean>>;
 }

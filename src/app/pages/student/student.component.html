@@ -68,7 +68,7 @@
                 </thead>
                 <tbody *ngIf="listData && listData.length < 1">
                     <tr>
-                        <td colspan="7" class="text-center"><b>Không có dữ liệu</b></td>
+                        <td colspan="8" class="text-center"><b>Không có dữ liệu</b></td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="listData && listData.length >= 1">
@@ -89,7 +89,7 @@
                         <th class="text-center table-col-0" scope="row">
                             {{ (currentPage - 1) * pageSize + (idx + 1) }}
                         </th>
-                        <td class="text-center table-col-1">{{ item.studentId }}</td>
+                        <td class="text-center table-col-1">{{ item.registrationId }}</td>
                         <td class="table-col-3">{{ item.courseId }}</td>
                         <td class="text-center table-col-3">{{ item.citizenId }}</td>
                         <td class="text-center table-col-0">
@@ -131,7 +131,8 @@
                             <nb-option [value]="40">40</nb-option>
                             <nb-option [value]="50">50</nb-option>
                         </nb-select>
-                        <pagination-controls maxSize="5" responsive="true" (pageChange)="pageChanged($event)">
+                        <pagination-controls maxSize="5"  previousLabel="Trước"
+                        nextLabel="Tiếp" responsive="true" (pageChange)="pageChanged($event)">
                         </pagination-controls>
                     </div>
                 </div>

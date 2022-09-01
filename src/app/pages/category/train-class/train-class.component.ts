@@ -25,17 +25,25 @@ export class TrainClassComponent implements OnInit {
   pageSize: number = 10;
   txtSearch: string = '';
   // page from server
-  size = 0;
+  size = 0
+  totalPages = 0;
   totalElements = 0;
   //
   listData: TrainClass[] = []
 
 
   searchData() {
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
-      console.log(res);
-      this.listData = res.content;
-    })
+    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.listData = res.content;
+        this.totalElements = res.totalElements;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   changePageSize(event) {
@@ -184,7 +192,7 @@ export class TrainClassComponent implements OnInit {
     })
   }
 
-  onDeleteAll(item): void {
+  onDeleteAll(): void {
     this.dialogService.open(DeleteComponent, {
       context: {
         title: "Xóa nhiều danh sách ",

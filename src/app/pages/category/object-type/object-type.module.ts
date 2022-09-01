@@ -11,6 +11,7 @@ import { ComponentModule } from '../../../@component/component.module';
 import { ObjectTypeFrmComponent } from './object-type-frm/object-type-frm.component';
 import { ObjectTypeRoutingModule } from './object-type-routing.module';
 import { ObjectTypeService } from './service/object-type.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -44,7 +45,8 @@ const SERVICES = [{ provide: ObjectTypeData, useClass: ObjectTypeService }]
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-    ComponentModule
+    ComponentModule,
+    NgxPaginationModule
   ]
 })
 export class ObjectTypeModule {

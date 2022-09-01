@@ -29,7 +29,7 @@
                             </button>
                         </span>
                         <span class="input-group-btn ml-2">
-                            <button nbButton status="danger" (click)="onDeleteAll($event)">
+                            <button nbButton status="danger" (click)="onDeleteAll()">
                                 <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
                                 Xóa tất cả
                             </button>
@@ -118,7 +118,8 @@
                             <nb-option [value]="40">40</nb-option>
                             <nb-option [value]="50">50</nb-option>
                         </nb-select>
-                        <pagination-controls maxSize="5" responsive="true" (pageChange)="pageChanged($event)">
+                        <pagination-controls maxSize="5"  previousLabel="Trước"
+                        nextLabel="Tiếp" responsive="true" (pageChange)="pageChanged($event)">
                         </pagination-controls>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
+import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { DeleteComponent } from '../../../shared/delete/delete.component';
 import { FeeListFrmComponent } from './fee-list-frm/fee-list-frm.component';
 import { FeeListData, FeeList } from './service/fee';
@@ -17,26 +18,35 @@ export class FeeListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentPage = 1;
-    this.pageSize = 10;
-    this.txtSearch = "";
+  
+    this.searchData();
   }
 
-  currentPage: number;
-  pageSize: number;
-  txtSearch: string;
+  currentPage: number = 1;
+  pageSize: number = 10;
+  txtSearch: string = '';
   // page from server
-  size = 0;
+  size = 0
+  totalPages = 0;
   totalElements = 0;
   //
   listData: FeeList[] = []
 
 
   searchData() {
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
-      this.listData = res.content;
-    })
+    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.listData = res.content;
+        this.totalElements = res.totalElements;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
+
 
   changePageSize(event) {
     console.log(event);
@@ -65,6 +75,8 @@ export class FeeListComponent implements OnInit {
     this.dialogService.open(FeeListFrmComponent, {
       context: {
         title: "Xem chi tiết lệ phí",
+        mode: FormModeEnum.VIEW,
+        feeListId: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -75,6 +87,7 @@ export class FeeListComponent implements OnInit {
     this.dialogService.open(FeeListFrmComponent, {
       context: {
         title: "Tạo mới lệ phí",
+        mode: FormModeEnum.CREATE,
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -105,10 +118,12 @@ export class FeeListComponent implements OnInit {
     })
   }
 
-  onEdit(): void {
+  onEdit(item): void {
     this.dialogService.open(FeeListFrmComponent, {
       context: {
         title: "Chỉnh sửa lệ phí",
+        mode: FormModeEnum.UPDATE,
+        feeListId: item.id
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
@@ -179,7 +194,7 @@ export class FeeListComponent implements OnInit {
     })
   }
 
-  onDeleteAll(item): void {
+  onDeleteAll(): void {
     this.dialogService.open(DeleteComponent, {
       context: {
         title: "Xóa nhiều danh sách ",

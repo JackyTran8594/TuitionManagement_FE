@@ -109,7 +109,7 @@ export class TrainClassFrmComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addTrainClass() {
+  buildObject() {
     let trainClass = {} as TrainClass;
     trainClass.id = this.id.value;
     trainClass.header = this.header.value;
@@ -122,7 +122,7 @@ export class TrainClassFrmComponent implements OnInit {
 
   save() {
 
-    let item = this.addTrainClass();
+    let item = this.buildObject();
 
     // console.log(this.item);
     const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(item) : this.service.update(item);

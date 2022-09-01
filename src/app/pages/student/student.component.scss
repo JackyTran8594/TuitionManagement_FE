@@ -1,3 +1,22 @@
 .buttons-row .btn-custom {
   margin-right: 8px;
 }
+
+::ng-deep .table-content {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.footer-table {
+  padding-top: 20px;
+}
+
+.pagination {
+  display: inline-flex;
+  text-align: right;
+}
+
+::ng-deep .pagination > nb-select {
+  max-width: 5rem !important;
+  cursor: pointer;
+}

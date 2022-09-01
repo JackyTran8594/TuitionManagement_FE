@@ -1,11 +1,11 @@
 import { Observable } from "rxjs";
+import { ResponseData } from "../../../shared/responseData";
 import { TableData } from "../../../shared/table-data";
 import { BaseObject } from "../../models/baseObject";
-import { MessageResponse } from "../../models/messageResponse";
 
 export interface Student extends BaseObject {
     id?: number;
-    studentId: string;
+    registrationId: string;
     courseId: string;
     citizenId: string;
     firstName: string;
@@ -21,9 +21,9 @@ export interface Student extends BaseObject {
 
 export abstract class StudentData {
     abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Student>>;
-    abstract getById(id: number): Observable<MessageResponse<Student>>;
-    abstract create(Student: Student): Observable<MessageResponse<Student>>;
-    abstract update(Student: Student): Observable<MessageResponse<Student>>;
-    abstract delete(id: number): Observable<MessageResponse<string>>;
-    abstract deleteList(listId: number[]): Observable<MessageResponse<string>>;
+    abstract getById(id: number): Observable<ResponseData<Student>>;
+    abstract create(Student: Student): Observable<ResponseData<Student>>;
+    abstract update(Student: Student): Observable<ResponseData<Student>>;
+    abstract delete(id: number): Observable<ResponseData<Boolean>>;
+    abstract deleteList(listId: number[]): Observable<ResponseData<Boolean>>;
 }

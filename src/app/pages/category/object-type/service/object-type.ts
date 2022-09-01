@@ -1,8 +1,9 @@
 import { Observable } from "rxjs";
 import { TableData } from "../../../../shared/table-data";
+import { ResponseData } from "../../../../shared/responseData";
 
 export interface ObjectType {
-    id: number;
+    id?: number;
     header: string;
     description: string;
     money: number;
@@ -14,9 +15,9 @@ export interface ObjectType {
 
 export abstract class ObjectTypeData {
     abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<ObjectType>>;
-    abstract getById(id: number): Observable<ObjectType>;
-    abstract create(ObjectList: ObjectType): Observable<ObjectType>;
-    abstract update(ObjectList: ObjectType): Observable<ObjectType>;
-    abstract delete(id: number): Observable<boolean>;
-    abstract deleteList(listId: number[]): Observable<boolean>;
+    abstract getById(id: number): Observable<ResponseData<ObjectType>>;
+    abstract create(ObjectList: ObjectType): Observable<ResponseData<ObjectType>>;
+    abstract update(ObjectList: ObjectType): Observable<ResponseData<ObjectType>>;
+    abstract delete(id: number): Observable<ResponseData<Boolean>>;
+    abstract deleteList(listId: number[]): Observable<ResponseData<Boolean>>;
 }

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { NbDialogRef } from '@nebular/theme';
+import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
+import { ResponseStatus } from '../../../../@core/constant/responseStatusEnum';
 import { FormModeEnum } from '../../../../common/enum/formModeEnum';
 import { resetForm } from '../../../../utils/utils';
 import { ObjectType, ObjectTypeData } from '../service/object-type';
@@ -14,6 +15,7 @@ import { ObjectType, ObjectTypeData } from '../service/object-type';
 export class ObjectTypeFrmComponent implements OnInit {
 
   formObjectType!: FormGroup;
+  @Input() objectTypeId!: number;
 
   @Input() title: string = "";
   // item: ObjectType = {
@@ -61,7 +63,10 @@ export class ObjectTypeFrmComponent implements OnInit {
 
   protected readonly unsubcribe$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder, private dialogRef: NbDialogRef<ObjectTypeFrmComponent>, private service: ObjectTypeData) { }
+  constructor(private fb: FormBuilder,
+    private dialogRef: NbDialogRef<ObjectTypeFrmComponent>,
+    private service: ObjectTypeData,
+    private toastrService: NbToastrService) { }
 
   ngOnDestroy(): void {
     this.unsubcribe$.next();
@@ -70,12 +75,14 @@ export class ObjectTypeFrmComponent implements OnInit {
 
   ngOnInit(): void {
     this.formBuilder();
-    console.log(this.mode);
+    if (this.objectTypeId) {
+      this.getById(this.objectTypeId);
+    }
   }
 
   formBuilder() {
     this.formObjectType = this.fb.group({
-      id: [0, []],
+      id: [null, []],
       header: ['', []],
       description: ['', []],
       money: [0, []],
@@ -92,8 +99,21 @@ export class ObjectTypeFrmComponent implements OnInit {
     this.service.getById(id).subscribe({
       next: (res) => {
         console.log(res)
-        if (res) {
-          resetForm(this.formObjectType, res);
+        if (res.result === ResponseStatus.OK) {
+          resetForm(this.formObjectType, res.data);
+        } else if (res.result === ResponseStatus.FAIL) {
+          this.toastrService.show(
+            "Lỗi",
+            "Đã có lỗi xảy ra",
+            {
+              status: "danger",
+              destroyByClick: true,
+              duration: 2000,
+            });
+
+          setTimeout(() => {
+            this.close();
+          }, 2500);
         }
       },
       error: (err) => {

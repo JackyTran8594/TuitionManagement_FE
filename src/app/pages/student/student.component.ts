@@ -19,17 +19,15 @@ export class StudentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentPage = 1;
-    this.pageSize = 10;
-    this.txtSearch = "";
     this.searchData();
   }
 
-  currentPage: number;
-  pageSize: number;
-  txtSearch: string;
+  currentPage: number = 1;
+  pageSize: number = 10;
+  txtSearch: string = '';
   // page from server
-  size = 0;
+  size = 0
+  totalPages = 0;
   totalElements = 0;
   //
   listData: Student[] = []
@@ -40,6 +38,8 @@ export class StudentComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.listData = res.content;
+        this.totalElements = res.totalElements;
+        this.totalPages = res.totalPages;
       },
       error: (err) => {
         console.log(err);

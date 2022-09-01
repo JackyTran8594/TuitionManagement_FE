@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
+import { ResponseStatus } from '../../../@core/constant/responseStatusEnum';
 import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { StatusEnum } from '../../../common/enum/statusEnum';
 import { resetForm } from '../../../utils/utils';
@@ -29,8 +30,8 @@ export class StudentFrmComponent implements OnInit {
     return this.formStudent.get("id");
   }
 
-  get studentId() {
-    return this.formStudent.get("studentId");
+  get registrationId() {
+    return this.formStudent.get("registrationId");
   }
 
   get courseId() {
@@ -108,8 +109,8 @@ export class StudentFrmComponent implements OnInit {
 
   ngOnInit(): void {
     this.formBuilder();
-    if(this.student_id && this.student_id > 0) {
-        this.getById(this.student_id);
+    if (this.student_id && this.student_id > 0) {
+      this.getById(this.student_id);
     }
   }
 
@@ -139,11 +140,24 @@ export class StudentFrmComponent implements OnInit {
 
 
   getById(id) {
-    this.service.getById(id).pipe(take(1)).subscribe({
+    this.service.getById(id).subscribe({
       next: (res) => {
         console.log(res)
-        if (res.result === StatusEnum.OK) {
+        if (res.result === ResponseStatus.OK) {
           resetForm(this.formStudent, res.data);
+        } else if (res.result === ResponseStatus.FAIL) {
+          this.toastrService.show(
+            "Lỗi",
+            "Đã có lỗi xảy ra",
+            {
+              status: "danger",
+              destroyByClick: true,
+              duration: 2000,
+            });
+
+          setTimeout(() => {
+            this.close();
+          }, 2500);
         }
       },
       error: (err) => {
@@ -158,7 +172,7 @@ export class StudentFrmComponent implements OnInit {
   }
 
 
-  public formValueToDto() {
+  public buildObject() {
     let item = {} as Student;
     item.id = this.id.value;
     item.citizenId = this.citizenId.value;
@@ -172,7 +186,7 @@ export class StudentFrmComponent implements OnInit {
     item.lastModifiedBy = this.lastModifiedBy.value;
     item.lastModifiedDate = this.lastModifiedDate.value;
     item.note = this.note.value;
-    item.studentId = this.studentId.value;
+    item.registrationId = this.registrationId.value;
     item.tempName = this.tempName.value;
     item.trainClassId = this.trainClassId.value;
     item.tuitionId = this.tuitionId.value;
@@ -181,33 +195,33 @@ export class StudentFrmComponent implements OnInit {
 
   save() {
 
-    let item = this.formValueToDto();
+    let item = this.buildObject();
     const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(item) : this.service.update(item);
     result$
-    .pipe(take(1))
-    .subscribe(
-      {
-        next: (res) => {
-          console.log(res);
-          if (res.result === StatusEnum.OK) {
-            this.toastrService.show(
-              "Thành công",
-              "Thêm thiết bị thành công",
-              {
-                status: "success",
-                destroyByClick: true,
-                duration: 2000,
-              });
+      .pipe(take(1))
+      .subscribe(
+        {
+          next: (res) => {
+            console.log(res);
+            if (res.result === StatusEnum.OK) {
+              this.toastrService.show(
+                "Thành công",
+                "Thêm thiết bị thành công",
+                {
+                  status: "success",
+                  destroyByClick: true,
+                  duration: 2000,
+                });
 
-            setTimeout(() => {
-              this.dialogRef.close(res);
-            }, 2000);
+              setTimeout(() => {
+                this.dialogRef.close(res);
+              }, 2000);
+            }
+          },
+          error: (err) => {
+            console.log(err);
           }
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
+        })
 
   }
 

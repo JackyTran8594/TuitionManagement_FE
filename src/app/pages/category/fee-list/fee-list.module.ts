@@ -11,6 +11,7 @@ import { FeeListComponent } from './fee-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { ComponentModule } from '../../../@component/component.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -44,7 +45,8 @@ const SERVICES = [{ provide: FeeListData, useClass: FeeListService }]
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-    ComponentModule
+    ComponentModule,
+    NgxPaginationModule
 
   ]
 })

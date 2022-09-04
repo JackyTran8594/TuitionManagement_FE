@@ -20,7 +20,6 @@ export class TuitionFrmComponent implements OnInit {
     id: 0,
     studentId: '',
     money: 0,
-    slop: 0,
     timeStamp: new Date(),
     note: '',
     isChecked: false
@@ -36,9 +35,6 @@ export class TuitionFrmComponent implements OnInit {
     return this.formTuition.get("header");
   }
 
-  get description() {
-    return this.formTuition.get("description");
-  }
 
   get money() {
     return this.formTuition.get("money");

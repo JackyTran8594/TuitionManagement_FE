@@ -29,10 +29,7 @@ const routes: Routes = [{
       path: 'student',
       loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
     },
-    {
-      path: 'fee',
-      loadChildren: () => import('./fee/fee.module').then(m => m.FeeModule)
-    },
+    
     {
       path: 'category/fee-list',
       loadChildren: () => import('./category/fee-list/fee-list.module').then(m => m.FeeListModule)

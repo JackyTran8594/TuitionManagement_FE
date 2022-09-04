@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(catchError((error: HttpErrorResponse) => {
       const helper = new JwtHelperService();
       let token = this.authService.tokenValue;
+      // console.log(token);
       const isExpired = helper.isTokenExpired(token);
       if (isExpired) {
         if (error.status === 401) {

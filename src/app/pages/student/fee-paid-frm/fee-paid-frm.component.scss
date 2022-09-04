@@ -1,14 +1,12 @@
-
-
 .modal-custom  {
-    min-width: 40rem !important;
+    min-width: 65rem !important;
    
 }
 
 .modal-title-custom {
     position: relative;
     top:10px;
-    left: 43%;
+    left: 0%;
     text-transform: uppercase;
 }
 
@@ -32,3 +30,6 @@
     border: 1px solid red;
 }
 
+::ng-deep nb-card-footer .buttons-row .btn-custom {
+    margin-right: 8px;
+}

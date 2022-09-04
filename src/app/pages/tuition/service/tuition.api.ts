@@ -2,6 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../../shared/http.service';
+import { ResponseData } from '../../../shared/responseData';
 import { TableData } from '../../../shared/table-data';
 import { Tuition } from './tuition';
 
@@ -21,25 +22,24 @@ export class TuitionApi {
     return this.http.get(this.apiController, { params });
   }
 
-  getById(id: number): Observable<Tuition> {
+  getById(id: number): Observable<ResponseData<Tuition>> {
     return this.http.get(`${this.apiController}/${id}`);
   }
 
-  create(Tuition: Tuition): Observable<Tuition> {
+  create(Tuition: Tuition): Observable<ResponseData<Tuition>> {
     return this.http.post(this.apiController, Tuition);
   }
 
-  update(Tuition: Tuition): Observable<Tuition> {
+  update(Tuition: Tuition): Observable<ResponseData<Tuition>> {
     return this.http.put(`${this.apiController}/${Tuition.id}`, Tuition);
   }
 
-  delete(id: number): Observable<boolean> {
+  delete(id: number): Observable<ResponseData<Boolean>> {
     return this.http.delete(`${this.apiController}/${id}`);
   }
 
-  deleteList(id: number[]): Observable<boolean> {
-    const params = new HttpParams().set('id', id.toString());
-    return this.http.delete(`${this.apiController}`, { params })
+  deleteList(listId: number[]): Observable<ResponseData<Boolean>> {
+    return this.http.post(`${this.apiController}/deleteAll`, listId)
   }
 
 }

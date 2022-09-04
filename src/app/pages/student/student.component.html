@@ -22,7 +22,7 @@
             <div class="col-6 col-md-6">
                 <div class="float-right">
                     <div class="input-group input-group-md">
-                         <span class="input-group-btn ml-2">
+                        <span class="input-group-btn ml-2">
                             <button nbButton status="info" (click)="onAttach()">
                                 <nb-icon class="action-icon" icon="attach-2-outline"></nb-icon>
                                 Import XML
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        
+
     </nb-card-header>
 
     <nb-card-body>
@@ -60,7 +60,7 @@
                         <th scope="col" class="text-center table-col-2">Mã khóa học</th>
                         <th scope="col" class="text-center table-col-2">CMT/CCCD</th>
                         <th scope="col" class="text-center table-col-3">Họ và tên</th>
-                        <th scope="col" class="text-center table-col-0">Mã lớp học</th>
+                        <th scope="col" class="text-center table-col-0">Mã hạng đào tạo</th>
                         <th scope="col" class="text-center col col-lg-2 table-col-4">
                             Thao tác
                         </th>
@@ -98,6 +98,10 @@
                         <td class="table-col-3">{{ item.trainClassId }}</td>
                         <td class="text-center col col-lg-2 table-col-4">
                             <div class="buttons-row">
+
+                                <button class="btn-custom" nbButton matRipple shape="round" (click)="onFeePaid(item)">
+                                    <nb-icon class="action-icon" icon="credit-card-outline"></nb-icon>
+                                </button>
                                 <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">
                                     <nb-icon class="action-icon" icon="eye-outline"></nb-icon>
                                 </button>
@@ -131,8 +135,8 @@
                             <nb-option [value]="40">40</nb-option>
                             <nb-option [value]="50">50</nb-option>
                         </nb-select>
-                        <pagination-controls maxSize="5"  previousLabel="Trước"
-                        nextLabel="Tiếp" responsive="true" (pageChange)="pageChanged($event)">
+                        <pagination-controls maxSize="5" previousLabel="Trước" nextLabel="Tiếp" responsive="true"
+                            (pageChange)="pageChanged($event)">
                         </pagination-controls>
                     </div>
                 </div>

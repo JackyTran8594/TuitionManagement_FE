@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Tuition, TuitionData } from './tuition';
 import { TuitionApi } from './tuition.api';
 import { TableData } from '../../../shared/table-data';
+import { ResponseData } from '../../../shared/responseData';
 
 @Injectable()
 export class TuitionService implements TuitionData {
@@ -13,23 +14,23 @@ export class TuitionService implements TuitionData {
     return this.api.paging(pageNumber, pageSize, txtSearch);
   }
 
-  getById(id: number): Observable<Tuition> {
+  getById(id: number): Observable<ResponseData<Tuition>> {
     return this.api.getById(id);
   }
 
-  create(fee: Tuition): Observable<Tuition> {
+  create(fee: Tuition): Observable<ResponseData<Tuition>> {
     return this.api.create(fee);
   }
 
-  update(fee: Tuition): Observable<Tuition> {
+  update(fee: Tuition): Observable<ResponseData<Tuition>> {
     return this.api.update(fee);
   }
 
-  delete(id: number): Observable<boolean> {
+  delete(id: number): Observable<ResponseData<Boolean>> {
     return this.api.delete(id);
   }
 
-  deleteList(listId: number[]): Observable<boolean> {
+  deleteList(listId: number[]): Observable<ResponseData<Boolean>> {
     return this.api.deleteList(listId);
   }
 }

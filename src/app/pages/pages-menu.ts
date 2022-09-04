@@ -12,16 +12,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     link: '/pages/student',
   },
-  {
-    title: 'Quản lý thu phí',
-    icon: 'credit-card-outline',
-    link: '/pages/tuition',
-  },
-  {
-    title: 'Quản lý lệ phí',
-    icon: 'credit-card-outline',
-    link: '/pages/fee',
-  },
+  // {
+  //   title: 'Quản lý thu phí',
+  //   icon: 'credit-card-outline',
+  //   link: '/pages/tuition',
+  // },
+  // {
+  //   title: 'Quản lý lệ phí',
+  //   icon: 'credit-card-outline',
+  //   link: '/pages/fee',
+  // },
   {
     title: 'Quản trị hệ thống',
     icon: 'settings-outline',

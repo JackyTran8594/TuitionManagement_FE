@@ -39,31 +39,7 @@
                 </div>
 
             </div>
-
-            <!-- row 2 -->
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <nb-form-field>
-                        <div class="form-group row">
-                            <label for="description" class="label col-sm-2 col-form-label">Mô tả:
-                                &nbsp;<span [hidden]="mode == 'view'" style="color: red">*</span></label>
-                            <div class="col-sm-10">
-                                <textarea type="text" id="description" class="form-control" nbInput fullWidth rows="4"
-                                    formControlName="description" required [ngxReadOnly]="mode == 'view'"
-                                    placeholder="Mô tả"></textarea>
-                                <ngx-validation-message label="Mô tả"
-                                    [showRequired]="description?.errors?.required && description.touched">
-                                </ngx-validation-message>
-                            </div>
-
-                        </div>
-                    </nb-form-field>
-
-
-
-                </div>
-
-            </div>
+       
 
 
             <!-- row 3 -->

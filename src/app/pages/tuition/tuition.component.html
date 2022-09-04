@@ -2,7 +2,7 @@
     <nb-card-header style="background-color: white">
         <div class="row">
             <div class="col-12 col-md-8 mb-2">
-                <h6>Danh sách lệ phí</h6>
+                <h6>Danh sách học phí</h6>
             </div>
         </div>
         <div class="row">
@@ -52,8 +52,6 @@
                         <th scope="col" class="text-center table-col-1">Header</th>
                         <th scope="col" class="text-center table-col-2">Mô tả</th>
                         <th scope="col" class="text-center table-col-2">Học phí</th>
-                        <th scope="col" class="text-center table-col-3">Hệ số a (Slop)</th>
-                        <th scope="col" class="text-center table-col-0">Hệ số b (Shift)</th>
                         <th scope="col" class="text-center col col-lg-2 table-col-4">
                             Thao tác
                         </th>
@@ -84,10 +82,6 @@
                         </th>
                         <td class="text-center table-col-1">{{ item.studentId }}</td>
                         <td class="table-col-3">{{ item.courseId }}</td>
-                        <td class="text-center table-col-3">{{ item.citizenId }}</td>
-                        <td class="text-center table-col-0">
-                            {{item.fullName}}
-                        </td>
                         <td class="table-col-3">{{ item.trainClassId }}</td>
                         <td class="text-center col col-lg-2 table-col-4">
                             <div class="buttons-row">

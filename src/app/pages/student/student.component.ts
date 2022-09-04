@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
 import { FormModeEnum } from '../../common/enum/formModeEnum';
 import { DeleteComponent } from '../../shared/delete/delete.component';
+import { FeePaidFrmComponent } from './fee-paid-frm/fee-paid-frm.component';
 import { ImportXmlComponent } from './import-xml/import-xml.component';
 import { StudentData, Student } from './service/student';
 import { StudentFrmComponent } from './student-frm/student-frm.component';
@@ -77,6 +78,21 @@ export class StudentComponent implements OnInit {
       },
       hasBackdrop: true,
       closeOnBackdropClick: false
+    })
+  }
+
+  onFeePaid(item) {
+    this.dialogService.open(FeePaidFrmComponent, {
+      context: {
+        student: item,
+      },
+      hasBackdrop: true,
+      closeOnBackdropClick: false
+    }).onClose.subscribe(res => {
+      console.log(res);
+      if (res) {
+        this.searchData()
+      }
     })
   }
 

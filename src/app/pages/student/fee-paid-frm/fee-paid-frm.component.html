@@ -1,0 +1,139 @@
+<nb-card class="modal-custom"  [nbSpinner]="loadingSpinner" nbSpinnerStatus="danger" nbSpinnerSize="large">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h6 class="modal-title-custom">
+                    <b>{{ title }}</b>
+                </h6>
+            </div>
+            <div class="col-md-3">
+                <nb-action matRipple icon="close-outline" class="modal-close-custom" (click)="close()"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-tabset fullWidth>
+            <nb-tab tabTitle="Thu phí">
+                <form [formGroup]="formTuition" class="form-horizontal">
+                    <!-- row 3 -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <nb-form-field>
+                                <div class="form-group row">
+                                    <label for="money" class="label col-sm-2 col-form-label">Phí <span
+                                            [hidden]="mode == 'view'" style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="number" id="money" class="form-control" nbInput fullWidth
+                                            formControlName="money" required [ngxReadOnly]="mode == 'view'"
+                                            placeholder="Học phí" />
+                                        <ngx-validation-message label="Học phí"
+                                            [showRequired]="money?.errors?.required && money.touched">
+                                        </ngx-validation-message>
+                                    </div>
+                                </div>
+                            </nb-form-field>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <nb-form-field>
+                                <div class="form-group row">
+                                    <label for="money" class="label col-sm-2 col-form-label">Thời điểm đóng <span
+                                            [hidden]="mode == 'view'" style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input [nbDatepicker]="dateTimepicker" id="timeStamp" class="form-control" nbInput
+                                            fullWidth formControlName="timeStamp" required
+                                            [ngxReadOnly]="mode == 'view'">
+                                        <nb-date-timepicker #dateTimepicker format="MM/dd/yyyy HH:mm:ss"></nb-date-timepicker>
+
+                                        <ngx-validation-message label="Thời điểm đóng"
+                                            [showRequired]="timeStamp?.errors?.required && timeStamp.touched">
+                                        </ngx-validation-message>
+                                    </div>
+                                </div>
+                            </nb-form-field>
+                        </div>
+                    </div>
+                </form>
+            </nb-tab>
+
+            <nb-tab tabTitle="Lịch sử thu phí">
+                <div class="table-content">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center table-col-0">STT</th>
+                                <th scope="col" class="text-center table-col-2">Học phí</th>
+                                <th scope="col" class="text-center table-col-2">Ngày nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="listData && listData.length >= 1">
+                            <tr *ngFor="
+                        let item of listData
+                          | paginate
+                            : {
+                                itemsPerPage: pageSize,
+                                currentPage: currentPage,
+                                totalItems: totalElements
+                              };
+                        let idx = index
+                      ">
+                                <th class="text-center table-col-0" scope="row">
+                                    {{ (currentPage - 1) * pageSize + (idx + 1) }}
+                                </th>
+                                <td class="table-col-3">{{ item.money | currency:'VND' }}</td>
+                                <td class="table-col-3">{{ item.timeStamp | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-table">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Tổng số bản ghi: {{ totalElements }} bản ghi</p>
+                        </div>
+                        <div class="col-md-4 offset-md-4" *ngIf="listData.length > 0">
+                            <div class="pagination">
+                                <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
+                                    <nb-option [value]="10">10</nb-option>
+                                    <nb-option [value]="20">20</nb-option>
+                                    <nb-option [value]="30">30</nb-option>
+                                    <nb-option [value]="40">40</nb-option>
+                                    <nb-option [value]="50">50</nb-option>
+                                </nb-select>
+                                <pagination-controls maxSize="5" previousLabel="Trước" nextLabel="Tiếp"
+                                    responsive="true" (pageChange)="pageChanged($event)">
+                                </pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nb-tab>
+        </nb-tabset>
+
+
+
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="text-center">
+                    <div class="buttons-row">
+                        <button nbButton status="info" class="btn-custom" (click)="save()" [hidden]="mode =='view'"
+                            [disabled]="!formTuition.valid">
+                            <nb-icon class="action-icon" icon="save-outline"></nb-icon>
+                            Lưu
+                        </button>
+                        <button nbButton status="danger" class="btn-custom" (click)="close()">
+                            <nb-icon class="action-icon" icon="close-circle-outline"></nb-icon>
+                            Hủy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

@@ -16,7 +16,6 @@ import {
 
 import { RippleService } from './utils/ripple.service';
 import { MockDataModule } from './mock/mock-data.module';
-import { FeeModule } from '../pages/fee/fee.module';
 import { StudentModule } from '../pages/student/student.module';
 import { RoleGroupModule } from '../pages/system-management/role-group/role-group.module';
 import { UserModule } from '../pages/system-management/user/user.module';
@@ -41,7 +40,6 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 export const NB_CORE_PROVIDERS = [
   ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
-  ...FeeModule.forRoot().providers,
   ...StudentModule.forRoot().providers,
   ...UserModule.forRoot().providers,
   ...RoleGroupModule.forRoot().providers,

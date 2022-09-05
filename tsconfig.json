@@ -13,6 +13,7 @@
       "node_modules/@types"
     ],
     "lib": [
+      "esnext", // --> add for error fromEntries not exits in ObjectConstructor -> Object.fromEntries(myObject)
       "es2017",
       "dom"
     ],

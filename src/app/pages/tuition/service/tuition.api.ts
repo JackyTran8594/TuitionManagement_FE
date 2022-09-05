@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../../shared/http.service';
 import { ResponseData } from '../../../shared/responseData';
+import { SearchParam } from '../../../shared/searchParam';
 import { TableData } from '../../../shared/table-data';
 import { Tuition } from './tuition';
 
@@ -13,13 +14,21 @@ export class TuitionApi {
 
   constructor(private http: HttpService) { }
 
-  paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Tuition>> {
+  paging(pageNumber: number, pageSize: number, param: Map<string, string>): Observable<TableData<Tuition>> {
+    // console.log(param);
+    // console.log(JSON.stringify(Object.fromEntries(param)));
     const params = new HttpParams()
-      .set('page', pageNumber)
-      .set('size', pageSize)
-      // .set('txtSearch', txtSearch);
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize)
+      .set('param', param.get("id"));
 
     return this.http.get(this.apiController, { params });
+  }
+
+  getAllWithId(id: number) {
+    const params = new HttpParams()
+      .set('id', `${id}`);
+    return this.http.get(this.apiController+ '/getAllWithId', { params });
   }
 
   getById(id: number): Observable<ResponseData<Tuition>> {

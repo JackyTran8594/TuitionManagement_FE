@@ -1,7 +1,7 @@
-<nb-card class="modal-custom"  [nbSpinner]="loadingSpinner" nbSpinnerStatus="danger" nbSpinnerSize="large">
+<nb-card class="modal-custom" [nbSpinner]="loadingSpinner" nbSpinnerStatus="danger" nbSpinnerSize="large">
     <nb-card-header>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-9">
                 <h6 class="modal-title-custom">
                     <b>{{ title }}</b>
                 </h6>
@@ -43,10 +43,11 @@
                                     <label for="money" class="label col-sm-2 col-form-label">Thời điểm đóng <span
                                             [hidden]="mode == 'view'" style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input [nbDatepicker]="dateTimepicker" id="timeStamp" class="form-control" nbInput
-                                            fullWidth formControlName="timeStamp" required
+                                        <input [nbDatepicker]="dateTimepicker" id="timeStamp" class="form-control"
+                                            nbInput fullWidth formControlName="timeStamp" required
                                             [ngxReadOnly]="mode == 'view'">
-                                        <nb-date-timepicker #dateTimepicker format="MM/dd/yyyy HH:mm:ss"></nb-date-timepicker>
+                                        <nb-date-timepicker #dateTimepicker format="MM/dd/yyyy HH:mm:ss">
+                                        </nb-date-timepicker>
 
                                         <ngx-validation-message label="Thời điểm đóng"
                                             [showRequired]="timeStamp?.errors?.required && timeStamp.touched">
@@ -55,6 +56,23 @@
                                 </div>
                             </nb-form-field>
                         </div>
+                    </div>
+
+                    <!-- row 3 -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <nb-form-field>
+                                <div class="form-group row">
+                                    <label for="money" class="label col-sm-2 col-form-label">Ghi chú</label>
+                                    <div class="col-sm-10">
+                                        <textarea type="number" id="money" class="form-control" nbInput fullWidth
+                                            formControlName="money" [ngxReadOnly]="mode == 'view'"
+                                            placeholder="Ghi chú"></textarea>
+                                    </div>
+                                </div>
+                            </nb-form-field>
+                        </div>
+
                     </div>
                 </form>
             </nb-tab>
@@ -69,15 +87,14 @@
                                 <th scope="col" class="text-center table-col-2">Ngày nộp</th>
                             </tr>
                         </thead>
-                        <tbody *ngIf="listData && listData.length >= 1">
+                        <tbody *ngIf="listDataTuition && listDataTuition.length < 1">
+                            <tr>
+                                <td colspan="8" class="text-center"><b>Không có dữ liệu</b></td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="listDataTuition && listDataTuition.length >= 1">
                             <tr *ngFor="
-                        let item of listData
-                          | paginate
-                            : {
-                                itemsPerPage: pageSize,
-                                currentPage: currentPage,
-                                totalItems: totalElements
-                              };
+                        let item of listDataTuition;
                         let idx = index
                       ">
                                 <th class="text-center table-col-0" scope="row">
@@ -93,9 +110,9 @@
                 <div class="footer-table">
                     <div class="row">
                         <div class="col-md-4">
-                            <p>Tổng số bản ghi: {{ totalElements }} bản ghi</p>
+                            <p>Tổng số bản ghi: {{ totalItems }} bản ghi</p>
                         </div>
-                        <div class="col-md-4 offset-md-4" *ngIf="listData.length > 0">
+                        <!-- <div class="col-md-4 offset-md-4" *ngIf="listDataTuition.length > 0">
                             <div class="pagination">
                                 <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
                                     <nb-option [value]="10">10</nb-option>
@@ -105,10 +122,10 @@
                                     <nb-option [value]="50">50</nb-option>
                                 </nb-select>
                                 <pagination-controls maxSize="5" previousLabel="Trước" nextLabel="Tiếp"
-                                    responsive="true" (pageChange)="pageChanged($event)">
+                                    responsive="true" (pageChange)="pageChanged(currentPage = $event)">
                                 </pagination-controls>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </nb-tab>

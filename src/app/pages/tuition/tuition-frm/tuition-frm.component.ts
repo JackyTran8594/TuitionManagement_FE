@@ -18,7 +18,7 @@ export class TuitionFrmComponent implements OnInit {
   @Input() title: string = "";
   item: Tuition = {
     id: 0,
-    studentId: '',
+    studentId: null,
     money: 0,
     timeStamp: new Date(),
     note: '',

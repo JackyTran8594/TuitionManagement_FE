@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService, NbDialogService } from '@nebular/theme';
 import { DeleteComponent } from '../../shared/delete/delete.component';
+import { SearchParam } from '../../shared/searchParam';
+import { buildParam } from '../../utils/utils';
 import { TuitionData, Tuition } from './service/tuition';
 import { TuitionFrmComponent } from './tuition-frm/tuition-frm.component';
 
@@ -22,6 +24,10 @@ export class TuitionComponent implements OnInit {
     this.txtSearch = "";
   }
 
+
+  searchParam: SearchParam = {
+
+  }
   currentPage: number;
   pageSize: number;
   txtSearch: string;
@@ -33,7 +39,9 @@ export class TuitionComponent implements OnInit {
 
 
   searchData() {
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe(res => {
+    // this.searchParam.id = (this.student.id) ? this.student.id : null;
+    let params = buildParam(this.searchParam);
+    this.service.paging(this.currentPage, this.pageSize, params).subscribe(res => {
       this.listData = res.content;
     })
   }

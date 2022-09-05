@@ -4,14 +4,19 @@ import { Tuition, TuitionData } from './tuition';
 import { TuitionApi } from './tuition.api';
 import { TableData } from '../../../shared/table-data';
 import { ResponseData } from '../../../shared/responseData';
+import { SearchParam } from '../../../shared/searchParam';
 
 @Injectable()
 export class TuitionService implements TuitionData {
 
   constructor(private api: TuitionApi) { }
 
-  paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Tuition>> {
-    return this.api.paging(pageNumber, pageSize, txtSearch);
+  getAllWithId(id: number): Observable<ResponseData<Tuition>> {
+    return this.api.getAllWithId(id);
+  }
+
+  paging(pageNumber: number, pageSize: number, param: Map<string, string>): Observable<TableData<Tuition>> {
+    return this.api.paging(pageNumber, pageSize, param);
   }
 
   getById(id: number): Observable<ResponseData<Tuition>> {

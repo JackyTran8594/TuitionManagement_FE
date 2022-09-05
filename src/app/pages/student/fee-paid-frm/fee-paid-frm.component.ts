@@ -1,13 +1,12 @@
-import { isNgTemplate } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResponseStatus } from '../../../@core/constant/responseStatusEnum';
-import { FormModeEnum } from '../../../common/enum/formModeEnum';
 import { StatusEnum } from '../../../common/enum/statusEnum';
-import { resetForm } from '../../../utils/utils';
+import { SearchParam } from '../../../shared/searchParam';
+import { buildParam, resetForm } from '../../../utils/utils';
 import { TuitionData, Tuition } from '../../tuition/service/tuition';
 import { TuitionFrmComponent } from '../../tuition/tuition-frm/tuition-frm.component';
 import { Student } from '../service/student';
@@ -17,7 +16,7 @@ import { Student } from '../service/student';
   templateUrl: './fee-paid-frm.component.html',
   styleUrls: ['./fee-paid-frm.component.scss']
 })
-export class FeePaidFrmComponent implements OnInit {
+export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentInit {
   formTuition!: FormGroup;
 
   @Input() title: string = "";
@@ -29,15 +28,18 @@ export class FeePaidFrmComponent implements OnInit {
 
   loadingSpinner = false;
 
-  currentPage: number = 1;
-  pageSize: number = 10;
-  txtSearch: string = '';
+  currentPage = 1;
+  pageSize = 10;
+  // txtSearch: string = '';
+  searchParam: SearchParam = {
+
+  }
   // page from server
   size = 0
   totalPages = 0;
-  totalElements = 0;
+  totalItems = 0;
   //
-  listData: Tuition[] = [];
+  listDataTuition: Tuition[] = [];
 
   public $unsubscribe: Subject<boolean> = new Subject()
 
@@ -81,8 +83,16 @@ export class FeePaidFrmComponent implements OnInit {
     private dialogRef: NbDialogRef<TuitionFrmComponent>,
     private service: TuitionData,
     private toastrService: NbToastrService) {
-    
-     }
+    this.formBuilder();
+  }
+
+  ngAfterContentInit(): void {
+    //  this.searchData();
+  }
+
+  ngAfterViewInit(): void {
+    // this.searchData();
+  }
 
   ngOnDestroy(): void {
     this.unsubcribe$.next();
@@ -92,21 +102,21 @@ export class FeePaidFrmComponent implements OnInit {
   ngOnInit(): void {
     this.title = "Thu phí học viên: " + this.student.registrationId + " - " + this.student.fullName;
 
-    this.formBuilder();
+
     // if (this.studentId) {
     //   this.getById(this.studentId);
     // }
-    this.searchData();
+    // this.searchData();
+    this.getAllWithId();
   }
 
-  searchData() {
-    this.txtSearch = (this.student.registrationId) ? this.student.registrationId : '';
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe({
+  getAllWithId() {
+    console.log(this.student.id);
+    this.service.getAllWithId(this.student.id).subscribe({
       next: (res) => {
         console.log(res);
-        this.listData = res.content;
-        this.totalElements = res.totalElements;
-        this.totalPages = res.totalPages;
+        this.listDataTuition = res.listData;
+        this.totalItems = (res.listData.length) ? res.listData.length : 0
       },
       error: (err) => {
         console.log(err);
@@ -114,18 +124,35 @@ export class FeePaidFrmComponent implements OnInit {
     });
   }
 
-  changePageSize(event) {
-    console.log(event);
-    if (event != this.size) {
-      this.currentPage = 1;
-    }
-    this.searchData();
-  }
+  // searchData() {
+  //   this.searchParam.id = (this.student.id) ? this.student.id : null;
+  //   let params = buildParam(this.searchParam);
+  //   this.service.paging(this.currentPage, this.pageSize, params).subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //       this.listDataTuition = res.content;
+  //       this.totalItems = res.totalElements;
+  //       this.totalPages = res.totalPages;
+  //       this.size = res.size
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 
-  pageChanged(page: any) {
-    this.currentPage = page;
-    this.searchData();
-  }
+  // changePageSize(event) {
+  //   console.log(event);
+  //   if (event != this.size) {
+  //     this.currentPage = 1;
+  //   }
+  //   this.searchData();
+  // }
+
+  // pageChanged(page: any) {
+  //   this.currentPage = page;
+  //   this.searchData();
+  // }
 
   formBuilder() {
     this.formTuition = this.fb.group({
@@ -180,7 +207,7 @@ export class FeePaidFrmComponent implements OnInit {
   public buildObject() {
     let item = {} as Tuition;
     item.id = this.id.value;
-    item.studentId = (this.student.registrationId) ? this.student.registrationId : '';
+    item.studentId = (this.student.id) ? this.student.id : null;
     item.money = this.money.value;
     item.timeStamp = this.timeStamp.value;
     return item;
@@ -189,7 +216,7 @@ export class FeePaidFrmComponent implements OnInit {
   save() {
     this.loadingSpinner = true;
     let item = this.buildObject();
-    const result$ = (this.mode === FormModeEnum.CREATE) ? this.service.create(item) : this.service.update(item);
+    const result$ = this.service.create(item);
     result$
       .pipe(take(1))
       .subscribe(
@@ -199,7 +226,7 @@ export class FeePaidFrmComponent implements OnInit {
             if (res.result === StatusEnum.OK) {
               this.toastrService.show(
                 "Thành công",
-                "Thêm thiết bị thành công",
+                "Thu phí thành công",
                 {
                   status: "success",
                   destroyByClick: true,
@@ -216,7 +243,6 @@ export class FeePaidFrmComponent implements OnInit {
             console.log(err);
           }
         })
-
   }
 
 }

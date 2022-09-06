@@ -14,7 +14,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ImportXmlComponent } from './import-xml/import-xml.component';
 import { FeePaidFrmComponent } from './fee-paid-frm/fee-paid-frm.component';
-import { NbDateFnsDateModule } from '@nebular/date-fns';
 
 const NB_MODULES = [
   NbActionsModule,

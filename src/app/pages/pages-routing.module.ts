@@ -29,7 +29,7 @@ const routes: Routes = [{
       path: 'student',
       loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
     },
-    
+
     {
       path: 'category/fee-list',
       loadChildren: () => import('./category/fee-list/fee-list.module').then(m => m.FeeListModule)
@@ -41,6 +41,10 @@ const routes: Routes = [{
     {
       path: 'category/train-class',
       loadChildren: () => import('./category/train-class/train-class.module').then(m => m.TrainClassModule)
+    },
+    {
+      path: 'report',
+      loadChildren: () => import('./report/report.module').then(m => m.ReportModule)
     },
     {
       path: '',

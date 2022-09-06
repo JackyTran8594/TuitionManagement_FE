@@ -61,6 +61,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
 
   },
+  {
+    title: 'Báo cáo, thống kê',
+    icon: 'file-text-outline',
+    link: '/pages/report',
+  },
 
   // {
   //   title: 'Auth',

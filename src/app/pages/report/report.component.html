@@ -1,1 +1,54 @@
-<p>report works!</p>
+<nb-card>
+    <nb-card-header style="background-color: white">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+                <h6>Thống kê báo cáo</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+                <div class="input-group input-group-md">
+                    <input type="text" name="searchContact" class="form-control" id="searchContact"
+                        placeholder="Nhập thông tin tìm kiếm...." [(ngModel)]="txtSearch"
+                        (keyup.enter)="searchData()" />
+                    <span class="input-group-btn ml-2">
+                        <button nbButton class="btn btn-primary" (click)="searchData()">
+                            <nb-icon class="action-icon" icon="search-outline"></nb-icon>
+                            Tìm kiếm
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 col-md-6">
+                <div class="float-right">
+                    <div class="input-group input-group-md">
+                        <!-- <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="onAttach()">
+                                <nb-icon class="action-icon" icon="attach-2-outline"></nb-icon>
+                                Import XML
+                            </button>
+                        </span>
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="onCreate()">
+                                <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
+                                Thêm mới
+                            </button>
+                        </span>
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="danger" (click)="onDeleteAll($event)">
+                                <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
+                                Xóa tất cả
+                            </button>
+                        </span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nb-card-header>
+
+    <nb-card-body>
+        
+       
+    </nb-card-body>
+</nb-card>

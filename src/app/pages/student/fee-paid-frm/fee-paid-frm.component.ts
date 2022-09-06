@@ -71,6 +71,10 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
     return this.formTuition.get("feeList");
   }
 
+  get fee() {
+    return this.formTuition.get('fee');
+  }
+
   // get createdBy() {
   //   return this.formTuition.get("createdBy");
   // }
@@ -175,6 +179,7 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
       trainClassId: ['', []],
       objectListId: ['', []],
       feeList: ['', []],
+      fee: ['', []],
       // createdBy: ['', []],
       // createdDate: ['', []],
       // lastModifiedBy: ['', []],

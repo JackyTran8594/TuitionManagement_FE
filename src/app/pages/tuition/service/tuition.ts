@@ -11,6 +11,9 @@ export interface Tuition extends BaseObject {
     timeStamp: Date;
     note: string;
     isChecked: boolean
+    feeList?: number[];
+    objectListId?: number;
+    trainClassId?: number;
 }
 
 export abstract class TuitionData {

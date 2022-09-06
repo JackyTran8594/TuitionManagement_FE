@@ -59,6 +59,18 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
     return this.formTuition.get("isChecked");
   }
 
+  get trainClassId() {
+    return this.formTuition.get("trainClassId");
+  }
+
+  get objectListId() {
+    return this.formTuition.get("objectListId");
+  }
+
+  get feeList() {
+    return this.formTuition.get("feeList");
+  }
+
   // get createdBy() {
   //   return this.formTuition.get("createdBy");
   // }
@@ -160,6 +172,9 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
       studentId: ['', []],
       money: ['', []],
       timeStamp: [new Date(), []],
+      trainClassId: ['', []],
+      objectListId: ['', []],
+      feeList: ['', []],
       // createdBy: ['', []],
       // createdDate: ['', []],
       // lastModifiedBy: ['', []],

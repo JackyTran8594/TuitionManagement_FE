@@ -40,6 +40,7 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
+import { CurrencyDirective } from '../shared/directives/currency.directive';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -71,10 +72,11 @@ const PIPES = [
   NumberWithCommasPipe,
 ];
 
+
 @NgModule({
   imports: [CommonModule, MatRippleModule, ...NB_MODULES],
   exports: [CommonModule, MatRippleModule, ...PIPES, ...COMPONENTS],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

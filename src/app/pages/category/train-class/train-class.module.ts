@@ -13,6 +13,7 @@ import { ComponentModule } from '../../../@component/component.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+
 const NB_MODULES = [
   NbActionsModule,
   NbButtonModule,
@@ -46,7 +47,8 @@ const SERVICES = [{ provide: TrainClassData, useClass: TrainClassService }]
     FormsModule,
     ComponentModule,
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    
   ]
 })
 export class TrainClassModule {

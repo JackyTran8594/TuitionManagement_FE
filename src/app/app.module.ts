@@ -19,6 +19,7 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import { AuthModule } from './auth/auth.module';
+import { NgxCurrencyInputModule } from 'ngx-currency-input';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { AuthModule } from './auth/auth.module';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     AuthModule.forRoot(),
+    NgxCurrencyInputModule
   ],
   bootstrap: [AppComponent],
 })

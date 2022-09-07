@@ -71,7 +71,7 @@ export class FeeListFrmComponent implements OnInit {
       id: [null, []],
       header: ['', []],
       description: ['', []],
-      money: [0, []],
+      money: ['', []],
       isChecked: [false, []],
     })
   }
@@ -81,7 +81,8 @@ export class FeeListFrmComponent implements OnInit {
     item.id = this.id.value;
     item.header = this.header.value;
     item.description = this.description.value;
-    item.money = this.money.value;
+    console.log(this.money.value.replace(/[,]/g,''));
+    item.money = Number(this.money.value.replace(/[,]/g,''));
     return item;
   }
 

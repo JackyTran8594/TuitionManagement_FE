@@ -10,7 +10,7 @@ import { HttpService } from './http.service';
 import { AuthService } from '../auth/service/auth.service';
 import { ComponentModule } from '../@component/component.module';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ShareService } from './share.service';
+import { ExtensionService } from './extension.service';
 import { CurrencyDirective } from './directives/currency.directive';
 
 const NB_MODULES = [
@@ -22,7 +22,7 @@ const NB_MODULES = [
   NbDialogModule.forChild()
 ]
 
-const SERVICES = [AuthService, HttpService, ShareService]
+const SERVICES = [AuthService, HttpService, ExtensionService]
 
 const DIRECTIVES = [ReadOnlyDirective, CurrencyDirective]
 const COMPONENTS = [DeleteComponent]

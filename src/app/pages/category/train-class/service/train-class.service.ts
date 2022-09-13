@@ -10,6 +10,10 @@ export class TrainClassService implements TrainClassData {
 
   constructor(private api: TrainClassApi) { }
 
+  getAll(): Observable<ResponseData<TrainClass>> {
+    return this.api.getAll();
+  }
+
   paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<TrainClass>> {
     return this.api.paging(pageNumber, pageSize, txtSearch);
   }

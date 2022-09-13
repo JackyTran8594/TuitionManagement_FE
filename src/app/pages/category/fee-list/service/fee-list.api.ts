@@ -22,6 +22,10 @@ export class FeeListApi {
     return this.http.get(this.apiController, { params });
   }
 
+  getAll() : Observable<ResponseData<FeeList>> {
+    return this.http.get(`${this.apiController}/getAll`)
+  }
+
   getById(id: number): Observable<ResponseData<FeeList>> {
     return this.http.get(`${this.apiController}/${id}`);
   }

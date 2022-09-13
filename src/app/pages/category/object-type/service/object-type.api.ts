@@ -26,6 +26,10 @@ export class ObjectTypeApi {
     return this.http.get(`${this.apiController}/${id}`);
   }
 
+  getAll() : Observable<ResponseData<ObjectType>> {
+    return this.http.get(`${this.apiController}/getAll`)
+  }
+
   create(ObjectList: ObjectType): Observable<ResponseData<ObjectType>> {
     return this.http.post(this.apiController, ObjectList);
   }

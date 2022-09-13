@@ -20,4 +20,5 @@ export abstract class ObjectTypeData {
     abstract update(ObjectList: ObjectType): Observable<ResponseData<ObjectType>>;
     abstract delete(id: number): Observable<ResponseData<Boolean>>;
     abstract deleteList(listId: number[]): Observable<ResponseData<Boolean>>;
+    abstract getAll() : Observable<ResponseData<ObjectType>>;
 }

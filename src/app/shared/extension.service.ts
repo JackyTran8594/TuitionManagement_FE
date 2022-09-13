@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 
 @Injectable()
-export class ShareService {
+export class ExtensionService {
 
   constructor(private http: HttpService) { }
 
@@ -17,5 +17,7 @@ export class ShareService {
     });
     return req;
   }
+
+  
 
 }

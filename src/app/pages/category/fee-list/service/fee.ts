@@ -17,4 +17,5 @@ export abstract class FeeListData {
     abstract update(Fee: FeeList): Observable<ResponseData<FeeList>>;
     abstract delete(id: number): Observable<ResponseData<Boolean>>;
     abstract deleteList(listId: number[]): Observable<ResponseData<Boolean>>;
+    abstract getAll() : Observable<ResponseData<FeeList>>;
 }

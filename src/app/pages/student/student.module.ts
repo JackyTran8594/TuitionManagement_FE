@@ -14,6 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ImportXmlComponent } from './import-xml/import-xml.component';
 import { FeePaidFrmComponent } from './fee-paid-frm/fee-paid-frm.component';
+import { CommonService } from '../../common/service/common.service';
 
 const NB_MODULES = [
   NbActionsModule,
@@ -32,7 +33,7 @@ const NB_MODULES = [
   NbDialogModule.forChild(),
   NbTabsetModule,
   NbSpinnerModule,
-  
+
 ]
 
 const API = [StudentApi]
@@ -57,7 +58,7 @@ const SERVICES = [{ provide: StudentData, useClass: StudentService }]
     NgxPaginationModule,
   ],
   providers: [
-
+    CommonService
   ]
 })
 export class StudentModule {

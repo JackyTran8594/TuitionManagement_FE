@@ -10,6 +10,10 @@ export class ObjectTypeService implements ObjectTypeData {
 
   constructor(private api: ObjectTypeApi) { }
 
+  getAll(): Observable<ResponseData<ObjectType>> {
+    return this.api.getAll();
+  }
+
   paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<ObjectType>> {
     return this.api.paging(pageNumber, pageSize, txtSearch);
   }

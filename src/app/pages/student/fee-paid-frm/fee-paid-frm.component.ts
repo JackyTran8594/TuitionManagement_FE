@@ -5,8 +5,12 @@ import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResponseStatus } from '../../../@core/constant/responseStatusEnum';
 import { StatusEnum } from '../../../common/enum/statusEnum';
+import { CommonService } from '../../../common/service/common.service';
 import { SearchParam } from '../../../shared/searchParam';
-import { buildParam, resetForm } from '../../../utils/utils';
+import { resetForm } from '../../../utils/utils';
+import { FeeList } from '../../category/fee-list/service/fee';
+import { ObjectType } from '../../category/object-type/service/object-type';
+import { TrainClass } from '../../category/train-class/service/train-class';
 import { TuitionData, Tuition } from '../../tuition/service/tuition';
 import { TuitionFrmComponent } from '../../tuition/tuition-frm/tuition-frm.component';
 import { Student } from '../service/student';
@@ -40,6 +44,9 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
   totalItems = 0;
   //
   listDataTuition: Tuition[] = [];
+  listFeeList: FeeList[] = [];
+  listObjectType: ObjectType[] = [];
+  listTrainClass: TrainClass[] = [];
 
   public $unsubscribe: Subject<boolean> = new Subject()
 
@@ -75,39 +82,33 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
     return this.formTuition.get('fee');
   }
 
-  // get createdBy() {
-  //   return this.formTuition.get("createdBy");
-  // }
+  get teacher() {
+    return this.formTuition.get('teacher');
+  }
 
-  // get createdDate() {
-  //   return this.formTuition.get("createdDate");
-  // }
-
-  // get lastModifiedBy() {
-  //   return this.formTuition.get("lastModifiedBy");
-  // }
-
-  // get lastModifiedDate() {
-  //   return this.formTuition.get("lastModifiedDate");
-  // }
-
-  // listStatus: Status[] = []
 
   protected readonly unsubcribe$ = new Subject<void>();
 
   constructor(private fb: FormBuilder,
     private dialogRef: NbDialogRef<TuitionFrmComponent>,
     private service: TuitionData,
+    private commonService: CommonService,
     private toastrService: NbToastrService) {
+    this.listFeeList = this.commonService.getFeeList();
+    this.listObjectType = this.commonService.getObjectType();
+    this.listTrainClass = this.commonService.getTrainClass();
+    console.log(this.listFeeList);
     this.formBuilder();
   }
 
+
+
   ngAfterContentInit(): void {
-    //  this.searchData();
+
   }
 
   ngAfterViewInit(): void {
-    // this.searchData();
+
   }
 
   ngOnDestroy(): void {
@@ -117,13 +118,8 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
 
   ngOnInit(): void {
     this.title = "Thu phí học viên: " + this.student.registrationId + " - " + this.student.fullName;
-
-
-    // if (this.studentId) {
-    //   this.getById(this.studentId);
-    // }
-    // this.searchData();
     this.getAllWithId();
+
   }
 
   getAllWithId() {
@@ -140,51 +136,23 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
     });
   }
 
-  // searchData() {
-  //   this.searchParam.id = (this.student.id) ? this.student.id : null;
-  //   let params = buildParam(this.searchParam);
-  //   this.service.paging(this.currentPage, this.pageSize, params).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.listDataTuition = res.content;
-  //       this.totalItems = res.totalElements;
-  //       this.totalPages = res.totalPages;
-  //       this.size = res.size
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
-
-  // changePageSize(event) {
-  //   console.log(event);
-  //   if (event != this.size) {
-  //     this.currentPage = 1;
-  //   }
-  //   this.searchData();
-  // }
-
-  // pageChanged(page: any) {
-  //   this.currentPage = page;
-  //   this.searchData();
-  // }
 
   formBuilder() {
     this.formTuition = this.fb.group({
       id: [null, []],
-      studentId: ['', []],
-      money: ['', []],
+      studentId: [null, []],
+      money: [null, []],
       timeStamp: [new Date(), []],
-      trainClassId: ['', []],
-      objectListId: ['', []],
-      feeList: ['', []],
-      fee: ['', []],
+      trainClassId: [null, []],
+      objectListId: [null, []],
+      feeList: [null, []],
+      fee: [null, []],
+      teacher: [null, []],
       // createdBy: ['', []],
       // createdDate: ['', []],
       // lastModifiedBy: ['', []],
       // lastModifiedDate: ['', []],
-      status: ['', []],
+      status: [null, []],
       isChecked: [false, []],
     })
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
-import { ShareService } from '../../../shared/share.service';
+import { ExtensionService } from '../../../shared/extension.service';
 
 @Component({
   selector: 'ngx-import-xml',
@@ -15,7 +15,7 @@ export class ImportXmlComponent implements OnInit {
 
   constructor(
     private dialogRef: NbDialogRef<ImportXmlComponent>,
-    private shareService: ShareService,
+    private extensionService: ExtensionService,
     private toastrService: NbToastrService,
     private fb: FormBuilder
   ) { }
@@ -31,7 +31,7 @@ export class ImportXmlComponent implements OnInit {
 
   save() {
     if(this.file) {
-      this.shareService.uploadFile(this.file, 'student/importFileXml').subscribe({
+      this.extensionService.uploadFile(this.file, 'student/importFileXml').subscribe({
         next: (res) => {
           console.log(res);
         },

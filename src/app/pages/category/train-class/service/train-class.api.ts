@@ -26,6 +26,11 @@ export class TrainClassApi {
     return this.http.get(`${this.apiController}/${id}`);
   }
 
+  getAll() : Observable<ResponseData<TrainClass>> {
+    return this.http.get(`${this.apiController}/getAll`)
+  }
+
+
   create(TrainClass: TrainClass): Observable<ResponseData<TrainClass>> {
     return this.http.post(this.apiController, TrainClass);
   }

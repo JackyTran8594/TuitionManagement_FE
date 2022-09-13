@@ -10,6 +10,10 @@ export class FeeListService implements FeeListData {
 
   constructor(private api: FeeListApi) { }
 
+  getAll(): Observable<ResponseData<FeeList>> {
+    return this.api.getAll();
+  }
+
   paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<FeeList>> {
     return this.api.paging(pageNumber, pageSize, txtSearch);
   }

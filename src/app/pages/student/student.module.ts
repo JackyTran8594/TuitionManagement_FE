@@ -58,7 +58,7 @@ const SERVICES = [{ provide: StudentData, useClass: StudentService }]
     NgxPaginationModule,
   ],
   providers: [
-    CommonService
+    // CommonService
   ]
 })
 export class StudentModule {

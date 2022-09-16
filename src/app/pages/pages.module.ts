@@ -7,6 +7,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { CommonService } from '../common/service/common.service';
 
 @NgModule({
   imports: [
@@ -19,15 +20,16 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
     FormsModule,
     SharedModule,
     NbDateFnsDateModule.forRoot({
-      parseOptions: {  useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
-      formatOptions: {  useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }
+      parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+      formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }
     }),
     NbTimepickerModule.forRoot()
   ],
   declarations: [
     PagesComponent,
-  ],
+  ],  
   providers: [
+    CommonService
     // {
     //   provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true,
     // },

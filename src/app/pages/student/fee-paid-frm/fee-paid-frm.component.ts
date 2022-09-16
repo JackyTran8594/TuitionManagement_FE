@@ -94,10 +94,7 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
     private service: TuitionData,
     private commonService: CommonService,
     private toastrService: NbToastrService) {
-    this.listFeeList = this.commonService.getFeeList();
-    this.listObjectType = this.commonService.getObjectType();
-    this.listTrainClass = this.commonService.getTrainClass();
-    console.log(this.listFeeList);
+
     this.formBuilder();
   }
 
@@ -108,7 +105,10 @@ export class FeePaidFrmComponent implements OnInit, AfterViewInit, AfterContentI
   }
 
   ngAfterViewInit(): void {
-
+    this.listFeeList = this.commonService.getFeeList();
+    this.listObjectType = this.commonService.getObjectType();
+    this.listTrainClass = this.commonService.getTrainClass();
+    console.log(this.listFeeList);
   }
 
   ngOnDestroy(): void {

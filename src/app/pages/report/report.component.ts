@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchParam } from '../../shared/searchParam';
+import { TrainClass, TrainClassData } from '../category/train-class/service/train-class';
 import { Student } from '../student/service/student';
 import { Report, ReportData } from './service/report';
 
@@ -10,13 +11,16 @@ import { Report, ReportData } from './service/report';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private service: ReportData) { }
+  constructor(private service: ReportData,
+    private trainClassService: TrainClassData) { }
 
   ngOnInit(): void {
     this.searchData();
   }
 
   searchParam: SearchParam = {}
+
+  trainClass: TrainClass[] = []
 
   currentPage: number = 1;
   pageSize: number = 10;
@@ -28,8 +32,19 @@ export class ReportComponent implements OnInit {
   //
   listData: Report[] = []
 
+  getDataCombo() {
+    this.trainClassService.getAll().subscribe({
+      next: (res) => {
+        this.trainClass = res.listData;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
   searchData() {
-    this.service.paging(this.currentPage, this.pageSize, this.txtSearch).subscribe({
+    this.service.paging(this.currentPage, this.pageSize, this.searchParam).subscribe({
       next: (res) => {
         console.log(res);
         this.listData = res.content;
@@ -57,7 +72,8 @@ export class ReportComponent implements OnInit {
 
 
   onRefresh() {
-
+    this.searchParam = {};
+    this.searchData();
   }
 
   exportExcel() {

@@ -14,11 +14,14 @@ export class ReportApi {
 
   constructor(private http: HttpService) { }
 
-  paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Report>> {
+  paging(pageNumber: number, pageSize: number, searchParam: SearchParam): Observable<TableData<Report>> {
     const params = new HttpParams()
       .set('pageNumber', pageNumber)
       .set('pageSize', pageSize)
-      .set('txtSearch', txtSearch);
+      .set('txtSearch', searchParam.txtSearch)
+      .set('fromDate', searchParam.fromDate)
+      .set('toDate', searchParam.toDate)
+      .set('code', searchParam.code);
 
     return this.http.get(this.apiController, { params });
   }
@@ -34,10 +37,10 @@ export class ReportApi {
 
   exportDoc(searchParam: SearchParam): Observable<Blob> {
     const params = new HttpParams()
-    .set('fromDate', searchParam.fromDate)
-    .set('toDate', searchParam.toDate)
-    .set('code', searchParam.code)
-    .set('txtSearch', searchParam.txtSearch)
+      .set('fromDate', searchParam.fromDate)
+      .set('toDate', searchParam.toDate)
+      .set('code', searchParam.code)
+      .set('txtSearch', searchParam.txtSearch)
     return this.http.post(this.apiController, params);
   }
 

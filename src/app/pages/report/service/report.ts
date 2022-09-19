@@ -31,7 +31,7 @@ export interface Report {
 }
 
 export abstract class ReportData {
-    abstract paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Report>>;
+    abstract paging(pageNumber: number, pageSize: number, searchParam: SearchParam): Observable<TableData<Report>>;
     abstract exportExcel(searchParam: SearchParam): Observable<Blob>;
     abstract exportDoc(searchParam: SearchParam): Observable<Blob>;
 }

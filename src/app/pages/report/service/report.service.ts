@@ -13,8 +13,8 @@ export class ReportService implements ReportData {
 
   constructor(private api: ReportApi) { }
 
-  paging(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<Report>> {
-     return this.api.paging(pageNumber, pageSize, txtSearch);
+  paging(pageNumber: number, pageSize: number, searchParam: SearchParam): Observable<TableData<Report>> {
+     return this.api.paging(pageNumber, pageSize, searchParam);
   }
   exportExcel(searchParam: SearchParam): Observable<Blob> {
     return this.api.exportExcel(searchParam);

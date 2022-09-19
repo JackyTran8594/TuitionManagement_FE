@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchParam } from '../../shared/searchParam';
 import { Student } from '../student/service/student';
 import { Report, ReportData } from './service/report';
 
@@ -14,6 +15,8 @@ export class ReportComponent implements OnInit {
   ngOnInit(): void {
     this.searchData();
   }
+
+  searchParam: SearchParam = {}
 
   currentPage: number = 1;
   pageSize: number = 10;
@@ -50,6 +53,35 @@ export class ReportComponent implements OnInit {
   pageChanged(page: any) {
     this.currentPage = page;
     this.searchData();
+  }
+
+
+  onRefresh() {
+
+  }
+
+  exportExcel() {
+    this.service.exportExcel(this.searchParam).subscribe({
+      next: (res) => {
+        console.log(res);
+        let dataType = res.type;
+        let binaryData = [];
+        binaryData.push(res);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+        downloadLink.setAttribute('download', "Báo cáo" + "_" + new Date().getTime() + ".xlsx")
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  onView() {
+
   }
 
 

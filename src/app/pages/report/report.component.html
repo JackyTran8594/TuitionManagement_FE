@@ -9,7 +9,7 @@
             <div class="col-12 col-md-6 mb-2">
                 <div class="input-group input-group-md">
                     <input type="text" name="searchContact" class="form-control" id="searchContact"
-                        placeholder="Nhập thông tin tìm kiếm...." [(ngModel)]="txtSearch"
+                        placeholder="Nhập thông tin tìm kiếm...." [(ngModel)]="searchParam.txtSearch"
                         (keyup.enter)="searchData()" />
                     <span class="input-group-btn ml-2">
                         <button nbButton class="btn btn-primary" (click)="searchData()">
@@ -22,24 +22,19 @@
             <div class="col-6 col-md-6">
                 <div class="float-right">
                     <div class="input-group input-group-md">
-                        <!-- <span class="input-group-btn ml-2">
-                            <button nbButton status="info" (click)="onAttach()">
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="exportExcel()">
                                 <nb-icon class="action-icon" icon="attach-2-outline"></nb-icon>
-                                Import XML
+                                Xuất Excel
                             </button>
                         </span>
                         <span class="input-group-btn ml-2">
-                            <button nbButton status="info" (click)="onCreate()">
+                            <button nbButton status="info" (click)="onRefresh()">
                                 <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
-                                Thêm mới
+                                Làm mới
                             </button>
                         </span>
-                        <span class="input-group-btn ml-2">
-                            <button nbButton status="danger" (click)="onDeleteAll($event)">
-                                <nb-icon class="action-icon" icon="trash-2-outline"></nb-icon>
-                                Xóa tất cả
-                            </button>
-                        </span> -->
+                      
                     </div>
                 </div>
             </div>
@@ -48,7 +43,75 @@
     </nb-card-header>
 
     <nb-card-body>
-        
+        <div class="table-content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center table-col-0">STT</th>
+                        <th scope="col" class="text-center table-col-1">Mã học viên</th>
+                        <th scope="col" class="text-center table-col-2">Họ và Tên</th>
+                        <th scope="col" class="text-center table-col-2">Học phí đã đóng</th>
+                        <th scope="col" class="text-center table-col-2">Học phí phải nộp</th>
+                        <th scope="col" class="text-center col col-lg-2 table-col-4">
+                            Thao tác
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="listData && listData.length < 1">
+                    <tr>
+                        <td colspan="7" class="text-center"><b>Không có dữ liệu</b></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="listData && listData.length >= 1">
+                    <tr *ngFor="
+                let item of listData
+                  | paginate
+                    : {
+                        itemsPerPage: pageSize,
+                        currentPage: currentPage,
+                        totalItems: totalElements
+                      };
+                let idx = index
+              ">
+                        <th class="text-center table-col-0" scope="row">
+                            {{ (currentPage - 1) * pageSize + (idx + 1) }}
+                        </th>
+                        <td class="text-center table-col-1">{{ item.registrationId }}</td>
+                        <td class="table-col-3">{{ item.fullName }}</td>
+                        <td class="text-center table-col-3">{{ item.tuitionFeePaid | currency:'VND' }}</td>
+                        <td class="text-center table-col-3">{{ item.tuitionFeePayable | currency:'VND' }}</td>
+                        <td class="text-center col col-lg-2 table-col-4">
+                            <div class="buttons-row">
+                                <button class="btn-custom" nbButton matRipple shape="round" (click)="onView(item)">
+                                    <nb-icon class="action-icon" icon="eye-outline"></nb-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-table">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Tổng số bản ghi: {{ totalElements }} bản ghi</p>
+                </div>
+                <div class="col-md-4 offset-md-4" *ngIf="listData.length > 0">
+                    <div class="pagination">
+                        <nb-select (selectedChange)="changePageSize($event)" [(ngModel)]="pageSize">
+                            <nb-option [value]="10">10</nb-option>
+                            <nb-option [value]="20">20</nb-option>
+                            <nb-option [value]="30">30</nb-option>
+                            <nb-option [value]="40">40</nb-option>
+                            <nb-option [value]="50">50</nb-option>
+                        </nb-select>
+                        <pagination-controls maxSize="5" previousLabel="Trước" nextLabel="Tiếp" responsive="true"
+                            (pageChange)="pageChanged($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
        
     </nb-card-body>
 </nb-card>

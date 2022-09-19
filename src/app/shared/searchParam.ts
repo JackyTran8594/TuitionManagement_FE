@@ -4,4 +4,5 @@ export interface SearchParam {
     txtSearch?: string;
     id?: number;
     T?: any;
+    code?: any;
 }

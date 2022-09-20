@@ -4,60 +4,92 @@
             <div class="col-12 col-md-6 mb-2">
                 <h6>Thống kê báo cáo</h6>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-4 mb-2">
 
-
-                <input [(ngModel)]="searchParam.txtSearch" nbInput type="text" placeholder="Nhập để tìm kiếm"
-                    [nbAutocomplete]="autoControl" />
-                <nb-autocomplete #autoControl>
-                    <nb-option *ngFor="let option of trainClass " [value]="option">
-                        {{ option.header }}
-                    </nb-option>
-                </nb-autocomplete>
-
-                <!-- 
-                <nb-select type="text" name="txtSearch" class="form-control" id="txtSearch"
-                    placeholder="Nhập thông tin tìm kiếm...." [(ngModel)]="searchParam.txtSearch"
-                    (keyup.enter)="searchData()">
-                    <nb-option *ngFor="let item of trainClass"></nb-option>
-                </nb-select> -->
-            </div>
-        </div>
-
-        <div class="col-12 col-md-4 mb-2">
-            <div class="input-group input-group-md">
-                <input type="text" name="code" class="form-control" id="code" placeholder="Nhập thông tin tìm kiếm...."
-                    [(ngModel)]="searchParam.code" (keyup.enter)="searchData()" />
-                <span class="input-group-btn ml-2">
-                    <button nbButton class="btn btn-primary" (click)="searchData()">
-                        <nb-icon class="action-icon" icon="search-outline"></nb-icon>
-                        Tìm kiếm
+            <div class="col-12 col-md-6 mb-2">
+                <div class="float-right">
+                    <button nbButton shape="round" size="small" class="btn-toggle-custom" (click)="toggleSearch()">
+                        <nb-icon *ngIf="toggleOn" icon="chevron-down-outline"></nb-icon>
+                        <nb-icon *ngIf="!toggleOn" icon="chevron-up-outline"></nb-icon>
                     </button>
-                </span>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-4">
-            <div class="float-right">
-                <div class="input-group input-group-md">
-                    <span class="input-group-btn ml-2">
-                        <button nbButton status="info" (click)="exportExcel()">
-                            <nb-icon class="action-icon" icon="attach-2-outline"></nb-icon>
-                            Xuất Excel
-                        </button>
-                    </span>
-                    <span class="input-group-btn ml-2">
-                        <button nbButton status="info" (click)="onRefresh()">
-                            <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
-                            Làm mới
-                        </button>
-                    </span>
-
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+                <div class="input-group input-group-md">
+                    <input type="text" name="code" class="form-control" id="code"
+                        placeholder="Nhập thông tin tìm kiếm...." [(ngModel)]="searchParam.txtSearch"
+                        (keyup.enter)="searchData()" />
+                    <span class="input-group-btn ml-2">
+                        <button nbButton class="btn btn-primary" (click)="searchData()">
+                            <nb-icon class="action-icon" icon="search-outline"></nb-icon>
+                            Tìm kiếm
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-2">
+                <div class="float-right">
+                    <div class="input-group input-group-md">
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="exportExcel()">
+                                <nb-icon class="action-icon" icon="attach-2-outline"></nb-icon>
+                                Xuất Excel
+                            </button>
+                        </span>
+                        <span class="input-group-btn ml-2">
+                            <button nbButton status="info" (click)="onRefresh()">
+                                <nb-icon class="action-icon" icon="plus-outline"></nb-icon>
+                                Làm mới
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nb-accordion>
+            <nb-accordion-item #advancedSearch>
+                <nb-accordion-item-body>
+                    <div class="row">
+                        <div class="input-group input-group-md">
+
+                            <div class="input-group-btn ml-2">
+                                <input nbInput [nbDatepicker]="fromDate" placeholder="Từ ngày" class="form-control"
+                                    [(ngModel)]="searchParam.fromDate" name="fromDate">
+                                <nb-datepicker #fromDate format="dd/MM/yyyy">
+                                </nb-datepicker>
+                            </div>
+                            <div class="input-group-btn ml-2">
+                                <input nbInput [nbDatepicker]="toDate" placeholder="Đến ngày" class="form-control"
+                                    [(ngModel)]="searchParam.toDate" name="toDate">
+                                <nb-datepicker #toDate format="dd/MM/yyyy">
+                                </nb-datepicker>
+                            </div>
+                            <div class="input-group-btn ml-2">
+                                <input [(ngModel)]="searchParam.code" nbInput type="text"
+                                    placeholder="Nhập mã học viên" [nbAutocomplete]="autoControl"
+                                    class="form-control" />
+                                <nb-autocomplete #autoControl>
+                                    <nb-option *ngFor="let option of trainClass " [value]="option">
+                                        {{ option.header }}
+                                    </nb-option>
+                                </nb-autocomplete>
+                            </div>
+                            <!--       
+                    <div *ngIf="buttonChecker.isComboDisabled()" class="input-group-btn ml-2">
+                      <nb-select matRipple fullWidth [(ngModel)]="params.username" name="listStaff" placeholder="Lựa chọn cán bộ">
+                        <nb-option *ngFor="let item of listStaff" [value]="item.username">{{ item.fullName }}</nb-option>
+                      </nb-select>
+                    </div> -->
+
+                        </div>
+                    </div>
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+        </nb-accordion>
 
     </nb-card-header>
 

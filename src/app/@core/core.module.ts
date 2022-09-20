@@ -24,6 +24,7 @@ import { TrainClassModule } from '../pages/category/train-class/train-class.modu
 import { TuitionModule } from '../pages/tuition/tuition.module';
 import { AuthModule } from '../auth/auth.module';
 import { ObjectTypeModule } from '../pages/category/object-type/object-type.module';
+import { ReportModule } from '../pages/report/report.module';
 
 const DATA_SERVICES = [
 
@@ -48,6 +49,7 @@ export const NB_CORE_PROVIDERS = [
   ...TrainClassModule.forRoot().providers,
   ...TuitionModule.forRoot().providers,
   ...AuthModule.forRoot().providers,
+  ...ReportModule.forRoot().providers,
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },

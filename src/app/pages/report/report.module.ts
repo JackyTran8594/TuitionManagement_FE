@@ -1,13 +1,17 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
-import { NbActionsModule, NbButtonModule, NbCardModule, NbInputModule, NbTabsetModule, NbRadioModule, NbSelectModule, NbListModule, NbIconModule, NbDatepickerModule, NbDialogModule, NbSpinnerModule, NbAutocompleteModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbInputModule, NbTabsetModule, NbRadioModule, NbSelectModule, NbListModule, NbIconModule, NbDatepickerModule, NbDialogModule, NbSpinnerModule, NbAutocompleteModule, NbAccordionModule } from '@nebular/theme';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ComponentModule } from '../../@component/component.module';
 import { SharedModule } from '../../shared/shared.module';
+import { ReportApi } from './service/report.api';
+import { ReportData } from './service/report';
+import { ReportService } from './service/report.service';
+import { NbDateFnsDateModule } from '@nebular/date-fns';
 
 const NB_MODULES = [
   NbButtonModule,
@@ -22,8 +26,21 @@ const NB_MODULES = [
   NbDialogModule.forChild(),
   NbTabsetModule,
   NbSpinnerModule,
-  NbAutocompleteModule
+  NbAutocompleteModule,
+  NbAccordionModule,
+  NbDateFnsDateModule.forChild({
+    parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+    formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+  })
 ]
+
+const API = [ReportApi];
+const SERVICE = [
+  {
+    provide: ReportData, useClass: ReportService
+}
+]
+
 
 @NgModule({
   declarations: [
@@ -40,4 +57,13 @@ const NB_MODULES = [
     NgxPaginationModule,
   ]
 })
-export class ReportModule { }
+export class ReportModule {
+   static forRoot(): ModuleWithProviders<ReportModule> { 
+    return {
+      ngModule: ReportModule,
+      providers: [
+        ...API, ...SERVICE
+      ]
+    }
+  }
+ }

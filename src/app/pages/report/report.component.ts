@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchParam } from '../../shared/searchParam';
 import { TrainClass, TrainClassData } from '../category/train-class/service/train-class';
 import { Student } from '../student/service/student';
@@ -30,7 +30,19 @@ export class ReportComponent implements OnInit {
   totalPages = 0;
   totalElements = 0;
   //
-  listData: Report[] = []
+  listData: Report[] = [];
+
+  //
+  @ViewChild('advancedSearch', { static: true }) accordion;
+  toggleOn: boolean;
+  toggleOff: boolean;
+
+
+  toggleSearch() {
+    this.accordion.toggle();
+    this.toggleOn = !this.toggleOn;
+    this.toggleOff = !this.toggleOff;
+  }
 
   getDataCombo() {
     this.trainClassService.getAll().subscribe({

@@ -13,14 +13,23 @@ export class AuthService {
   public currentUser: Observable<any>;
 
   constructor(private api: AuthApi) {
-    let helper = new JwtHelperService();
+    // let helper = new JwtHelperService();
+
+    // this.token = <AccessToken>(JSON.parse(localStorage.getItem('access_token')));
+    // console.log(this.token);
+    // if (this.token) {
+    //   let user = helper.decodeToken(this.token.accessToken)['sub'];
+    //   this.currentUserSubject = new BehaviorSubject<any>(user);
+    //   this.currentUser = this.currentUserSubject.asObservable();
+    //   this.tokenSubject = new BehaviorSubject<any>(this.token.accessToken);
+    // }
+  }
+
+  getToken(): AccessToken {
+    // let helper = new JwtHelperService();
     this.token = <AccessToken>(JSON.parse(localStorage.getItem('access_token')));
-    if (this.token) {
-      let user = helper.decodeToken(this.token.accessToken)['sub'];
-      this.currentUserSubject = new BehaviorSubject<any>(user);
-      this.currentUser = this.currentUserSubject.asObservable();
-      this.tokenSubject = new BehaviorSubject<any>(this.token.accessToken);
-    }
+    console.log(this.token);
+    return this.token;
   }
 
   authenticate(item: User): Observable<AccessToken> {
@@ -40,15 +49,27 @@ export class AuthService {
     } else { return false; }
   }
 
+
+
   public get currentUserValue(): string {
+    let helper = new JwtHelperService();
+    let token = this.getToken();
+    if (token) {
+      let user = helper.decodeToken(token.accessToken)['sub'];
+      this.currentUserSubject = new BehaviorSubject<any>(user);
+      this.currentUser = this.currentUserSubject.asObservable();
+    }
+    //  this.tokenSubject = new BehaviorSubject<any>(this.token.accessToken);
     return (this.currentUserSubject) ? (this.currentUserSubject.value) : '';
   }
 
   public get tokenValue(): string {
     // console.log(this.tokenSubject.value);
+    let token = this.getToken();
+    if (token) {
+      this.tokenSubject = new BehaviorSubject<any>(token.accessToken);
+    }
     return (this.tokenSubject) ? (this.tokenSubject.value) : '';
   }
-
-
 
 }

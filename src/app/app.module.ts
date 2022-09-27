@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { UserService } from './pages/system-management/user/service/user.service';
+import { AuthService } from './auth/service/auth.service';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -5,7 +8,7 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -20,6 +23,7 @@ import {
 } from '@nebular/theme';
 import { AuthModule } from './auth/auth.module';
 import { NgxCurrencyInputModule } from 'ngx-currency-input';
+import { take } from 'rxjs/operators';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,4 +44,6 @@ import { NgxCurrencyInputModule } from 'ngx-currency-input';
   bootstrap: [AppComponent],
 })
 export class AppModule {
+
 }
+

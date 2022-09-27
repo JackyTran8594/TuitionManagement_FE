@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { TableData } from '../../../../shared/table-data';
-import { User, UserData } from './user';
+import { User, UserData, UserInfo } from './user';
 import { UserApi } from './user.api';
 
 @Injectable()
 export class UserService implements UserData {
+
+  public userInfo: UserInfo = {
+    username: '',
+    permission: undefined,
+    role: undefined
+  }
+
 
   constructor(private api: UserApi) { }
 
@@ -35,10 +43,23 @@ export class UserService implements UserData {
   delete(id: number): Observable<boolean> {
     return this.api.delete(id);
   }
-  
+
   deleteAll(ids: number[]): Observable<boolean> {
     return this.api.deleteAll(ids);
   }
 
-  
+  getUserInfo() {
+    debugger;
+    return this.api.getUserInfo().pipe(take(1)).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.userInfo = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { NbCardModule, NbCheckboxModule, NbIconModule, NbMenuModule, NbTimepickerModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
 import { CommonService } from '../common/service/common.service';
+import { UserService } from './system-management/user/service/user.service';
 
 @NgModule({
   imports: [
@@ -27,13 +28,24 @@ import { CommonService } from '../common/service/common.service';
   ],
   declarations: [
     PagesComponent,
-  ],  
+  ],
   providers: [
-    CommonService
+    CommonService,
     // {
     //   provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true,
     // },
+    {
+      provide: APP_INITIALIZER, useFactory: initializeAppFactory, deps: [UserService], multi: true
+    }
   ]
 })
 export class PagesModule {
 }
+
+// initing function (doing something with logic) before loading app
+export function initializeAppFactory(userService: UserService) {
+  // return () => userService.getUserInfo();
+  return userService.getUserInfo()
+
+}
+

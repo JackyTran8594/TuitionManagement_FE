@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../../../shared/http.service';
 import { TableData } from '../../../../shared/table-data';
-import { User } from './user';
+import { User, UserInfo } from './user';
 
 @Injectable()
 export class UserApi {
@@ -27,7 +27,7 @@ export class UserApi {
     let params = new HttpParams()
       .set("page", pageNumber)
       .set("size", pageSize)
-      // .set("txtSearch", txtSearch);
+    // .set("txtSearch", txtSearch);
     return this.http.get(this.apiControllerV2, { params });
   }
 
@@ -51,5 +51,9 @@ export class UserApi {
 
   getByUsername(username: string): Observable<User> {
     return this.http.get(this.apiController + '/' + username);
+  }
+
+  getUserInfo(): Observable<UserInfo> {
+    return this.http.get(this.apiController + '/userInfo');
   }
 }

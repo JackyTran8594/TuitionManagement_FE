@@ -24,6 +24,12 @@ export interface User {
     functions?: number[];
 }
 
+export interface UserInfo {
+  username: string,
+  permission: any | any[],
+  role: any | any[]
+}
+
 export abstract class UserData {
 
     abstract list(pageNumber: number, pageSize: number, txtSearch: string): Observable<TableData<User>>;
@@ -34,7 +40,8 @@ export abstract class UserData {
     abstract get(id: number): Observable<User>;
     abstract delete(id: number): Observable<boolean>;
     abstract deleteAll(ids: number[]): Observable<boolean>;
-    abstract getByUsername(username: string): Observable<User>
+    abstract getByUsername(username: string): Observable<User>;
+    abstract getUserInfo();
 
 }
 
